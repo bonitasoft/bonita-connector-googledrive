@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<definition:ConnectorDefinition xmlns:definition="http://www.bonitasoft.org/ns/connector/definition/6.1"
+                                xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+
+    <id>${connector-id.def.id}</id>
+    <version>${connector-id.def.version}</version>
+    <icon>gdrive.png</icon>
+
+    <category id="gdrive" icon="gdrive.png"/>
+
+    <!-- === Page 1 — Connection === -->
+    <input name="serviceAccountKeyJson" type="java.lang.String" mandatory="true"/>
+    <input name="impersonatedUserEmail" type="java.lang.String" mandatory="false"/>
+    <input name="applicationName" type="java.lang.String" mandatory="false" defaultValue="Bonita-GoogleDrive-Connector"/>
+    <input name="connectTimeout" type="java.lang.Integer" mandatory="false" defaultValue="30000"/>
+    <input name="readTimeout" type="java.lang.Integer" mandatory="false" defaultValue="60000"/>
+
+    <!-- === Page 2 — Delete === -->
+    <input name="fileId" type="java.lang.String" mandatory="true"/>
+
+    <!-- === Page 3 — Configuration === -->
+    <input name="permanent" type="java.lang.Boolean" mandatory="false" defaultValue="false"/>
+
+    <!-- === Outputs === -->
+    <output name="deletedFileId" type="java.lang.String"/>
+    <output name="permanent" type="java.lang.Boolean"/>
+    <output name="success" type="java.lang.Boolean"/>
+    <output name="errorMessage" type="java.lang.String"/>
+
+    <!-- === Pages === -->
+    <page id="connectionPage">
+        <widget id="serviceAccountKeyJsonWidget" inputName="serviceAccountKeyJson" xsi:type="definition:Password"/>
+        <widget id="impersonatedUserEmailWidget" inputName="impersonatedUserEmail" xsi:type="definition:Text"/>
+        <widget id="applicationNameWidget" inputName="applicationName" xsi:type="definition:Text"/>
+        <widget id="connectTimeoutWidget" inputName="connectTimeout" xsi:type="definition:Text"/>
+        <widget id="readTimeoutWidget" inputName="readTimeout" xsi:type="definition:Text"/>
+    </page>
+
+    <page id="deletePage">
+        <widget id="fileIdWidget" inputName="fileId" xsi:type="definition:Text"/>
+    </page>
+
+    <page id="configurationPage">
+        <widget id="permanentWidget" inputName="permanent" xsi:type="definition:Checkbox"/>
+    </page>
+
+</definition:ConnectorDefinition>

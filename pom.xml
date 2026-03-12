@@ -1,0 +1,240 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0
+         http://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+
+    <groupId>com.bonitasoft.connectors</groupId>
+    <artifactId>bonita-connector-gdrive</artifactId>
+    <version>1.0.0-SNAPSHOT</version>
+    <packaging>pom</packaging>
+    <name>Bonita Connector - GDrive</name>
+
+    <modules>
+        <module>bonita-connector-gdrive-core</module>
+        <module>bonita-connector-gdrive-upload-file</module>
+        <module>bonita-connector-gdrive-download-file</module>
+        <module>bonita-connector-gdrive-create-folder</module>
+        <module>bonita-connector-gdrive-get-file</module>
+        <module>bonita-connector-gdrive-list-files</module>
+        <module>bonita-connector-gdrive-move-file</module>
+        <module>bonita-connector-gdrive-delete-file</module>
+    </modules>
+
+    <properties>
+        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+        <maven.compiler.source>17</maven.compiler.source>
+        <maven.compiler.target>17</maven.compiler.target>
+
+        <!-- Bonita -->
+        <bonita-common.version>10.2.0</bonita-common.version>
+
+        <!-- Google Drive API -->
+        <google.drive.version>v3-rev20260220-2.0.0</google.drive.version>
+        <google.api.client.version>2.9.0</google.api.client.version>
+        <google.auth.version>1.43.0</google.auth.version>
+        <google.http.client.version>2.1.0</google.http.client.version>
+
+        <!-- Dependencies -->
+        <lombok.version>1.18.30</lombok.version>
+        <slf4j.version>2.0.9</slf4j.version>
+
+        <!-- Test -->
+        <junit-jupiter.version>5.10.2</junit-jupiter.version>
+        <mockito.version>5.11.0</mockito.version>
+        <assertj.version>3.25.3</assertj.version>
+        <jqwik.version>1.8.4</jqwik.version>
+        <wiremock.version>3.4.2</wiremock.version>
+
+        <!-- Plugins -->
+        <jacoco.version>0.8.11</jacoco.version>
+        <pitest.version>1.15.6</pitest.version>
+        <pitest-junit5.version>1.2.1</pitest-junit5.version>
+        <surefire.version>3.2.5</surefire.version>
+        <failsafe.version>3.2.5</failsafe.version>
+    </properties>
+
+    <dependencyManagement>
+        <dependencies>
+            <dependency>
+                <groupId>org.bonitasoft.engine</groupId>
+                <artifactId>bonita-common</artifactId>
+                <version>${bonita-common.version}</version>
+                <scope>provided</scope>
+            </dependency>
+            <dependency>
+                <groupId>org.projectlombok</groupId>
+                <artifactId>lombok</artifactId>
+                <version>${lombok.version}</version>
+                <scope>provided</scope>
+            </dependency>
+            <dependency>
+                <groupId>org.slf4j</groupId>
+                <artifactId>slf4j-api</artifactId>
+                <version>${slf4j.version}</version>
+            </dependency>
+            <!-- Google Drive API -->
+            <dependency>
+                <groupId>com.google.apis</groupId>
+                <artifactId>google-api-services-drive</artifactId>
+                <version>${google.drive.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>com.google.api-client</groupId>
+                <artifactId>google-api-client</artifactId>
+                <version>${google.api.client.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>com.google.auth</groupId>
+                <artifactId>google-auth-library-oauth2-http</artifactId>
+                <version>${google.auth.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>com.google.http-client</groupId>
+                <artifactId>google-http-client-gson</artifactId>
+                <version>${google.http.client.version}</version>
+            </dependency>
+            <!-- Core module -->
+            <dependency>
+                <groupId>com.bonitasoft.connectors</groupId>
+                <artifactId>bonita-connector-gdrive-core</artifactId>
+                <version>${project.version}</version>
+            </dependency>
+            <!-- Test dependencies -->
+            <dependency>
+                <groupId>org.junit.jupiter</groupId>
+                <artifactId>junit-jupiter</artifactId>
+                <version>${junit-jupiter.version}</version>
+                <scope>test</scope>
+            </dependency>
+            <dependency>
+                <groupId>org.mockito</groupId>
+                <artifactId>mockito-core</artifactId>
+                <version>${mockito.version}</version>
+                <scope>test</scope>
+            </dependency>
+            <dependency>
+                <groupId>org.mockito</groupId>
+                <artifactId>mockito-junit-jupiter</artifactId>
+                <version>${mockito.version}</version>
+                <scope>test</scope>
+            </dependency>
+            <dependency>
+                <groupId>org.assertj</groupId>
+                <artifactId>assertj-core</artifactId>
+                <version>${assertj.version}</version>
+                <scope>test</scope>
+            </dependency>
+            <dependency>
+                <groupId>net.jqwik</groupId>
+                <artifactId>jqwik</artifactId>
+                <version>${jqwik.version}</version>
+                <scope>test</scope>
+            </dependency>
+            <dependency>
+                <groupId>org.wiremock</groupId>
+                <artifactId>wiremock-standalone</artifactId>
+                <version>${wiremock.version}</version>
+                <scope>test</scope>
+            </dependency>
+        </dependencies>
+    </dependencyManagement>
+
+    <build>
+        <pluginManagement>
+            <plugins>
+                <plugin>
+                    <groupId>org.apache.maven.plugins</groupId>
+                    <artifactId>maven-compiler-plugin</artifactId>
+                    <version>3.12.1</version>
+                    <configuration>
+                        <source>17</source>
+                        <target>17</target>
+                        <annotationProcessorPaths>
+                            <path>
+                                <groupId>org.projectlombok</groupId>
+                                <artifactId>lombok</artifactId>
+                                <version>${lombok.version}</version>
+                            </path>
+                        </annotationProcessorPaths>
+                    </configuration>
+                </plugin>
+                <plugin>
+                    <groupId>org.apache.maven.plugins</groupId>
+                    <artifactId>maven-surefire-plugin</artifactId>
+                    <version>${surefire.version}</version>
+                </plugin>
+                <plugin>
+                    <groupId>org.apache.maven.plugins</groupId>
+                    <artifactId>maven-failsafe-plugin</artifactId>
+                    <version>${failsafe.version}</version>
+                </plugin>
+                <plugin>
+                    <groupId>org.jacoco</groupId>
+                    <artifactId>jacoco-maven-plugin</artifactId>
+                    <version>${jacoco.version}</version>
+                    <executions>
+                        <execution>
+                            <goals><goal>prepare-agent</goal></goals>
+                        </execution>
+                        <execution>
+                            <id>report</id>
+                            <phase>test</phase>
+                            <goals><goal>report</goal></goals>
+                        </execution>
+                    </executions>
+                </plugin>
+                <plugin>
+                    <groupId>org.pitest</groupId>
+                    <artifactId>pitest-maven</artifactId>
+                    <version>${pitest.version}</version>
+                    <dependencies>
+                        <dependency>
+                            <groupId>org.pitest</groupId>
+                            <artifactId>pitest-junit5-plugin</artifactId>
+                            <version>${pitest-junit5.version}</version>
+                        </dependency>
+                    </dependencies>
+                    <configuration>
+                        <mutators>
+                            <mutator>STRONGER</mutator>
+                        </mutators>
+                        <mutationThreshold>95</mutationThreshold>
+                        <coverageThreshold>95</coverageThreshold>
+                        <timestampedReports>false</timestampedReports>
+                    </configuration>
+                </plugin>
+            </plugins>
+        </pluginManagement>
+    </build>
+
+    <repositories>
+        <repository>
+            <id>bonitasoft-releases</id>
+            <url>https://bonitasoft.jfrog.io/artifactory/maven</url>
+        </repository>
+    </repositories>
+
+    <profiles>
+        <profile>
+            <id>integration-tests</id>
+            <build>
+                <plugins>
+                    <plugin>
+                        <groupId>org.apache.maven.plugins</groupId>
+                        <artifactId>maven-failsafe-plugin</artifactId>
+                        <executions>
+                            <execution>
+                                <goals>
+                                    <goal>integration-test</goal>
+                                    <goal>verify</goal>
+                                </goals>
+                            </execution>
+                        </executions>
+                    </plugin>
+                </plugins>
+            </build>
+        </profile>
+    </profiles>
+</project>

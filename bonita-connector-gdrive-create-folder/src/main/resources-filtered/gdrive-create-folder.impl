@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<implementation:connectorImplementation
+    xmlns:implementation="http://www.bonitasoft.org/ns/connector/implementation/6.1">
+    <definitionId>${connector-id.def.id}</definitionId>
+    <definitionVersion>${connector-id.def.version}</definitionVersion>
+    <implementationClassname>com.bonitasoft.connectors.gdrive.CreateFolderConnector</implementationClassname>
+    <implementationId>${connector-id.impl.id}</implementationId>
+    <implementationVersion>${connector-id.impl.version}</implementationVersion>
+    <jarDependencies/>
+</implementation:connectorImplementation>

@@ -1,0 +1,85 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0
+         http://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+
+    <parent>
+        <groupId>com.bonitasoft.connectors</groupId>
+        <artifactId>bonita-connector-gdrive</artifactId>
+        <version>1.0.0-SNAPSHOT</version>
+    </parent>
+
+    <artifactId>bonita-connector-gdrive-create-folder</artifactId>
+    <name>Bonita Connector GDrive - CreateFolder</name>
+
+    <properties>
+        <connector-id.def.id>gdrive-create-folder</connector-id.def.id>
+        <connector-id.def.version>1.0.0</connector-id.def.version>
+        <connector-id.impl.id>gdrive-create-folder-impl</connector-id.impl.id>
+        <connector-id.impl.version>1.0.0</connector-id.impl.version>
+    </properties>
+
+    <dependencies>
+        <dependency>
+            <groupId>com.bonitasoft.connectors</groupId>
+            <artifactId>bonita-connector-gdrive-core</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>org.bonitasoft.engine</groupId>
+            <artifactId>bonita-common</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>org.projectlombok</groupId>
+            <artifactId>lombok</artifactId>
+        </dependency>
+        <!-- Test deps -->
+        <dependency>
+            <groupId>org.junit.jupiter</groupId>
+            <artifactId>junit-jupiter</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>org.mockito</groupId>
+            <artifactId>mockito-core</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>org.mockito</groupId>
+            <artifactId>mockito-junit-jupiter</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>org.assertj</groupId>
+            <artifactId>assertj-core</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>net.jqwik</groupId>
+            <artifactId>jqwik</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>org.wiremock</groupId>
+            <artifactId>wiremock-standalone</artifactId>
+        </dependency>
+    </dependencies>
+
+    <build>
+        <resources>
+            <resource>
+                <directory>src/main/resources</directory>
+            </resource>
+            <resource>
+                <directory>src/main/resources-filtered</directory>
+                <filtering>true</filtering>
+            </resource>
+        </resources>
+        <plugins>
+            <plugin>
+                <groupId>org.jacoco</groupId>
+                <artifactId>jacoco-maven-plugin</artifactId>
+            </plugin>
+            <plugin>
+                <groupId>org.pitest</groupId>
+                <artifactId>pitest-maven</artifactId>
+            </plugin>
+        </plugins>
+    </build>
+</project>
