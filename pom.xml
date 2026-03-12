@@ -81,7 +81,7 @@
         <!-- Test -->
         <junit-jupiter.version>5.10.2</junit-jupiter.version>
         <mockito.version>5.11.0</mockito.version>
-        <assertj.version>3.25.3</assertj.version>
+        <assertj.version>3.27.7</assertj.version>
         <jqwik.version>1.8.4</jqwik.version>
         <wiremock.version>3.4.2</wiremock.version>
 
