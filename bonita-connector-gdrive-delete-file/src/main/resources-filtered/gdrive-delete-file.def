@@ -6,7 +6,8 @@
     <version>${connector-id.def.version}</version>
     <icon>gdrive.png</icon>
 
-    <category id="gdrive" icon="gdrive.png"/>
+    <category id="Cloud" icon="gdrive.png"/>
+    <category id="GoogleDrive" icon="gdrive.png" parentCategoryId="Cloud"/>
 
     <!-- === Page 1 — Connection === -->
     <input name="serviceAccountKeyJson" type="java.lang.String" mandatory="true"/>

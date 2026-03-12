@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<definition:ConnectorDefinition xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:definition="http://www.bonitasoft.org/ns/connector/definition/6.1">
+  <id>${get-file.def.id}</id>
+  <version>${get-file.def.version}</version>
+  <icon>drive_48dp.png</icon>
+  <category icon="drive_48dp.png" id="Google Drive"/>
+
+  <input name="serviceAccountKeyJson" type="java.lang.String" mandatory="true"/>
+  <input name="impersonatedUserEmail" type="java.lang.String" mandatory="false"/>
+  <input name="applicationName" type="java.lang.String" mandatory="false" defaultValue="Bonita-GoogleDrive-Connector"/>
+  <input name="connectTimeout" type="java.lang.Integer" mandatory="false" defaultValue="30000"/>
+  <input name="readTimeout" type="java.lang.Integer" mandatory="false" defaultValue="60000"/>
+  <input name="fileId" type="java.lang.String" mandatory="true"/>
+
+  <output name="fileId" type="java.lang.String"/>
+  <output name="fileName" type="java.lang.String"/>
+  <output name="mimeType" type="java.lang.String"/>
+  <output name="webViewLink" type="java.lang.String"/>
+  <output name="webContentLink" type="java.lang.String"/>
+  <output name="sizeBytes" type="java.lang.Long"/>
+  <output name="createdTime" type="java.lang.String"/>
+  <output name="modifiedTime" type="java.lang.String"/>
+  <output name="ownerEmail" type="java.lang.String"/>
+  <output name="success" type="java.lang.Boolean"/>
+  <output name="errorMessage" type="java.lang.String"/>
+
+  <page id="connectionPage">
+    <widget xsi:type="definition:Password" id="serviceAccountKeyJsonWidget" inputName="serviceAccountKeyJson"/>
+    <widget xsi:type="definition:Text" id="impersonatedUserEmailWidget" inputName="impersonatedUserEmail"/>
+    <widget xsi:type="definition:Text" id="applicationNameWidget" inputName="applicationName"/>
+    <widget xsi:type="definition:Text" id="connectTimeoutWidget" inputName="connectTimeout"/>
+    <widget xsi:type="definition:Text" id="readTimeoutWidget" inputName="readTimeout"/>
+  </page>
+  <page id="operationPage">
+    <widget xsi:type="definition:Text" id="fileIdWidget" inputName="fileId"/>
+  </page>
+</definition:ConnectorDefinition>

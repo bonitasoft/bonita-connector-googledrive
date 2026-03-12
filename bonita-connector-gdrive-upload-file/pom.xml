@@ -2,7 +2,7 @@
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
     <modelVersion>4.0.0</modelVersion>
     <parent>
-        <groupId>com.bonitasoft.connectors</groupId>
+        <groupId>org.bonitasoft.connectors</groupId>
         <artifactId>bonita-connector-gdrive</artifactId>
         <version>1.0.0-SNAPSHOT</version>
     </parent>
@@ -12,10 +12,10 @@
         <connector-id.def.id>gdrive-upload-file</connector-id.def.id>
         <connector-id.def.version>1.0.0</connector-id.def.version>
         <connector-id.impl.id>gdrive-upload-file-impl</connector-id.impl.id>
-        <connector-id.impl.version>1.0.0</connector-id.impl.version>
+        <connector-id.impl.version>${project.version}</connector-id.impl.version>
     </properties>
     <dependencies>
-        <dependency><groupId>com.bonitasoft.connectors</groupId><artifactId>bonita-connector-gdrive-core</artifactId></dependency>
+        <dependency><groupId>org.bonitasoft.connectors</groupId><artifactId>bonita-connector-gdrive-core</artifactId></dependency>
         <dependency><groupId>org.bonitasoft.engine</groupId><artifactId>bonita-common</artifactId></dependency>
         <dependency><groupId>org.projectlombok</groupId><artifactId>lombok</artifactId></dependency>
         <dependency><groupId>org.junit.jupiter</groupId><artifactId>junit-jupiter</artifactId></dependency>

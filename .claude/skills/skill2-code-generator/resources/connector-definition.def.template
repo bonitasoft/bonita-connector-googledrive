@@ -1,0 +1,73 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+  TEMPLATE: Connector Definition XML (.def)
+  PLACEHOLDERS: {name}, {Name}, {DisplayName}, {operation}, {Operation}, {icon-filename}
+
+  CUSTOMIZATION:
+    1. Generate one <input> per parameter from the spec's input table.
+       Attributes: name (camelCase), type (java.lang.String etc.), mandatory ("true"/"false").
+       If parameter has a Default, add: defaultValue="..."
+    2. Generate one <output> per output from the spec's output table.
+       Always include the built-in success + errorMessage outputs.
+    3. Group inputs into <page> elements based on their Scope column (see mapping below).
+    4. Map the Widget column to xsi:type (see mapping below).
+    5. Widget id convention: {inputName}Widget (e.g., fileIdWidget, apiKeyWidget).
+
+  SCOPE-TO-PAGE MAPPING:
+    Project / Runtime  -> <page id="connectionPage">    (Auth & connection)
+    Connector          -> <page id="operationPage">     (Main operation inputs)
+    Process            -> <page id="configurationPage"> (Process-level config)
+    Advanced flags     -> <page id="advancedPage">      (Timeouts, retries, debug)
+
+  WIDGET-TO-TYPE MAPPING:
+    Text       -> definition:Text
+    TextArea   -> definition:TextArea
+    Password   -> definition:Password
+    Checkbox   -> definition:Checkbox
+    RadioGroup -> definition:RadioGroup  (must have <choices> children)
+    Select     -> definition:Select      (must have <items> children)
+    Array      -> definition:Array
+
+  CATEGORY:
+    Use a single flat category (no parentCategoryId). The id should be human-readable.
+    Example: <category icon="{icon-filename}.png" id="Google Drive"/>
+
+  ICON:
+    Must be 16x16 pixels PNG. Referenced by filename (no path).
+-->
+<definition:ConnectorDefinition
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xmlns:definition="http://www.bonitasoft.org/ns/connector/definition/6.1">
+
+  <id>${{operation}.def.id}</id>
+  <version>${{operation}.def.version}</version>
+  <icon>{icon-filename}.png</icon>
+  <category icon="{icon-filename}.png" id="{DisplayName}"/>
+
+  <!-- === INPUTS === -->
+  <!-- Connection inputs (shared across operations):
+  <input name="serviceAccountKeyJson" type="java.lang.String" mandatory="true"/>
+  <input name="connectTimeout" type="java.lang.Integer" mandatory="false" defaultValue="30000"/>
+  <input name="readTimeout" type="java.lang.Integer" mandatory="false" defaultValue="60000"/>
+  -->
+
+  <!-- Operation-specific inputs:
+  <input name="fileId" type="java.lang.String" mandatory="true"/>
+  -->
+
+  <!-- === OUTPUTS (always include success + errorMessage) === -->
+  <output name="success" type="java.lang.Boolean"/>
+  <output name="errorMessage" type="java.lang.String"/>
+  <!-- Add operation-specific outputs here -->
+
+  <!-- === UI PAGES === -->
+  <!-- Example:
+  <page id="connectionPage">
+    <widget xsi:type="definition:Password" id="serviceAccountKeyJsonWidget" inputName="serviceAccountKeyJson"/>
+    <widget xsi:type="definition:Text" id="connectTimeoutWidget" inputName="connectTimeout"/>
+  </page>
+  <page id="operationPage">
+    <widget xsi:type="definition:Text" id="fileIdWidget" inputName="fileId"/>
+  </page>
+  -->
+</definition:ConnectorDefinition>

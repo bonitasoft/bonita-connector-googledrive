@@ -1,0 +1,35 @@
+package com.bonitasoft.connectors.{name};
+
+import net.jqwik.api.*;
+
+/**
+ * TEMPLATE: Property-based tests for {Operation}Connector using jqwik.
+ * PLACEHOLDERS: {name}, {Name}, {Operation}
+ *
+ * MINIMUM 10 PROPERTIES. Focus on:
+ *   - Input validation (non-blank strings accepted, blank/null rejected for mandatory fields)
+ *   - Query/string builder correctness (if operation builds queries, URLs, etc.)
+ *   - Configuration builder (valid inputs always produce valid config)
+ *   - Output mapping (valid API response maps to valid result record)
+ */
+class {Operation}ConnectorPropertyTest {
+
+    @Property
+    void mandatoryStringInputRejectsBlank(@ForAll("blankStrings") String input) {
+        // TODO [CONNECTOR-GEN]: Verify blank/null mandatory inputs cause validation failure
+    }
+
+    @Provide
+    Arbitrary<String> blankStrings() {
+        return Arbitraries.of("", " ", "\t", "\n");
+    }
+
+    @Property
+    void validConfigurationAlwaysBuilds(
+            @ForAll @net.jqwik.api.constraints.StringLength(min = 1, max = 500) String apiKey
+    ) {
+        // TODO [CONNECTOR-GEN]: Build config with arbitrary valid inputs, verify no exception
+    }
+
+    // TODO [CONNECTOR-GEN]: Add at least 8 more properties specific to this operation
+}

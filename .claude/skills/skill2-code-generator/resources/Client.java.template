@@ -1,0 +1,44 @@
+package com.bonitasoft.connectors.{name};
+
+import lombok.extern.slf4j.Slf4j;
+
+/**
+ * TEMPLATE: API client facade for {Name} connector.
+ * PLACEHOLDERS: {name}, {Name}, {Operation}, {operationCamelCase}
+ *
+ * CUSTOMIZATION:
+ *   - Initialize HTTP client or API client SDK in the constructor.
+ *   - Add one public method per operation in the spec.
+ *   - Each method: build request -> retryPolicy.execute(() -> apiCall) -> parse response -> return model record.
+ */
+@Slf4j
+public class {Name}Client {
+
+    private final {Name}Configuration configuration;
+    private final RetryPolicy retryPolicy;
+
+    public {Name}Client({Name}Configuration configuration) throws {Name}Exception {
+        this.configuration = configuration;
+        this.retryPolicy = new RetryPolicy(configuration.getMaxRetries());
+        // TODO [CONNECTOR-GEN]: Initialize HTTP client or API client SDK here
+        // Authenticate if needed (e.g., set API key header, obtain OAuth token)
+        log.debug("{Name}Client initialized");
+    }
+
+    // === Generate one public method per operation in the spec ===
+    //
+    // Pattern for each method:
+    //
+    // public {Operation}Result {operationCamelCase}(String param1, String param2)
+    //         throws {Name}Exception {
+    //     return retryPolicy.execute(() -> {
+    //         // TODO [CONNECTOR-GEN]: Implement actual API call
+    //         // HttpResponse response = httpClient.send(request, ...);
+    //         // if (response.statusCode() >= 400) { handle error }
+    //         // return parse(response);
+    //         throw new UnsupportedOperationException("Not yet implemented");
+    //     });
+    // }
+
+    // TODO [CONNECTOR-GEN]: Add one method per operation from spec
+}

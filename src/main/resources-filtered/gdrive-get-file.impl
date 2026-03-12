@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<implementation:connectorImplementation xmlns:implementation="http://www.bonitasoft.org/ns/connector/implementation/6.0">
+  <implementationId>${get-file.impl.id}</implementationId>
+  <implementationVersion>${get-file.impl.version}</implementationVersion>
+  <definitionId>${get-file.def.id}</definitionId>
+  <definitionVersion>${get-file.def.version}</definitionVersion>
+  <implementationClassname>${get-file.main-class}</implementationClassname>
+  <hasSources>false</hasSources>
+  <description>Google Drive Get File connector implementation</description>
+
+<!-- retrieved from the pom.xml at build time -->
+${connector-dependencies}
+
+</implementation:connectorImplementation>

@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<implementation:connectorImplementation xmlns:implementation="http://www.bonitasoft.org/ns/connector/implementation/6.0">
+  <implementationId>${create-folder.impl.id}</implementationId>
+  <implementationVersion>${create-folder.impl.version}</implementationVersion>
+  <definitionId>${create-folder.def.id}</definitionId>
+  <definitionVersion>${create-folder.def.version}</definitionVersion>
+  <implementationClassname>${create-folder.main-class}</implementationClassname>
+  <hasSources>false</hasSources>
+  <description>Google Drive Create Folder connector implementation</description>
+
+<!-- retrieved from the pom.xml at build time -->
+${connector-dependencies}
+
+</implementation:connectorImplementation>

@@ -1,0 +1,35 @@
+/*
+  TEMPLATE: Groovy script that generates <jarDependencies> XML for .impl files.
+  Place this file at: src/script/dependencies-as-var.groovy (ONE file for the whole project).
+  No placeholder replacement needed.
+
+  The groovy-maven-plugin runs this at generate-resources phase.
+  It collects all provided-scope dependency JARs (excluding Bonita runtime libs)
+  and sets the Maven property ${connector-dependencies} which is then injected
+  into the .impl files via resource filtering.
+
+  NOTE: Dependencies use "provided" scope in the POM to prevent Bonita Studio
+  import failures. This script includes provided-scope deps (except known Bonita
+  runtime groupIds) so they appear in jarDependencies for runtime loading.
+*/
+import groovy.xml.MarkupBuilder
+
+// GroupIds already on the Bonita runtime classpath — exclude from jarDependencies
+def bonitaRuntime = ['org.bonitasoft.engine', 'org.projectlombok', 'org.slf4j'] as Set
+
+def xml = new StringWriter()
+def builder = new MarkupBuilder(xml)
+builder.jarDependencies {
+    jarDependency("${project.artifactId}-${project.version}.${project.packaging}")
+    project.artifacts
+            .findAll { artifact ->
+                (artifact.scope == "compile" || artifact.scope == "runtime" || artifact.scope == "provided") \
+                && !bonitaRuntime.contains(artifact.groupId)
+            }
+            .sort { artifact -> artifact.artifactId }
+            .each { artifact ->
+                jarDependency("${artifact.artifactId}-${artifact.version}.${artifact.type}")
+            }
+}
+def deps = xml.toString()
+project.properties.setProperty("connector-dependencies", deps)

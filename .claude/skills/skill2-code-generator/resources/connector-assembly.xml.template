@@ -1,0 +1,40 @@
+<!--
+  TEMPLATE: Assembly descriptor for connector ZIP packaging.
+  Place this file at: src/assembly/all-assembly.xml (ONE file for the whole project).
+  No placeholder replacement needed.
+
+  Produces a ZIP containing:
+    *.def, *.impl, *.properties, *.png  — at root
+    classpath/                          — all provided-scope dependency JARs
+
+  NOTE: scope is "provided" because all API client dependencies use provided scope
+  to prevent Bonita Studio import failures. The assembly still bundles them for
+  production deployment.
+-->
+<assembly
+        xmlns="http://maven.apache.org/plugins/maven-assembly-plugin/assembly/1.1.2"
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:schemaLocation="http://maven.apache.org/plugins/maven-assembly-plugin/assembly/1.1.2 http://maven.apache.org/xsd/assembly-1.1.2.xsd">
+    <id>all</id>
+    <formats>
+        <format>zip</format>
+    </formats>
+    <includeBaseDirectory>false</includeBaseDirectory>
+    <fileSets>
+        <fileSet>
+            <outputDirectory/>
+            <directory>target/classes</directory>
+            <includes>
+                <!-- Only first level files -->
+                <include>*.*</include>
+            </includes>
+        </fileSet>
+    </fileSets>
+    <dependencySets>
+        <dependencySet>
+            <unpack>false</unpack>
+            <scope>provided</scope>
+            <outputDirectory>classpath</outputDirectory>
+        </dependencySet>
+    </dependencySets>
+</assembly>

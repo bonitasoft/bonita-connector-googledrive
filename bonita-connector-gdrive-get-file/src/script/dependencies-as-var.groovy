@@ -1,15 +1,15 @@
-import org.apache.maven.project.MavenProject
+import groovy.xml.MarkupBuilder
 
-MavenProject mavenProject = project
-
-def sb = new StringBuilder()
-sb.append('<jarDependencies>\n')
-mavenProject.artifacts.findAll { artifact ->
-    artifact.scope in ['compile', 'runtime']
-}.each { artifact ->
-    sb.append("        <jarDependency>${artifact.file.name}</jarDependency>\n")
+def xml = new StringWriter()
+def builder = new MarkupBuilder(xml)
+builder.jarDependencies {
+    jarDependency("${project.artifactId}-${project.version}.${project.packaging}")
+    project.artifacts
+            .findAll { artifact -> artifact.scope == "compile" || artifact.scope == "runtime" }
+            .sort { artifact -> artifact.artifactId }
+            .each { artifact ->
+                jarDependency("${artifact.artifactId}-${artifact.version}.${artifact.type}")
+            }
 }
-sb.append('    </jarDependencies>')
-
-mavenProject.properties['connector-dependencies'] = sb.toString()
-log.info("Generated connector-dependencies with ${mavenProject.artifacts.findAll { it.scope in ['compile', 'runtime'] }.size()} JARs")
+def deps = xml.toString()
+project.properties.setProperty("connector-dependencies", deps)

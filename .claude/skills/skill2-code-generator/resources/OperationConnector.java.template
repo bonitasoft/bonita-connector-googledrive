@@ -1,0 +1,59 @@
+package com.bonitasoft.connectors.{name};
+
+import com.bonitasoft.connectors.{name}.model.{Operation}Result;
+import lombok.extern.slf4j.Slf4j;
+
+/**
+ * TEMPLATE: Thin operation connector subclass.
+ * PLACEHOLDERS: {name}, {Name}, {Operation}, {operationMethod}
+ *
+ * CUSTOMIZATION:
+ *   - Add static final String constants for every input and output from the spec's parameter table.
+ *   - Implement buildConfiguration() mapping inputs to the Configuration builder.
+ *   - Implement doExecute() calling the client method and setting all outputs.
+ */
+@Slf4j
+public class {Operation}Connector extends Abstract{Name}Connector {
+
+    // === Input parameter name constants ===
+    // Declare one per input from the spec's parameter table.
+    // Example:
+    // static final String INPUT_API_KEY = "apiKey";
+    // static final String INPUT_CHANNEL = "channel";
+    // TODO [CONNECTOR-GEN]: Add all input constants from spec
+
+    // === Output parameter name constants ===
+    // Declare one per output.
+    // Example:
+    // static final String OUTPUT_RESPONSE_ID = "responseId";
+    // TODO [CONNECTOR-GEN]: Add all output constants from spec
+
+    @Override
+    protected {Name}Configuration buildConfiguration() {
+        return {Name}Configuration.builder()
+                // Map each input to the configuration builder using helper methods.
+                // Example:
+                // .apiKey(readStringInput(INPUT_API_KEY))
+                // .channel(readStringInput(INPUT_CHANNEL))
+                // TODO [CONNECTOR-GEN]: Map all inputs to configuration
+                .build();
+    }
+
+    @Override
+    protected void doExecute() throws {Name}Exception {
+        log.info("Executing {Operation} connector");
+
+        // Call the client method for this operation:
+        // {Operation}Result result = client.{operationMethod}(
+        //     configuration.getParam1(),
+        //     configuration.getParam2()
+        // );
+
+        // Set all output parameters from the result:
+        // setOutputParameter(OUTPUT_RESPONSE_ID, result.responseId());
+
+        // TODO [CONNECTOR-GEN]: Implement operation call and output mapping
+
+        log.info("{Operation} connector executed successfully");
+    }
+}

@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<implementation:connectorImplementation xmlns:implementation="http://www.bonitasoft.org/ns/connector/implementation/6.0">
+  <implementationId>${move-file.impl.id}</implementationId>
+  <implementationVersion>${move-file.impl.version}</implementationVersion>
+  <definitionId>${move-file.def.id}</definitionId>
+  <definitionVersion>${move-file.def.version}</definitionVersion>
+  <implementationClassname>${move-file.main-class}</implementationClassname>
+  <hasSources>false</hasSources>
+  <description>Google Drive Move File connector implementation</description>
+
+<!-- retrieved from the pom.xml at build time -->
+${connector-dependencies}
+
+</implementation:connectorImplementation>

@@ -1,0 +1,268 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+  TEMPLATE: Single-module POM for bonita-connector-{name}
+  PLACEHOLDERS:
+    {name}            — lowercase connector name with hyphens (e.g., "gdrive")
+    {Name}            — PascalCase connector name (e.g., "GDrive")
+    {DisplayName}     — Human-readable name for UI (e.g., "Google Drive")
+    {operation}       — lowercase operation name with hyphens (e.g., "get-file")
+    {Operation}       — PascalCase operation name (e.g., "GetFile")
+
+  CUSTOMIZATION INSTRUCTIONS:
+    1. Replace ALL placeholders with actual connector values.
+    2. Add one property block per operation (def.id, def.version, impl.id, impl.version, main-class).
+    3. Add API client library dependencies from spec — ALL with scope "provided".
+    4. Version MUST be a release (e.g., 1.0.0), NEVER a SNAPSHOT.
+    5. groupId MUST be org.bonitasoft.connectors.
+    6. ALL non-test dependencies MUST have scope "provided".
+-->
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0
+         http://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+
+    <groupId>org.bonitasoft.connectors</groupId>
+    <artifactId>bonita-connector-{name}</artifactId>
+    <version>1.0.0</version>
+    <name>Bonita Connector - {DisplayName}</name>
+    <description>{DisplayName} Connectors for Bonita</description>
+
+    <properties>
+        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+        <maven.compiler.source>17</maven.compiler.source>
+        <maven.compiler.target>17</maven.compiler.target>
+
+        <!-- {Operation} Connector (repeat this block for each operation) -->
+        <{operation}.def.id>{name}-{operation}</{operation}.def.id>
+        <{operation}.def.version>1.0.0</{operation}.def.version>
+        <{operation}.impl.id>${{operation}.def.id}-impl</{operation}.impl.id>
+        <{operation}.impl.version>${project.version}</{operation}.impl.version>
+        <{operation}.main-class>com.bonitasoft.connectors.{name}.{Operation}Connector</{operation}.main-class>
+
+        <!-- Bonita -->
+        <bonita-common.version>10.2.0</bonita-common.version>
+
+        <!-- Dependencies -->
+        <lombok.version>1.18.30</lombok.version>
+        <slf4j.version>2.0.9</slf4j.version>
+        <!-- TODO [CONNECTOR-GEN]: Add API client library version properties from spec -->
+
+        <!-- Test -->
+        <junit-jupiter.version>5.10.2</junit-jupiter.version>
+        <mockito.version>5.11.0</mockito.version>
+        <assertj.version>3.25.3</assertj.version>
+        <jqwik.version>1.8.4</jqwik.version>
+        <wiremock.version>3.4.2</wiremock.version>
+
+        <!-- Plugins -->
+        <jacoco.version>0.8.11</jacoco.version>
+        <pitest.version>1.15.6</pitest.version>
+        <pitest-junit5.version>1.2.1</pitest-junit5.version>
+        <surefire.version>3.2.5</surefire.version>
+        <failsafe.version>3.2.5</failsafe.version>
+        <assembly.version>3.6.0</assembly.version>
+        <groovy-maven-plugin.version>2.1.1</groovy-maven-plugin.version>
+    </properties>
+
+    <dependencies>
+        <!-- Bonita (provided — already in Bonita runtime) -->
+        <dependency>
+            <groupId>org.bonitasoft.engine</groupId>
+            <artifactId>bonita-common</artifactId>
+            <version>${bonita-common.version}</version>
+            <scope>provided</scope>
+        </dependency>
+        <dependency>
+            <groupId>org.projectlombok</groupId>
+            <artifactId>lombok</artifactId>
+            <version>${lombok.version}</version>
+            <scope>provided</scope>
+        </dependency>
+        <dependency>
+            <groupId>org.slf4j</groupId>
+            <artifactId>slf4j-api</artifactId>
+            <version>${slf4j.version}</version>
+            <scope>provided</scope>
+        </dependency>
+
+        <!-- TODO [CONNECTOR-GEN]: Add API client library dependencies from spec.
+             ALL must have scope "provided" to prevent Bonita Studio import failures.
+             Example:
+        <dependency>
+            <groupId>com.example</groupId>
+            <artifactId>api-client</artifactId>
+            <version>${api-client.version}</version>
+            <scope>provided</scope>
+        </dependency>
+        -->
+
+        <!-- Test dependencies -->
+        <dependency>
+            <groupId>org.junit.jupiter</groupId>
+            <artifactId>junit-jupiter</artifactId>
+            <version>${junit-jupiter.version}</version>
+            <scope>test</scope>
+        </dependency>
+        <dependency>
+            <groupId>org.mockito</groupId>
+            <artifactId>mockito-core</artifactId>
+            <version>${mockito.version}</version>
+            <scope>test</scope>
+        </dependency>
+        <dependency>
+            <groupId>org.mockito</groupId>
+            <artifactId>mockito-junit-jupiter</artifactId>
+            <version>${mockito.version}</version>
+            <scope>test</scope>
+        </dependency>
+        <dependency>
+            <groupId>org.assertj</groupId>
+            <artifactId>assertj-core</artifactId>
+            <version>${assertj.version}</version>
+            <scope>test</scope>
+        </dependency>
+        <dependency>
+            <groupId>net.jqwik</groupId>
+            <artifactId>jqwik</artifactId>
+            <version>${jqwik.version}</version>
+            <scope>test</scope>
+        </dependency>
+        <dependency>
+            <groupId>org.wiremock</groupId>
+            <artifactId>wiremock-standalone</artifactId>
+            <version>${wiremock.version}</version>
+            <scope>test</scope>
+        </dependency>
+    </dependencies>
+
+    <build>
+        <resources>
+            <resource>
+                <directory>src/main/resources-filtered</directory>
+                <filtering>true</filtering>
+            </resource>
+            <resource>
+                <directory>src/main/resources</directory>
+                <filtering>false</filtering>
+            </resource>
+        </resources>
+        <plugins>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-compiler-plugin</artifactId>
+                <version>3.12.1</version>
+                <configuration>
+                    <source>17</source>
+                    <target>17</target>
+                    <annotationProcessorPaths>
+                        <path>
+                            <groupId>org.projectlombok</groupId>
+                            <artifactId>lombok</artifactId>
+                            <version>${lombok.version}</version>
+                        </path>
+                    </annotationProcessorPaths>
+                </configuration>
+            </plugin>
+            <plugin>
+                <groupId>org.codehaus.gmaven</groupId>
+                <artifactId>groovy-maven-plugin</artifactId>
+                <version>${groovy-maven-plugin.version}</version>
+                <executions>
+                    <execution>
+                        <phase>generate-resources</phase>
+                        <goals><goal>execute</goal></goals>
+                        <configuration>
+                            <source>${project.basedir}/src/script/dependencies-as-var.groovy</source>
+                        </configuration>
+                    </execution>
+                </executions>
+            </plugin>
+            <plugin>
+                <artifactId>maven-assembly-plugin</artifactId>
+                <version>${assembly.version}</version>
+                <executions>
+                    <execution>
+                        <id>package-connectors</id>
+                        <phase>package</phase>
+                        <goals><goal>single</goal></goals>
+                        <configuration>
+                            <descriptorSourceDirectory>${project.basedir}/src/assembly</descriptorSourceDirectory>
+                            <appendAssemblyId>true</appendAssemblyId>
+                        </configuration>
+                    </execution>
+                </executions>
+            </plugin>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-surefire-plugin</artifactId>
+                <version>${surefire.version}</version>
+            </plugin>
+            <plugin>
+                <groupId>org.jacoco</groupId>
+                <artifactId>jacoco-maven-plugin</artifactId>
+                <version>${jacoco.version}</version>
+                <executions>
+                    <execution>
+                        <goals><goal>prepare-agent</goal></goals>
+                    </execution>
+                    <execution>
+                        <id>report</id>
+                        <phase>test</phase>
+                        <goals><goal>report</goal></goals>
+                    </execution>
+                </executions>
+            </plugin>
+            <plugin>
+                <groupId>org.pitest</groupId>
+                <artifactId>pitest-maven</artifactId>
+                <version>${pitest.version}</version>
+                <dependencies>
+                    <dependency>
+                        <groupId>org.pitest</groupId>
+                        <artifactId>pitest-junit5-plugin</artifactId>
+                        <version>${pitest-junit5.version}</version>
+                    </dependency>
+                </dependencies>
+                <configuration>
+                    <mutators>
+                        <mutator>STRONGER</mutator>
+                    </mutators>
+                    <mutationThreshold>95</mutationThreshold>
+                    <coverageThreshold>95</coverageThreshold>
+                    <timestampedReports>false</timestampedReports>
+                </configuration>
+            </plugin>
+        </plugins>
+    </build>
+
+    <repositories>
+        <repository>
+            <id>bonitasoft-releases</id>
+            <url>https://bonitasoft.jfrog.io/artifactory/maven</url>
+        </repository>
+    </repositories>
+
+    <profiles>
+        <profile>
+            <id>integration-tests</id>
+            <build>
+                <plugins>
+                    <plugin>
+                        <groupId>org.apache.maven.plugins</groupId>
+                        <artifactId>maven-failsafe-plugin</artifactId>
+                        <version>${failsafe.version}</version>
+                        <executions>
+                            <execution>
+                                <goals>
+                                    <goal>integration-test</goal>
+                                    <goal>verify</goal>
+                                </goals>
+                            </execution>
+                        </executions>
+                    </plugin>
+                </plugins>
+            </build>
+        </profile>
+    </profiles>
+</project>

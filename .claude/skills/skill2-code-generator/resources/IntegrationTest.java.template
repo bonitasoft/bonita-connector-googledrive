@@ -1,0 +1,26 @@
+package com.bonitasoft.connectors.{name};
+
+import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.condition.EnabledIfEnvironmentVariable;
+
+/**
+ * TEMPLATE: Integration test for {Operation}Connector.
+ * PLACEHOLDERS: {name}, {NAME}, {Operation}
+ *
+ * SKIPPED unless required environment variables are set.
+ * Set these env vars to run against the real API:
+ *   {NAME}_API_KEY, {NAME}_BASE_URL, etc.
+ */
+@EnabledIfEnvironmentVariable(named = "{NAME}_API_KEY", matches = ".+")
+class {Operation}ConnectorIntegrationTest {
+
+    @Test
+    void shouldExecuteAgainstRealApi() throws Exception {
+        // String apiKey = System.getenv("{NAME}_API_KEY");
+
+        // Create and configure the connector with real credentials
+        // Execute and verify real API response
+
+        // TODO [CONNECTOR-GEN]: Implement with real API calls
+    }
+}

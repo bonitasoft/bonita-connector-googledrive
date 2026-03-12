@@ -1,0 +1,37 @@
+package com.bonitasoft.connectors.{name};
+
+import lombok.Builder;
+import lombok.Data;
+
+/**
+ * TEMPLATE: Configuration for {Name} connector.
+ * PLACEHOLDERS: {name}, {Name}
+ *
+ * CUSTOMIZATION:
+ *   - For each parameter with scope "Project" or "Runtime" in the spec, add a field.
+ *   - Use @Builder.Default for any parameter with a Default value in the spec.
+ *   - Match Java types to the spec's Type column.
+ *   - Operation-specific parameters go here too (or use per-operation config subclasses).
+ */
+@Data
+@Builder
+public class {Name}Configuration {
+
+    // === Connection / Auth parameters (Project/Runtime scope) ===
+    // TODO [CONNECTOR-GEN]: Add all connection parameters from spec
+    // Example:
+    // private String baseUrl;
+    // @Builder.Default
+    // private String apiVersion = "v1";
+    // private String apiKey;
+
+    // === Operation parameters (Connector scope) ===
+    // TODO [CONNECTOR-GEN]: Add operation parameters from spec
+
+    // === Advanced parameters ===
+    @Builder.Default
+    private int timeoutSeconds = 30;
+
+    @Builder.Default
+    private int maxRetries = 5;
+}

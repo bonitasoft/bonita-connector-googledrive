@@ -1,0 +1,44 @@
+package com.bonitasoft.connectors.{name};
+
+/**
+ * TEMPLATE: Typed exception for {Name} connector.
+ * PLACEHOLDERS: {name}, {Name}
+ * No customization needed — use as-is after placeholder replacement.
+ */
+public class {Name}Exception extends Exception {
+
+    private final int statusCode;
+    private final boolean retryable;
+
+    public {Name}Exception(String message) {
+        super(message);
+        this.statusCode = -1;
+        this.retryable = false;
+    }
+
+    public {Name}Exception(String message, Throwable cause) {
+        super(message, cause);
+        this.statusCode = -1;
+        this.retryable = false;
+    }
+
+    public {Name}Exception(String message, int statusCode, boolean retryable) {
+        super(message);
+        this.statusCode = statusCode;
+        this.retryable = retryable;
+    }
+
+    public {Name}Exception(String message, int statusCode, boolean retryable, Throwable cause) {
+        super(message, cause);
+        this.statusCode = statusCode;
+        this.retryable = retryable;
+    }
+
+    public int getStatusCode() {
+        return statusCode;
+    }
+
+    public boolean isRetryable() {
+        return retryable;
+    }
+}

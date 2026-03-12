@@ -1,0 +1,96 @@
+package com.bonitasoft.connectors.{name};
+
+import static org.assertj.core.api.Assertions.*;
+import static org.mockito.Mockito.*;
+
+import org.bonitasoft.engine.connector.ConnectorValidationException;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.extension.ExtendWith;
+import org.mockito.Mock;
+import org.mockito.junit.jupiter.MockitoExtension;
+
+import java.util.HashMap;
+import java.util.Map;
+
+/**
+ * TEMPLATE: Unit tests for {Operation}Connector.
+ * PLACEHOLDERS: {name}, {Name}, {Operation}
+ *
+ * REQUIRED TEST SCENARIOS (minimum — implement ALL, do NOT leave as stubs):
+ *   1. Happy path — all mandatory inputs set, mock client returns success, verify all outputs
+ *   2. Each mandatory input missing — one test per mandatory param -> ConnectorValidationException
+ *   3. Rate limit retry — mock 429 then success, verify retry occurs
+ *   4. Auth failure — mock 401/403, verify immediate failure with error message
+ *   5. Network timeout — mock timeout exception, verify failure path
+ *   6. Null optional inputs — verify defaults applied correctly
+ *   7. All output fields populated — every output from spec is set after success
+ *   8. Error path outputs — success=false and errorMessage set on failure
+ *
+ * MOCK CLIENT INJECTION PATTERN:
+ *   After connector.connect(), replace client with mock via reflection:
+ *     var clientField = Abstract{Name}Connector.class.getDeclaredField("client");
+ *     clientField.setAccessible(true);
+ *     clientField.set(connector, mockClient);
+ */
+@ExtendWith(MockitoExtension.class)
+class {Operation}ConnectorTest {
+
+    @Mock
+    private {Name}Client mockClient;
+
+    private {Operation}Connector connector;
+    private Map<String, Object> inputs;
+
+    @BeforeEach
+    void setUp() {
+        connector = new {Operation}Connector();
+        inputs = new HashMap<>();
+        // TODO [CONNECTOR-GEN]: Set all mandatory inputs with valid values
+    }
+
+    @Test
+    void shouldExecuteSuccessfully() throws Exception {
+        // TODO [CONNECTOR-GEN]: Implement happy path
+    }
+
+    // TODO [CONNECTOR-GEN]: Add one test per mandatory parameter
+    @Test
+    void shouldFailValidationWhenMandatoryParamMissing() {
+        // TODO [CONNECTOR-GEN]: Implement for each mandatory param
+    }
+
+    @Test
+    void shouldRetryOnRateLimit() throws Exception {
+        // TODO [CONNECTOR-GEN]: Mock retryable 429 then success
+    }
+
+    @Test
+    void shouldFailImmediatelyOnAuthError() throws Exception {
+        // TODO [CONNECTOR-GEN]: Mock 401, verify success=false
+    }
+
+    @Test
+    void shouldHandleNetworkTimeout() throws Exception {
+        // TODO [CONNECTOR-GEN]: Mock timeout
+    }
+
+    @Test
+    void shouldApplyDefaultsForNullOptionalInputs() throws Exception {
+        // TODO [CONNECTOR-GEN]: Verify defaults
+    }
+
+    @Test
+    void shouldPopulateAllOutputFields() throws Exception {
+        // TODO [CONNECTOR-GEN]: Verify every output non-null after success
+    }
+
+    @Test
+    void shouldSetErrorOutputsOnFailure() throws Exception {
+        // TODO [CONNECTOR-GEN]: Force error, verify success=false + errorMessage
+    }
+
+    private void setConnectorInputs(Map<String, Object> inputValues) {
+        inputValues.forEach(connector::setInputParameters);
+    }
+}

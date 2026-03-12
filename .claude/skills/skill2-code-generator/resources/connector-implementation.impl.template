@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+  TEMPLATE: Implementation Descriptor (.impl)
+  PLACEHOLDERS: {name}, {operation}, {Operation}
+
+  IMPORTANT:
+    - Namespace MUST be 6.0 (NOT 6.1). .def uses 6.1, but .impl uses 6.0.
+    - Element order MUST follow the XSD sequence exactly (see below).
+    - ${connector-dependencies} is auto-generated at build time by the
+      groovy-maven-plugin (dependencies-as-var.groovy).
+    - Property references use the per-operation prefix: ${operation}.def.id etc.
+    - <hasSources>false</hasSources> is REQUIRED.
+-->
+<implementation:connectorImplementation xmlns:implementation="http://www.bonitasoft.org/ns/connector/implementation/6.0">
+  <implementationId>${{operation}.impl.id}</implementationId>
+  <implementationVersion>${{operation}.impl.version}</implementationVersion>
+  <definitionId>${{operation}.def.id}</definitionId>
+  <definitionVersion>${{operation}.def.version}</definitionVersion>
+  <implementationClassname>${{operation}.main-class}</implementationClassname>
+  <hasSources>false</hasSources>
+  <description>{DisplayName} {Operation} connector implementation</description>
+
+<!-- retrieved from the pom.xml at build time -->
+${connector-dependencies}
+
+</implementation:connectorImplementation>

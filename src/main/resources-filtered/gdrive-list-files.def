@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<definition:ConnectorDefinition xmlns:definition="http://www.bonitasoft.org/ns/connector/definition/6.1"
+                                xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+
+    <id>${list-files.def.id}</id>
+    <version>${list-files.def.version}</version>
+    <icon>drive_48dp.png</icon>
+
+    <category icon="drive_48dp.png" id="Google Drive"/>
+
+    <!-- === Page 1 — Connection === -->
+    <input name="serviceAccountKeyJson" type="java.lang.String" mandatory="true"/>
+    <input name="impersonatedUserEmail" type="java.lang.String" mandatory="false"/>
+    <input name="applicationName" type="java.lang.String" mandatory="false" defaultValue="Bonita-GoogleDrive-Connector"/>
+    <input name="connectTimeout" type="java.lang.Integer" mandatory="false" defaultValue="30000"/>
+    <input name="readTimeout" type="java.lang.Integer" mandatory="false" defaultValue="60000"/>
+
+    <!-- === Page 2 — Search === -->
+    <input name="parentFolderId" type="java.lang.String" mandatory="false"/>
+    <input name="searchQuery" type="java.lang.String" mandatory="false"/>
+    <input name="mimeTypeFilter" type="java.lang.String" mandatory="false"/>
+
+    <!-- === Page 3 — Configuration === -->
+    <input name="maxResults" type="java.lang.Integer" mandatory="false" defaultValue="100"/>
+    <input name="orderBy" type="java.lang.String" mandatory="false" defaultValue="modifiedTime desc"/>
+    <input name="includeFiles" type="java.lang.Boolean" mandatory="false" defaultValue="true"/>
+    <input name="includeFolders" type="java.lang.Boolean" mandatory="false" defaultValue="true"/>
+
+    <!-- === Outputs === -->
+    <output name="files" type="java.util.List"/>
+    <output name="totalCount" type="java.lang.Integer"/>
+    <output name="nextPageToken" type="java.lang.String"/>
+    <output name="success" type="java.lang.Boolean"/>
+    <output name="errorMessage" type="java.lang.String"/>
+
+    <!-- === Pages === -->
+    <page id="connectionPage">
+        <widget id="serviceAccountKeyJson" inputName="serviceAccountKeyJson" xsi:type="definition:Password"/>
+        <widget id="impersonatedUserEmail" inputName="impersonatedUserEmail" xsi:type="definition:Text"/>
+        <widget id="applicationNameWidget" inputName="applicationName" xsi:type="definition:Text"/>
+        <widget id="connectTimeout" inputName="connectTimeout" xsi:type="definition:Text"/>
+        <widget id="readTimeout" inputName="readTimeout" xsi:type="definition:Text"/>
+    </page>
+
+    <page id="searchPage">
+        <widget id="parentFolderId" inputName="parentFolderId" xsi:type="definition:Text"/>
+        <widget id="searchQuery" inputName="searchQuery" xsi:type="definition:TextArea"/>
+        <widget id="mimeTypeFilter" inputName="mimeTypeFilter" xsi:type="definition:Text"/>
+    </page>
+
+    <page id="configurationPage">
+        <widget id="maxResults" inputName="maxResults" xsi:type="definition:Text"/>
+        <widget id="orderBy" inputName="orderBy" xsi:type="definition:Select"/>
+        <widget id="includeFiles" inputName="includeFiles" xsi:type="definition:Checkbox"/>
+        <widget id="includeFolders" inputName="includeFolders" xsi:type="definition:Checkbox"/>
+    </page>
+
+</definition:ConnectorDefinition>

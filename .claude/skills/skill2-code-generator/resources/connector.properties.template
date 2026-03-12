@@ -1,0 +1,37 @@
+# TEMPLATE: i18n properties for {DisplayName} - {Operation}
+# PLACEHOLDERS: {name}, {Name}, {DisplayName}, {operation}, {Operation}
+#
+# KEY NAMING CONVENTIONS (must match widget IDs in .def file):
+#   Page:     {pageId}.pageTitle / {pageId}.pageDescription
+#   Widget:   {widgetId}.label / {widgetId}.description
+#   Category: {categoryId}.category
+#   Connector: connectorDefinitionLabel / connectorDefinitionDescription
+#
+# Widget IDs follow the convention: {inputName}Widget (e.g., fileIdWidget)
+#
+# IMPORTANT: Connector label must use consistent prefix across all operations.
+# Example: "Google Drive - Get File", "Google Drive - Upload File"
+
+# Connector label (use same "{DisplayName} - " prefix for ALL operations)
+connectorDefinitionLabel={DisplayName} - {Operation}
+connectorDefinitionDescription={Operation description from spec}
+
+# Category
+{DisplayName}.category={DisplayName}
+
+# Page labels
+connectionPage.pageTitle=Connection
+connectionPage.pageDescription=Configure authentication and connection settings
+operationPage.pageTitle={Operation}
+operationPage.pageDescription=Configure the {operation} operation parameters
+# Uncomment if used:
+# configurationPage.pageTitle=Configuration
+# configurationPage.pageDescription=Process-level configuration
+# advancedPage.pageTitle=Advanced
+# advancedPage.pageDescription=Advanced settings
+
+# Input widget labels
+# {inputName}Widget.label=Human Readable Label
+# {inputName}Widget.description=Tooltip description shown in Bonita Studio
+
+# TODO [CONNECTOR-GEN]: Add all operation-specific widget labels

@@ -1,0 +1,14 @@
+package com.bonitasoft.connectors.{name}.model;
+
+/**
+ * TEMPLATE: Immutable result record for the {operation} operation.
+ * PLACEHOLDERS: {name}, {Operation}
+ *
+ * CUSTOMIZATION:
+ *   - Add one parameter per output field in the spec's output table for this operation.
+ *   - Use the exact Java type from the spec's Type column.
+ *   - Example: String id, String status, java.time.Instant createdAt
+ */
+public record {Operation}Result(
+    // TODO [CONNECTOR-GEN]: Populate from spec output table
+) {}

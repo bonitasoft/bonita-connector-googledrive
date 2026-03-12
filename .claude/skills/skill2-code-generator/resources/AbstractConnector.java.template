@@ -1,0 +1,128 @@
+package com.bonitasoft.connectors.{name};
+
+import lombok.extern.slf4j.Slf4j;
+import org.bonitasoft.engine.connector.AbstractConnector;
+import org.bonitasoft.engine.connector.ConnectorException;
+import org.bonitasoft.engine.connector.ConnectorValidationException;
+
+/**
+ * TEMPLATE: Abstract base connector for {Name}.
+ * PLACEHOLDERS: {name}, {Name}
+ *
+ * CUSTOMIZATION:
+ *   - Add all connection/auth parameters from the spec's authentication section
+ *     to buildConfiguration() and validateConfiguration().
+ *   - Add input-reading helpers for any non-standard types found in the spec.
+ */
+@Slf4j
+public abstract class Abstract{Name}Connector extends AbstractConnector {
+
+    // Output parameter constants
+    protected static final String OUTPUT_SUCCESS = "success";
+    protected static final String OUTPUT_ERROR_MESSAGE = "errorMessage";
+
+    protected {Name}Configuration configuration;
+    protected {Name}Client client;
+
+    /**
+     * Validates all input parameters and builds the configuration object.
+     * Called by Bonita engine before connect().
+     */
+    @Override
+    public void validateInputParameters() throws ConnectorValidationException {
+        try {
+            this.configuration = buildConfiguration();
+            validateConfiguration(this.configuration);
+        } catch (IllegalArgumentException e) {
+            throw new ConnectorValidationException(this, e.getMessage());
+        }
+    }
+
+    /**
+     * Creates and authenticates the API client.
+     */
+    @Override
+    public void connect() throws ConnectorException {
+        try {
+            this.client = new {Name}Client(this.configuration);
+            log.info("{Name} connector connected successfully");
+        } catch ({Name}Exception e) {
+            throw new ConnectorException("Failed to connect: " + e.getMessage(), e);
+        }
+    }
+
+    /**
+     * Stateless HTTP — null the client reference.
+     */
+    @Override
+    public void disconnect() throws ConnectorException {
+        this.client = null;
+    }
+
+    /**
+     * Template method: wraps doExecute() with standard error handling.
+     * Always sets success and errorMessage outputs.
+     */
+    @Override
+    protected void executeBusinessLogic() throws ConnectorException {
+        try {
+            doExecute();
+            setOutputParameter(OUTPUT_SUCCESS, true);
+        } catch ({Name}Exception e) {
+            log.error("{Name} connector execution failed: {}", e.getMessage(), e);
+            setOutputParameter(OUTPUT_SUCCESS, false);
+            setOutputParameter(OUTPUT_ERROR_MESSAGE, e.getMessage());
+        } catch (Exception e) {
+            log.error("Unexpected error in {Name} connector: {}", e.getMessage(), e);
+            setOutputParameter(OUTPUT_SUCCESS, false);
+            setOutputParameter(OUTPUT_ERROR_MESSAGE, "Unexpected error: " + e.getMessage());
+        }
+    }
+
+    /**
+     * Subclasses implement this to perform their specific operation.
+     */
+    protected abstract void doExecute() throws {Name}Exception;
+
+    /**
+     * Subclasses implement this to build their configuration from input parameters.
+     * Use getInputParameter("paramName") to read each input.
+     */
+    protected abstract {Name}Configuration buildConfiguration();
+
+    /**
+     * Validates the configuration. Override in subclasses for operation-specific validation.
+     * TODO [CONNECTOR-GEN]: Add mandatory parameter validation from spec's auth section.
+     * Example:
+     *   if (config.getApiKey() == null || config.getApiKey().isBlank()) {
+     *       throw new IllegalArgumentException("apiKey is mandatory");
+     *   }
+     */
+    protected void validateConfiguration({Name}Configuration config) {
+        // TODO [CONNECTOR-GEN]: Add mandatory parameter validation from spec
+    }
+
+    /** Helper: read a String input, returning null if not set. */
+    protected String readStringInput(String name) {
+        Object value = getInputParameter(name);
+        return value != null ? value.toString() : null;
+    }
+
+    /** Helper: read a String input with a default value. */
+    protected String readStringInput(String name, String defaultValue) {
+        String value = readStringInput(name);
+        return (value != null && !value.isBlank()) ? value : defaultValue;
+    }
+
+    /** Helper: read a Boolean input with a default value. */
+    protected Boolean readBooleanInput(String name, boolean defaultValue) {
+        Object value = getInputParameter(name);
+        return value != null ? (Boolean) value : defaultValue;
+    }
+
+    /** Helper: read an Integer input with a default value. */
+    protected Integer readIntegerInput(String name, int defaultValue) {
+        Object value = getInputParameter(name);
+        return value != null ? ((Number) value).intValue() : defaultValue;
+    }
+}

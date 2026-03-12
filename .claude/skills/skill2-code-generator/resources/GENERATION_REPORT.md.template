@@ -1,0 +1,34 @@
+# Connector Generation Report
+
+## Summary
+- **Connector name:** {name}
+- **Generated:** {current_date}
+- **Operations:** {operation_count}
+
+## Operations Generated
+
+| Operation | Module | .def | .impl | Unit Tests | Property Tests | Integration Test |
+|---|---|---|---|---|---|---|
+| {operation} | bonita-connector-{name}-{operation} | Yes | Yes | {unit_count} | {property_count} | Yes (skippable) |
+
+## Files Created
+
+<!-- List every file created, grouped by module -->
+
+## Test Coverage
+
+| Module | Line Coverage | Mutation Score |
+|---|---|---|
+| core | {line_cov}% | {mut_score}% |
+| {operation} | {line_cov}% | {mut_score}% |
+
+## Assumptions Made
+
+<!-- List any decisions made where the spec was ambiguous -->
+
+## TODOs Requiring Human Input
+
+- [ ] Replace placeholder icon ({name}.png) with actual connector icon (48x48 PNG)
+- [ ] Set real API credentials in environment variables for integration tests
+- [ ] Implement actual API calls in {Name}Client.java (marked with TODO [CONNECTOR-GEN])
+<!-- Add any other TODOs discovered during generation -->

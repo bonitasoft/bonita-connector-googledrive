@@ -7,6 +7,7 @@
     <version>${connector-id.def.version}</version>
     <icon>gdrive.png</icon>
 
+    <category id="Cloud" icon="gdrive.png"/>
     <category id="GoogleDrive" icon="gdrive.png" parentCategoryId="Cloud"/>
 
     <!-- === INPUTS === -->
