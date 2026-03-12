@@ -31,6 +31,8 @@
             <resource><directory>src/main/resources-filtered</directory><filtering>true</filtering></resource>
         </resources>
         <plugins>
+            <plugin><groupId>org.codehaus.gmaven</groupId><artifactId>groovy-maven-plugin</artifactId></plugin>
+            <plugin><artifactId>maven-assembly-plugin</artifactId></plugin>
             <plugin><groupId>org.jacoco</groupId><artifactId>jacoco-maven-plugin</artifactId></plugin>
             <plugin><groupId>org.pitest</groupId><artifactId>pitest-maven</artifactId></plugin>
         </plugins>

@@ -6,5 +6,5 @@
     <implementationClassname>com.bonitasoft.connectors.gdrive.CreateFolderConnector</implementationClassname>
     <implementationId>${connector-id.impl.id}</implementationId>
     <implementationVersion>${connector-id.impl.version}</implementationVersion>
-    <jarDependencies/>
+    ${connector-dependencies}
 </implementation:connectorImplementation>

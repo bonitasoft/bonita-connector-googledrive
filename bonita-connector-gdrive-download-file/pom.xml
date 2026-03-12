@@ -72,6 +72,8 @@
             </resource>
         </resources>
         <plugins>
+            <plugin><groupId>org.codehaus.gmaven</groupId><artifactId>groovy-maven-plugin</artifactId></plugin>
+            <plugin><artifactId>maven-assembly-plugin</artifactId></plugin>
             <plugin>
                 <groupId>org.jacoco</groupId>
                 <artifactId>jacoco-maven-plugin</artifactId>
