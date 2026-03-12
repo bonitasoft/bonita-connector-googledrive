@@ -1,291 +1,432 @@
 <?xml version="1.0" encoding="UTF-8"?>
+
 <project xmlns="http://maven.apache.org/POM/4.0.0"
-         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0
-         http://maven.apache.org/xsd/maven-4.0.0.xsd">
-    <modelVersion>4.0.0</modelVersion>
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+	<modelVersion>4.0.0</modelVersion>
 
-    <groupId>org.bonitasoft.connectors</groupId>
-    <artifactId>bonita-connector-gdrive</artifactId>
-    <version>1.0.0</version>
-    <name>Bonita Connector - GDrive</name>
-    <description>Google Drive Connectors for Bonita</description>
+	<groupId>org.bonitasoft.connectors</groupId>
+	<artifactId>bonita-connector-gdrive</artifactId>
+	<version>1.0.0</version>
 
-    <properties>
-        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-        <maven.compiler.source>17</maven.compiler.source>
-        <maven.compiler.target>17</maven.compiler.target>
+	<name>Bonita Google Drive Connector</name>
+	<description>Google Drive Connectors for Bonita</description>
+	<url>https://www.bonitasoft.com</url>
 
-        <!-- Get File Connector -->
-        <get-file.def.id>gdrive-get-file</get-file.def.id>
-        <get-file.def.version>1.0.0</get-file.def.version>
-        <get-file.impl.id>${get-file.def.id}-impl</get-file.impl.id>
-        <get-file.impl.version>${project.version}</get-file.impl.version>
-        <get-file.main-class>com.bonitasoft.connectors.gdrive.GetFileConnector</get-file.main-class>
+	<developers>
+		<developer>
+			<id>bonitasoft</id>
+			<name>Bonitasoft</name>
+			<email>rd.user@bonitasoft.com</email>
+			<organization>Bonitasoft</organization>
+			<organizationUrl>https://www.bonitasoft.com</organizationUrl>
+		</developer>
+	</developers>
 
-        <!-- List Files Connector -->
-        <list-files.def.id>gdrive-list-files</list-files.def.id>
-        <list-files.def.version>1.0.0</list-files.def.version>
-        <list-files.impl.id>${list-files.def.id}-impl</list-files.impl.id>
-        <list-files.impl.version>${project.version}</list-files.impl.version>
-        <list-files.main-class>com.bonitasoft.connectors.gdrive.ListFilesConnector</list-files.main-class>
+	<licenses>
+		<license>
+			<name>GPL-v2.0</name>
+			<url>http://www.gnu.org/licenses/gpl-2.0.txt</url>
+		</license>
+	</licenses>
 
-        <!-- Upload File Connector -->
-        <upload-file.def.id>gdrive-upload-file</upload-file.def.id>
-        <upload-file.def.version>1.0.0</upload-file.def.version>
-        <upload-file.impl.id>${upload-file.def.id}-impl</upload-file.impl.id>
-        <upload-file.impl.version>${project.version}</upload-file.impl.version>
-        <upload-file.main-class>com.bonitasoft.connectors.gdrive.UploadFileConnector</upload-file.main-class>
+	<properties>
+		<!-- Maven -->
+		<java.version>17</java.version>
+		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+		<project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
+		<maven.build.timestamp.format>yyyy.MM.dd-hh.mm</maven.build.timestamp.format>
 
-        <!-- Download File Connector -->
-        <download-file.def.id>gdrive-download-file</download-file.def.id>
-        <download-file.def.version>1.0.0</download-file.def.version>
-        <download-file.impl.id>${download-file.def.id}-impl</download-file.impl.id>
-        <download-file.impl.version>${project.version}</download-file.impl.version>
-        <download-file.main-class>com.bonitasoft.connectors.gdrive.DownloadFileConnector</download-file.main-class>
+		<!-- Get File Connector -->
+		<get-file.def.id>gdrive-get-file</get-file.def.id>
+		<get-file.def.version>1.0.0</get-file.def.version>
+		<get-file.impl.id>${get-file.def.id}-impl</get-file.impl.id>
+		<get-file.impl.version>${project.version}</get-file.impl.version>
+		<get-file.main-class>com.bonitasoft.connectors.gdrive.GetFileConnector</get-file.main-class>
 
-        <!-- Create Folder Connector -->
-        <create-folder.def.id>gdrive-create-folder</create-folder.def.id>
-        <create-folder.def.version>1.0.0</create-folder.def.version>
-        <create-folder.impl.id>${create-folder.def.id}-impl</create-folder.impl.id>
-        <create-folder.impl.version>${project.version}</create-folder.impl.version>
-        <create-folder.main-class>com.bonitasoft.connectors.gdrive.CreateFolderConnector</create-folder.main-class>
+		<!-- List Files Connector -->
+		<list-files.def.id>gdrive-list-files</list-files.def.id>
+		<list-files.def.version>1.0.0</list-files.def.version>
+		<list-files.impl.id>${list-files.def.id}-impl</list-files.impl.id>
+		<list-files.impl.version>${project.version}</list-files.impl.version>
+		<list-files.main-class>com.bonitasoft.connectors.gdrive.ListFilesConnector</list-files.main-class>
 
-        <!-- Move File Connector -->
-        <move-file.def.id>gdrive-move-file</move-file.def.id>
-        <move-file.def.version>1.0.0</move-file.def.version>
-        <move-file.impl.id>${move-file.def.id}-impl</move-file.impl.id>
-        <move-file.impl.version>${project.version}</move-file.impl.version>
-        <move-file.main-class>com.bonitasoft.connectors.gdrive.MoveFileConnector</move-file.main-class>
+		<!-- Upload File Connector -->
+		<upload-file.def.id>gdrive-upload-file</upload-file.def.id>
+		<upload-file.def.version>1.0.0</upload-file.def.version>
+		<upload-file.impl.id>${upload-file.def.id}-impl</upload-file.impl.id>
+		<upload-file.impl.version>${project.version}</upload-file.impl.version>
+		<upload-file.main-class>com.bonitasoft.connectors.gdrive.UploadFileConnector</upload-file.main-class>
 
-        <!-- Delete File Connector -->
-        <delete-file.def.id>gdrive-delete-file</delete-file.def.id>
-        <delete-file.def.version>1.0.0</delete-file.def.version>
-        <delete-file.impl.id>${delete-file.def.id}-impl</delete-file.impl.id>
-        <delete-file.impl.version>${project.version}</delete-file.impl.version>
-        <delete-file.main-class>com.bonitasoft.connectors.gdrive.DeleteFileConnector</delete-file.main-class>
+		<!-- Download File Connector -->
+		<download-file.def.id>gdrive-download-file</download-file.def.id>
+		<download-file.def.version>1.0.0</download-file.def.version>
+		<download-file.impl.id>${download-file.def.id}-impl</download-file.impl.id>
+		<download-file.impl.version>${project.version}</download-file.impl.version>
+		<download-file.main-class>com.bonitasoft.connectors.gdrive.DownloadFileConnector</download-file.main-class>
 
-        <!-- Bonita -->
-        <bonita-common.version>10.2.0</bonita-common.version>
+		<!-- Create Folder Connector -->
+		<create-folder.def.id>gdrive-create-folder</create-folder.def.id>
+		<create-folder.def.version>1.0.0</create-folder.def.version>
+		<create-folder.impl.id>${create-folder.def.id}-impl</create-folder.impl.id>
+		<create-folder.impl.version>${project.version}</create-folder.impl.version>
+		<create-folder.main-class>com.bonitasoft.connectors.gdrive.CreateFolderConnector</create-folder.main-class>
 
-        <!-- Google Drive API -->
-        <google.drive.version>v3-rev20260220-2.0.0</google.drive.version>
-        <google.api.client.version>2.9.0</google.api.client.version>
-        <google.auth.version>1.43.0</google.auth.version>
-        <google.http.client.version>2.1.0</google.http.client.version>
+		<!-- Move File Connector -->
+		<move-file.def.id>gdrive-move-file</move-file.def.id>
+		<move-file.def.version>1.0.0</move-file.def.version>
+		<move-file.impl.id>${move-file.def.id}-impl</move-file.impl.id>
+		<move-file.impl.version>${project.version}</move-file.impl.version>
+		<move-file.main-class>com.bonitasoft.connectors.gdrive.MoveFileConnector</move-file.main-class>
 
-        <!-- Dependencies -->
-        <lombok.version>1.18.30</lombok.version>
-        <slf4j.version>2.0.9</slf4j.version>
+		<!-- Delete File Connector -->
+		<delete-file.def.id>gdrive-delete-file</delete-file.def.id>
+		<delete-file.def.version>1.0.0</delete-file.def.version>
+		<delete-file.impl.id>${delete-file.def.id}-impl</delete-file.impl.id>
+		<delete-file.impl.version>${project.version}</delete-file.impl.version>
+		<delete-file.main-class>com.bonitasoft.connectors.gdrive.DeleteFileConnector</delete-file.main-class>
 
-        <!-- Test -->
-        <junit-jupiter.version>5.10.2</junit-jupiter.version>
-        <mockito.version>5.11.0</mockito.version>
-        <assertj.version>3.27.7</assertj.version>
-        <jqwik.version>1.8.4</jqwik.version>
-        <wiremock.version>3.4.2</wiremock.version>
+		<!-- Bonita -->
+		<bonita-common.version>10.2.0</bonita-common.version>
 
-        <!-- Plugins -->
-        <jacoco.version>0.8.11</jacoco.version>
-        <surefire.version>3.2.5</surefire.version>
-        <failsafe.version>3.2.5</failsafe.version>
-        <assembly.version>3.6.0</assembly.version>
-        <groovy-maven-plugin.version>2.1.1</groovy-maven-plugin.version>
-    </properties>
+		<!-- Google Drive API -->
+		<google.drive.version>v3-rev20260220-2.0.0</google.drive.version>
+		<google.api.client.version>2.9.0</google.api.client.version>
+		<google.auth.version>1.43.0</google.auth.version>
+		<google.http.client.version>2.1.0</google.http.client.version>
 
-    <dependencies>
-        <!-- Bonita -->
-        <dependency>
-            <groupId>org.bonitasoft.engine</groupId>
-            <artifactId>bonita-common</artifactId>
-            <version>${bonita-common.version}</version>
-            <scope>provided</scope>
-        </dependency>
-        <dependency>
-            <groupId>org.projectlombok</groupId>
-            <artifactId>lombok</artifactId>
-            <version>${lombok.version}</version>
-            <scope>provided</scope>
-        </dependency>
-        <dependency>
-            <groupId>org.slf4j</groupId>
-            <artifactId>slf4j-api</artifactId>
-            <version>${slf4j.version}</version>
-            <scope>provided</scope>
-        </dependency>
+		<!-- Connector dependencies -->
+		<lombok.version>1.18.30</lombok.version>
 
-        <!-- Google Drive API (provided: bundled via assembly, not resolved by Bonita) -->
-        <dependency>
-            <groupId>com.google.apis</groupId>
-            <artifactId>google-api-services-drive</artifactId>
-            <version>${google.drive.version}</version>
-            <scope>provided</scope>
-        </dependency>
-        <dependency>
-            <groupId>com.google.api-client</groupId>
-            <artifactId>google-api-client</artifactId>
-            <version>${google.api.client.version}</version>
-            <scope>provided</scope>
-        </dependency>
-        <dependency>
-            <groupId>com.google.auth</groupId>
-            <artifactId>google-auth-library-oauth2-http</artifactId>
-            <version>${google.auth.version}</version>
-            <scope>provided</scope>
-        </dependency>
-        <dependency>
-            <groupId>com.google.http-client</groupId>
-            <artifactId>google-http-client-gson</artifactId>
-            <version>${google.http.client.version}</version>
-            <scope>provided</scope>
-        </dependency>
+		<!-- Test -->
+		<junit-jupiter.version>5.10.2</junit-jupiter.version>
+		<mockito.version>5.11.0</mockito.version>
+		<assertj.version>3.27.7</assertj.version>
+		<jqwik.version>1.8.4</jqwik.version>
+		<wiremock.version>3.4.2</wiremock.version>
 
-        <!-- Test dependencies -->
-        <dependency>
-            <groupId>org.junit.jupiter</groupId>
-            <artifactId>junit-jupiter</artifactId>
-            <version>${junit-jupiter.version}</version>
-            <scope>test</scope>
-        </dependency>
-        <dependency>
-            <groupId>org.mockito</groupId>
-            <artifactId>mockito-core</artifactId>
-            <version>${mockito.version}</version>
-            <scope>test</scope>
-        </dependency>
-        <dependency>
-            <groupId>org.mockito</groupId>
-            <artifactId>mockito-junit-jupiter</artifactId>
-            <version>${mockito.version}</version>
-            <scope>test</scope>
-        </dependency>
-        <dependency>
-            <groupId>org.assertj</groupId>
-            <artifactId>assertj-core</artifactId>
-            <version>${assertj.version}</version>
-            <scope>test</scope>
-        </dependency>
-        <dependency>
-            <groupId>net.jqwik</groupId>
-            <artifactId>jqwik</artifactId>
-            <version>${jqwik.version}</version>
-            <scope>test</scope>
-        </dependency>
-        <dependency>
-            <groupId>org.wiremock</groupId>
-            <artifactId>wiremock-standalone</artifactId>
-            <version>${wiremock.version}</version>
-            <scope>test</scope>
-        </dependency>
-    </dependencies>
+		<!-- Maven plugins -->
+		<maven-compiler-plugin.version>3.13.0</maven-compiler-plugin.version>
+		<maven.compiler.release>${java.version}</maven.compiler.release>
+		<maven-assembly-plugin.version>3.7.1</maven-assembly-plugin.version>
+		<groovy-maven-plugin.version>2.1.1</groovy-maven-plugin.version>
+		<groovy.version>3.0.19</groovy.version>
+		<maven-surefire-plugin.version>3.2.5</maven-surefire-plugin.version>
+		<maven-failsafe-plugin.version>3.2.5</maven-failsafe-plugin.version>
+		<jacoco-maven-plugin.version>0.8.11</jacoco-maven-plugin.version>
+		<maven-source-plugin.version>3.3.0</maven-source-plugin.version>
+		<maven-javadoc-plugin.version>3.7.0</maven-javadoc-plugin.version>
+		<central-maven-plugin.version>0.8.0</central-maven-plugin.version>
+	</properties>
 
-    <build>
-        <resources>
-            <resource>
-                <directory>src/main/resources-filtered</directory>
-                <filtering>true</filtering>
-            </resource>
-            <resource>
-                <directory>src/main/resources</directory>
-                <filtering>false</filtering>
-            </resource>
-        </resources>
-        <plugins>
-            <plugin>
-                <groupId>org.apache.maven.plugins</groupId>
-                <artifactId>maven-compiler-plugin</artifactId>
-                <version>3.12.1</version>
-                <configuration>
-                    <source>17</source>
-                    <target>17</target>
-                    <annotationProcessorPaths>
-                        <path>
-                            <groupId>org.projectlombok</groupId>
-                            <artifactId>lombok</artifactId>
-                            <version>${lombok.version}</version>
-                        </path>
-                    </annotationProcessorPaths>
-                </configuration>
-            </plugin>
-            <plugin>
-                <groupId>org.codehaus.gmaven</groupId>
-                <artifactId>groovy-maven-plugin</artifactId>
-                <version>${groovy-maven-plugin.version}</version>
-                <executions>
-                    <execution>
-                        <phase>generate-resources</phase>
-                        <goals><goal>execute</goal></goals>
-                        <configuration>
-                            <source>${project.basedir}/src/script/dependencies-as-var.groovy</source>
-                        </configuration>
-                    </execution>
-                </executions>
-            </plugin>
-            <plugin>
-                <artifactId>maven-assembly-plugin</artifactId>
-                <version>${assembly.version}</version>
-                <executions>
-                    <execution>
-                        <id>package-connectors</id>
-                        <phase>package</phase>
-                        <goals><goal>single</goal></goals>
-                        <configuration>
-                            <descriptorSourceDirectory>${project.basedir}/src/assembly</descriptorSourceDirectory>
-                            <appendAssemblyId>true</appendAssemblyId>
-                        </configuration>
-                    </execution>
-                </executions>
-            </plugin>
-            <plugin>
-                <groupId>org.apache.maven.plugins</groupId>
-                <artifactId>maven-surefire-plugin</artifactId>
-                <version>${surefire.version}</version>
-            </plugin>
-            <plugin>
-                <groupId>org.jacoco</groupId>
-                <artifactId>jacoco-maven-plugin</artifactId>
-                <version>${jacoco.version}</version>
-                <executions>
-                    <execution>
-                        <goals><goal>prepare-agent</goal></goals>
-                    </execution>
-                    <execution>
-                        <id>report</id>
-                        <phase>test</phase>
-                        <goals><goal>report</goal></goals>
-                    </execution>
-                </executions>
-            </plugin>
-        </plugins>
-    </build>
+	<dependencies>
+		<!-- Bonita -->
+		<dependency>
+			<groupId>org.bonitasoft.engine</groupId>
+			<artifactId>bonita-common</artifactId>
+			<version>${bonita-common.version}</version>
+			<scope>provided</scope>
+		</dependency>
 
-    <repositories>
-        <repository>
-            <id>bonitasoft-releases</id>
-            <url>https://bonitasoft.jfrog.io/artifactory/maven</url>
-        </repository>
-    </repositories>
+		<!-- Connector -->
+		<dependency>
+			<groupId>org.projectlombok</groupId>
+			<artifactId>lombok</artifactId>
+			<version>${lombok.version}</version>
+			<scope>provided</scope>
+		</dependency>
 
-    <profiles>
-        <profile>
-            <id>integration-tests</id>
-            <build>
-                <plugins>
-                    <plugin>
-                        <groupId>org.apache.maven.plugins</groupId>
-                        <artifactId>maven-failsafe-plugin</artifactId>
-                        <version>${failsafe.version}</version>
-                        <executions>
-                            <execution>
-                                <goals>
-                                    <goal>integration-test</goal>
-                                    <goal>verify</goal>
-                                </goals>
-                            </execution>
-                        </executions>
-                    </plugin>
-                </plugins>
-            </build>
-        </profile>
-    </profiles>
+		<!-- Google Drive API (provided: bundled via assembly, not resolved by Bonita) -->
+		<dependency>
+			<groupId>com.google.apis</groupId>
+			<artifactId>google-api-services-drive</artifactId>
+			<version>${google.drive.version}</version>
+			<scope>provided</scope>
+		</dependency>
+		<dependency>
+			<groupId>com.google.api-client</groupId>
+			<artifactId>google-api-client</artifactId>
+			<version>${google.api.client.version}</version>
+			<scope>provided</scope>
+		</dependency>
+		<dependency>
+			<groupId>com.google.auth</groupId>
+			<artifactId>google-auth-library-oauth2-http</artifactId>
+			<version>${google.auth.version}</version>
+			<scope>provided</scope>
+		</dependency>
+		<dependency>
+			<groupId>com.google.http-client</groupId>
+			<artifactId>google-http-client-gson</artifactId>
+			<version>${google.http.client.version}</version>
+			<scope>provided</scope>
+		</dependency>
+
+		<!-- Tests -->
+		<dependency>
+			<groupId>org.junit.jupiter</groupId>
+			<artifactId>junit-jupiter</artifactId>
+			<version>${junit-jupiter.version}</version>
+			<scope>test</scope>
+		</dependency>
+		<dependency>
+			<groupId>org.mockito</groupId>
+			<artifactId>mockito-core</artifactId>
+			<version>${mockito.version}</version>
+			<scope>test</scope>
+		</dependency>
+		<dependency>
+			<groupId>org.mockito</groupId>
+			<artifactId>mockito-junit-jupiter</artifactId>
+			<version>${mockito.version}</version>
+			<scope>test</scope>
+		</dependency>
+		<dependency>
+			<groupId>org.assertj</groupId>
+			<artifactId>assertj-core</artifactId>
+			<version>${assertj.version}</version>
+			<scope>test</scope>
+		</dependency>
+		<dependency>
+			<groupId>net.jqwik</groupId>
+			<artifactId>jqwik</artifactId>
+			<version>${jqwik.version}</version>
+			<scope>test</scope>
+		</dependency>
+		<dependency>
+			<groupId>org.wiremock</groupId>
+			<artifactId>wiremock-standalone</artifactId>
+			<version>${wiremock.version}</version>
+			<scope>test</scope>
+		</dependency>
+	</dependencies>
+
+	<build>
+		<defaultGoal>verify</defaultGoal>
+		<resources>
+			<resource>
+				<directory>src/main/resources-filtered</directory>
+				<filtering>true</filtering>
+			</resource>
+			<resource>
+				<directory>src/main/resources</directory>
+				<filtering>false</filtering>
+			</resource>
+		</resources>
+		<pluginManagement>
+			<plugins>
+				<plugin>
+					<groupId>org.apache.maven.plugins</groupId>
+					<artifactId>maven-compiler-plugin</artifactId>
+					<version>${maven-compiler-plugin.version}</version>
+					<configuration>
+						<annotationProcessorPaths>
+							<path>
+								<groupId>org.projectlombok</groupId>
+								<artifactId>lombok</artifactId>
+								<version>${lombok.version}</version>
+							</path>
+						</annotationProcessorPaths>
+					</configuration>
+				</plugin>
+				<plugin>
+					<groupId>org.apache.maven.plugins</groupId>
+					<artifactId>maven-surefire-plugin</artifactId>
+					<version>${maven-surefire-plugin.version}</version>
+				</plugin>
+				<plugin>
+					<groupId>org.apache.maven.plugins</groupId>
+					<artifactId>maven-failsafe-plugin</artifactId>
+					<version>${maven-failsafe-plugin.version}</version>
+				</plugin>
+				<plugin>
+					<artifactId>maven-assembly-plugin</artifactId>
+					<version>${maven-assembly-plugin.version}</version>
+					<configuration>
+						<descriptorSourceDirectory>
+							${project.basedir}/src/assembly</descriptorSourceDirectory>
+					</configuration>
+					<executions>
+						<execution>
+							<id>package-connectors</id>
+							<phase>package</phase>
+							<goals>
+								<goal>single</goal>
+							</goals>
+							<configuration>
+								<appendAssemblyId>true</appendAssemblyId>
+							</configuration>
+						</execution>
+					</executions>
+				</plugin>
+				<plugin>
+					<groupId>org.codehaus.gmaven</groupId>
+					<artifactId>groovy-maven-plugin</artifactId>
+					<version>${groovy-maven-plugin.version}</version>
+					<dependencies>
+						<dependency>
+							<groupId>org.codehaus.groovy</groupId>
+							<artifactId>groovy</artifactId>
+							<version>${groovy.version}</version>
+						</dependency>
+					</dependencies>
+				</plugin>
+				<plugin>
+					<groupId>org.jacoco</groupId>
+					<artifactId>jacoco-maven-plugin</artifactId>
+					<version>${jacoco-maven-plugin.version}</version>
+					<configuration>
+						<append>true</append>
+					</configuration>
+					<executions>
+						<execution>
+							<id>prepare-agent</id>
+							<goals>
+								<goal>prepare-agent</goal>
+							</goals>
+						</execution>
+						<execution>
+							<id>prepare-agent-integration</id>
+							<goals>
+								<goal>prepare-agent-integration</goal>
+							</goals>
+						</execution>
+						<execution>
+							<id>jacoco-site</id>
+							<phase>verify</phase>
+							<goals>
+								<goal>report</goal>
+							</goals>
+						</execution>
+					</executions>
+				</plugin>
+				<plugin>
+					<groupId>org.sonatype.central</groupId>
+					<artifactId>central-publishing-maven-plugin</artifactId>
+					<version>${central-maven-plugin.version}</version>
+					<extensions>true</extensions>
+					<configuration>
+						<autoPublish>true</autoPublish>
+					</configuration>
+				</plugin>
+			</plugins>
+		</pluginManagement>
+
+		<plugins>
+			<plugin>
+				<groupId>org.codehaus.gmaven</groupId>
+				<artifactId>groovy-maven-plugin</artifactId>
+				<executions>
+					<execution>
+						<phase>generate-resources</phase>
+						<goals>
+							<goal>execute</goal>
+						</goals>
+						<configuration>
+							<source>
+								${project.basedir}/src/script/dependencies-as-var.groovy</source>
+						</configuration>
+					</execution>
+				</executions>
+			</plugin>
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-assembly-plugin</artifactId>
+			</plugin>
+			<plugin>
+				<groupId>org.jacoco</groupId>
+				<artifactId>jacoco-maven-plugin</artifactId>
+			</plugin>
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-source-plugin</artifactId>
+				<version>${maven-source-plugin.version}</version>
+				<executions>
+					<execution>
+						<id>attach-sources</id>
+						<goals>
+							<goal>jar-no-fork</goal>
+						</goals>
+					</execution>
+				</executions>
+			</plugin>
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-javadoc-plugin</artifactId>
+				<version>${maven-javadoc-plugin.version}</version>
+				<executions>
+					<execution>
+						<id>attach-javadocs</id>
+						<goals>
+							<goal>jar</goal>
+						</goals>
+					</execution>
+				</executions>
+			</plugin>
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-failsafe-plugin</artifactId>
+				<executions>
+					<execution>
+						<goals>
+							<goal>integration-test</goal>
+							<goal>verify</goal>
+						</goals>
+					</execution>
+				</executions>
+			</plugin>
+			<plugin>
+				<groupId>org.sonatype.central</groupId>
+				<artifactId>central-publishing-maven-plugin</artifactId>
+			</plugin>
+		</plugins>
+	</build>
+
+	<profiles>
+		<!-- Deployment profile (required so these plugins are only used when deploying) -->
+		<profile>
+			<id>deploy</id>
+			<build>
+				<plugins>
+					<!-- GPG plugin -->
+					<plugin>
+						<groupId>org.apache.maven.plugins</groupId>
+						<artifactId>maven-gpg-plugin</artifactId>
+						<version>3.1.0</version>
+						<executions>
+							<execution>
+								<id>sign-artifacts</id>
+								<phase>verify</phase>
+								<goals>
+									<goal>sign</goal>
+								</goals>
+								<configuration>
+									<!-- Prevent `gpg` from using pinentry programs -->
+									<gpgArguments>
+										<arg>--pinentry-mode</arg>
+										<arg>loopback</arg>
+									</gpgArguments>
+								</configuration>
+							</execution>
+						</executions>
+					</plugin>
+				</plugins>
+			</build>
+		</profile>
+	</profiles>
+
+	<repositories>
+		<repository>
+			<id>bonitasoft-releases</id>
+			<url>https://bonitasoft.jfrog.io/artifactory/maven</url>
+		</repository>
+	</repositories>
+
+	<scm>
+		<developerConnection>scm:git:git@github.com:bonitasoft/bonita-connector-googledrive.git</developerConnection>
+		<connection>scm:git:git@github.com:bonitasoft/bonita-connector-googledrive.git</connection>
+		<url>https://github.com/bonitasoft/bonita-connector-googledrive</url>
+		<tag>HEAD</tag>
+	</scm>
+
 </project>

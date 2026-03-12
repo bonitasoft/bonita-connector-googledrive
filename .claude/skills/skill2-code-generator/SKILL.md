@@ -28,11 +28,12 @@
     [ ] 5b. .def XML                   <- resources/connector-definition.def.template
     [ ] 5c. .impl XML                  <- resources/connector-implementation.impl.template
     [ ] 5d. .properties                <- resources/connector.properties.template
-    [ ] 5e. Unit test                  <- resources/UnitTest.java.template
-    [ ] 5f. Property test              <- resources/PropertyTest.java.template
-    [ ] 5g. Integration test           <- resources/IntegrationTest.java.template
+    [ ] 5e. Per-operation assembly     <- resources/operation-assembly.xml.template
+    [ ] 5f. Unit test                  <- resources/UnitTest.java.template
+    [ ] 5g. Property test              <- resources/PropertyTest.java.template
+    [ ] 5h. Integration test           <- resources/IntegrationTest.java.template
 [ ] 6. Generate shared files (one copy each, NOT per-operation):
-    [ ] 6a. Assembly descriptor        <- resources/connector-assembly.xml.template
+    [ ] 6a. All-assembly descriptor    <- resources/connector-assembly.xml.template
     [ ] 6b. Groovy dep script          <- resources/dependencies-as-var.groovy.template
 [ ] 7. Run `mvn verify` — fix ALL compilation/test failures until green
 [ ] 8. Run `mvn install` — installs to local Maven repo (required for Bonita Studio import)
@@ -94,11 +95,14 @@ bonita-connector-{name}/
 ├── pom.xml
 ├── src/
 │   ├── assembly/
-│   │   └── all-assembly.xml
+│   │   ├── all-assembly.xml                         (bundles ALL operations)
+│   │   ├── {operation1}-assembly.xml                (per-operation ZIP)
+│   │   ├── {operation2}-assembly.xml                (per-operation ZIP)
+│   │   └── ...
 │   ├── script/
 │   │   └── dependencies-as-var.groovy
 │   ├── main/
-│   │   ├── java/com/bonitasoft/connectors/{name}/
+│   │   ├── java/com/bonitasoft/connectors/{name}/   (ALL classes in ONE flat package)
 │   │   │   ├── Abstract{Name}Connector.java
 │   │   │   ├── {Name}Client.java
 │   │   │   ├── {Name}Configuration.java
@@ -124,6 +128,8 @@ bonita-connector-{name}/
 │       ├── {Operation1}ConnectorIntegrationTest.java
 │       └── ...
 ```
+
+This structure matches `bonita-connector-rest` exactly: single module, flat Java package, per-operation assembly files alongside `all-assembly.xml`.
 
 **Icon:** Must be **16x16 pixels** PNG. Bonita Studio renders it inline in the connector picker — larger icons break the layout.
 
@@ -152,7 +158,8 @@ For each file to generate:
 | `{name}-{operation}.def` | `connector-definition.def.template` | Add all inputs, outputs, pages, widgets |
 | `{name}-{operation}.impl` | `connector-implementation.impl.template` | None — jarDependencies auto-generated |
 | `{name}-{operation}.properties` | `connector.properties.template` | Add i18n label for every widget |
-| `src/assembly/all-assembly.xml` | `connector-assembly.xml.template` | None — copy as-is (ONE file, not per-operation) |
+| `src/assembly/{operation}-assembly.xml` | `operation-assembly.xml.template` | Replace `{name}` and `{operation}` (one per operation) |
+| `src/assembly/all-assembly.xml` | `connector-assembly.xml.template` | None — copy as-is (ONE file for all operations) |
 | `src/script/dependencies-as-var.groovy` | `dependencies-as-var.groovy.template` | None — copy as-is (ONE file) |
 | `{Operation}ConnectorTest.java` | `UnitTest.java.template` | **Implement ALL test methods** (see below) |
 | `{Operation}ConnectorPropertyTest.java` | `PropertyTest.java.template` | **Add 10+ jqwik properties** |
@@ -166,6 +173,19 @@ For each file to generate:
 | **Version must be release** | Use `1.0.0`, NEVER `1.0.0-SNAPSHOT`. SNAPSHOTs cause Bonita Studio import failures because Maven tries to resolve them from remote repos. |
 | **All deps `provided` scope** | ALL dependencies (including API client libraries) must be `provided`. Bonita's analyze plugin tries to resolve compile/runtime deps from remote repos and fails. The groovy script and assembly handle runtime bundling separately. |
 | **groupId = `org.bonitasoft.connectors`** | Matches the convention of `bonita-connector-rest` and `bonita-connector-ai`. |
+
+### Critical: POM Structure (must match bonita-connector-rest)
+
+The POM template follows the exact pattern of `bonita-connector-rest`:
+- **`pluginManagement`** section defines plugin configurations; `plugins` references them
+- **`<defaultGoal>verify</defaultGoal>`**
+- **`maven.compiler.release`** property instead of `source`/`target`
+- **Groovy plugin** declares explicit `groovy` dependency in `pluginManagement`
+- **`maven-source-plugin`** and **`maven-javadoc-plugin`** for Maven Central publishing
+- **`central-publishing-maven-plugin`** in both `pluginManagement` and `plugins`
+- **`deploy` profile** with GPG signing for release deployment
+- **`<scm>`** section pointing to the GitHub repository
+- **`<developers>`**, **`<licenses>`**, **`<url>`** metadata sections
 
 ### Critical: .def Page Grouping Rules
 
@@ -317,6 +337,7 @@ Read `resources/GENERATION_REPORT.md.template`, fill in actual values from the b
 - Do NOT use multi-module Maven structure (single-module only).
 - Do NOT use SNAPSHOT versions (release versions only).
 - Do NOT use `compile` or `runtime` scope for dependencies (use `provided` for non-test deps).
+- Do NOT put Java classes in sub-packages — all classes go in ONE flat package.
 
 ---
 
@@ -367,6 +388,10 @@ When done, inform the user:
 1. Project location
 2. Build command: `mvn clean verify`
 3. Install command: `mvn install -DskipTests` (required before Bonita Studio import)
-4. Integration test command: `mvn verify -Pintegration-tests` (after setting env vars)
-5. Import into Bonita Studio: use `target/bonita-connector-{name}-{version}.jar` via "Import from file"
-6. Point to `GENERATION_REPORT.md` for details and remaining TODOs
+4. Integration test command: `mvn verify` (after setting env vars)
+5. Build artifacts in `target/`:
+   - `bonita-connector-{name}-{version}-all.zip` — all operations bundled
+   - `bonita-connector-{name}-{version}-{operation}-impl.zip` — individual operation ZIPs
+   - `bonita-connector-{name}-{version}.jar` — main JAR for Bonita Studio import
+6. Import into Bonita Studio: use the `.jar` file via "Import from file"
+7. Point to `GENERATION_REPORT.md` for details and remaining TODOs

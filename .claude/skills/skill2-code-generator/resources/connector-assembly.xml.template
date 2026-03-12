@@ -1,11 +1,16 @@
 <!--
-  TEMPLATE: Assembly descriptor for connector ZIP packaging.
+  TEMPLATE: Assembly descriptor for the "all" connector ZIP packaging.
   Place this file at: src/assembly/all-assembly.xml (ONE file for the whole project).
   No placeholder replacement needed.
 
   Produces a ZIP containing:
     *.def, *.impl, *.properties, *.png  — at root
-    classpath/                          — all provided-scope dependency JARs
+    classpath/                          — all provided-scope dependency JARs + project JAR
+
+  This bundles ALL operations into a single ZIP. Per-operation assembly files
+  (generated from operation-assembly.xml.template) produce individual ZIPs.
+  Both types are placed in src/assembly/ and picked up automatically by the
+  maven-assembly-plugin via <descriptorSourceDirectory>.
 
   NOTE: scope is "provided" because all API client dependencies use provided scope
   to prevent Bonita Studio import failures. The assembly still bundles them for
@@ -27,6 +32,13 @@
             <includes>
                 <!-- Only first level files -->
                 <include>*.*</include>
+            </includes>
+        </fileSet>
+        <fileSet>
+            <outputDirectory>classpath</outputDirectory>
+            <directory>${basedir}/target</directory>
+            <includes>
+                <include>*:jar</include>
             </includes>
         </fileSet>
     </fileSets>

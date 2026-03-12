@@ -1,0 +1,56 @@
+<!--
+  TEMPLATE: Per-operation assembly descriptor for individual connector ZIP packaging.
+  PLACEHOLDERS: {name}, {operation}
+  Generate ONE file per operation: src/assembly/{operation}-assembly.xml
+  Example: src/assembly/get-file-assembly.xml
+
+  This produces a ZIP containing only the .impl for a single operation,
+  plus the classpath JARs. Used for individual connector distribution.
+
+  The all-assembly.xml (connector-assembly.xml.template) bundles ALL operations together.
+  Both file types are placed in src/assembly/ and picked up automatically by the
+  maven-assembly-plugin via <descriptorSourceDirectory>.
+
+  NOTE: scope is "provided" because all API client dependencies use provided scope.
+-->
+<assembly
+    xmlns="http://maven.apache.org/plugins/maven-assembly-plugin/assembly/1.1.2"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://maven.apache.org/plugins/maven-assembly-plugin/assembly/1.1.2 http://maven.apache.org/xsd/assembly-1.1.2.xsd">
+    <id>{operation}-impl</id>
+    <formats>
+        <format>zip</format>
+    </formats>
+    <includeBaseDirectory>false</includeBaseDirectory>
+    <fileSets>
+        <fileSet>
+            <outputDirectory/>
+            <directory>target/classes</directory>
+            <includes>
+                <include>{name}-{operation}.impl</include>
+                <include>classpath</include>
+            </includes>
+        </fileSet>
+        <fileSet>
+            <outputDirectory>classpath</outputDirectory>
+            <directory>${basedir}/target</directory>
+            <includes>
+                <include>*-sources.jar</include>
+            </includes>
+        </fileSet>
+        <fileSet>
+            <outputDirectory>classpath</outputDirectory>
+            <directory>${basedir}/target</directory>
+            <includes>
+                <include>*:jar</include>
+            </includes>
+        </fileSet>
+    </fileSets>
+    <dependencySets>
+        <dependencySet>
+            <unpack>false</unpack>
+            <scope>provided</scope>
+            <outputDirectory>classpath</outputDirectory>
+        </dependencySet>
+    </dependencySets>
+</assembly>
