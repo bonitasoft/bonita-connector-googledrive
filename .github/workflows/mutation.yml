@@ -1,0 +1,114 @@
+name: Mutation Testing
+
+on:
+  workflow_dispatch:
+    inputs:
+      mutator:
+        description: 'Pitest mutator group'
+        required: true
+        default: 'DEFAULTS'
+        type: choice
+        options:
+          - DEFAULTS
+          - STRONGER
+
+# NOTE: The pitest-maven plugin must be configured in pom.xml for this workflow to work.
+# Add the following to pom.xml <build><plugins> section:
+#
+# <plugin>
+#   <groupId>org.pitest</groupId>
+#   <artifactId>pitest-maven</artifactId>
+#   <version>1.15.3</version>
+#   <dependencies>
+#     <dependency>
+#       <groupId>org.pitest</groupId>
+#       <artifactId>pitest-junit5-plugin</artifactId>
+#       <version>1.2.1</version>
+#     </dependency>
+#   </dependencies>
+# </plugin>
+
+jobs:
+  mutation-test:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Set up JDK 17
+        uses: actions/setup-java@v4
+        with:
+          java-version: '17'
+          distribution: 'temurin'
+          cache: maven
+
+      - name: Run Mutation Tests
+        run: mvn -B -ntp clean test pitest:mutationCoverage -Dpitest.mutators=${{ github.event.inputs.mutator }}
+
+      - name: Upload Pitest Report
+        uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: pit-reports
+          path: '**/target/pit-reports/'
+
+      - name: Generate Summary
+        if: always()
+        run: |
+          echo "## Mutation Testing Report" >> $GITHUB_STEP_SUMMARY
+          echo "" >> $GITHUB_STEP_SUMMARY
+          echo "**Mutator:** ${{ github.event.inputs.mutator }}" >> $GITHUB_STEP_SUMMARY
+          echo "" >> $GITHUB_STEP_SUMMARY
+
+          # Find the pitest HTML report
+          REPORT_FILE=$(find . -path "*/pit-reports/*/index.html" -type f | head -1)
+
+          if [ -z "$REPORT_FILE" ]; then
+            echo "> No Pitest report found. The build may have failed before generating reports." >> $GITHUB_STEP_SUMMARY
+            exit 0
+          fi
+
+          echo "Report found: $REPORT_FILE"
+
+          # Extract summary statistics from the HTML report
+          # Parse the mutation score and statistics from the summary table
+          MUTATION_SCORE=$(grep -oP 'Mutation Coverage.*?<td>\K[0-9]+%' "$REPORT_FILE" || echo "N/A")
+          TEST_STRENGTH=$(grep -oP 'Test Strength.*?<td>\K[0-9]+%' "$REPORT_FILE" || echo "N/A")
+
+          # Parse the detailed numbers from the report
+          TOTAL_MUTATIONS=$(grep -oP 'Generated \K[0-9]+' "$REPORT_FILE" | head -1 || echo "N/A")
+          KILLED=$(grep -oP 'Killed \K[0-9]+' "$REPORT_FILE" | head -1 || echo "N/A")
+          SURVIVED=$(grep -oP 'Survived \K[0-9]+' "$REPORT_FILE" | head -1 || echo "N/A")
+          NO_COVERAGE=$(grep -oP 'No Coverage \K[0-9]+' "$REPORT_FILE" | head -1 || echo "N/A")
+
+          echo "| Metric | Value |" >> $GITHUB_STEP_SUMMARY
+          echo "|--------|-------|" >> $GITHUB_STEP_SUMMARY
+          echo "| Mutation Coverage | $MUTATION_SCORE |" >> $GITHUB_STEP_SUMMARY
+          echo "| Test Strength | $TEST_STRENGTH |" >> $GITHUB_STEP_SUMMARY
+          echo "| Total Mutations | $TOTAL_MUTATIONS |" >> $GITHUB_STEP_SUMMARY
+          echo "| Killed | $KILLED |" >> $GITHUB_STEP_SUMMARY
+          echo "| Survived | $SURVIVED |" >> $GITHUB_STEP_SUMMARY
+          echo "| No Coverage | $NO_COVERAGE |" >> $GITHUB_STEP_SUMMARY
+          echo "" >> $GITHUB_STEP_SUMMARY
+
+          # Parse per-class breakdown from HTML tables
+          echo "### Per-Class Breakdown" >> $GITHUB_STEP_SUMMARY
+          echo "" >> $GITHUB_STEP_SUMMARY
+
+          # Extract class-level data from the report (each row in the summary table)
+          # The HTML structure has: <a href="...">ClassName</a> ... <td>N/M</td> ... <td>coverage%</td>
+          grep -oP '<a href="[^"]*">[^<]+</a>.*?</tr>' "$REPORT_FILE" | while IFS= read -r line; do
+            CLASS_NAME=$(echo "$line" | grep -oP '>[^<]+</a>' | head -1 | sed 's/^>//;s/<\/a>//')
+            NUMBERS=$(echo "$line" | grep -oP '<td>[0-9]+</td>' | grep -oP '[0-9]+')
+            COVERAGES=$(echo "$line" | grep -oP '<td>[0-9]+%</td>' | grep -oP '[0-9]+%')
+
+            if [ -n "$CLASS_NAME" ] && [ -n "$COVERAGES" ]; then
+              LINE_COV=$(echo "$COVERAGES" | sed -n '1p')
+              MUT_COV=$(echo "$COVERAGES" | sed -n '2p')
+              echo "- **$CLASS_NAME**: Line Coverage $LINE_COV, Mutation Coverage $MUT_COV" >> $GITHUB_STEP_SUMMARY
+            fi
+          done
+
+          echo "" >> $GITHUB_STEP_SUMMARY
+          echo "> Full HTML report available in the **pit-reports** artifact." >> $GITHUB_STEP_SUMMARY

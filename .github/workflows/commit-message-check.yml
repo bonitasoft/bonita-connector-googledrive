@@ -1,0 +1,14 @@
+name: Commit checks
+
+on:
+  pull_request_target:
+    types: [opened, edited, reopened]
+
+jobs:
+  pr-title:
+    runs-on: ubuntu-latest
+    permissions:
+      pull-requests: write
+    steps:
+      - name: Check Pull Request title
+        uses: bonitasoft/actions/packages/pr-title-conventional-commits@v3

@@ -1,0 +1,138 @@
+<generated_prompt>
+<system_instruction>
+Eres un experto en Bonita BPM, conectores Java y testing con BTT (Bonita Test Toolkit).
+Continuas el trabajo de una sesion anterior sobre el conector Google Drive para Bonita.
+</system_instruction>
+
+<context>
+<project>
+  <path>C:\PSProjects\bonita-connector-googledrive</path>
+  <type>Multi-module Maven connector (Java 17, Bonita 10.2.0)</type>
+  <modules>common, upload, download, export, create-folder, delete, move, copy, search, all</modules>
+  <status>Build OK, 102+ unit tests passing, connector JAR funcional</status>
+</project>
+
+<what_works>
+  - mvn clean install: BUILD SUCCESS (17 unit tests en modulo -all, 102+ total)
+  - Connector fat JAR (-bonita.jar) se genera correctamente con 8 .def + 8 .impl
+  - .proc XMI (GDriveConnectorTestProcess-1.0.proc) se abre en Bonita Studio 2025.2-u3
+  - GDriveProcessDefinitionTest valida el .proc XMI (17 tests)
+  - GDriveFullLifecycleIT (Level 4) funciona con SA JSON contra Google Drive real
+  - BarPatcher.java y BonitaDeployer.java existen (enfoque toolkit, parcialmente funcional)
+  - BTT btt/ package creado: GDriveProcessBarBuilder, BonitaRestApiDeployer, AbstractProcessTest, GDriveBonitaRuntimeIT
+</what_works>
+
+<what_needs_work>
+  <task id="1" priority="critical">
+    <title>Verificar y corregir los ficheros btt/ generados por agente</title>
+    <description>
+      Los 4 ficheros en src/test/java/.../btt/ fueron generados por un agente y NO se ha verificado
+      que compilen ni funcionen correctamente. Necesitan revision:
+      - GDriveProcessBarBuilder.java: genera .bar programaticamente
+      - BonitaRestApiDeployer.java: despliega via REST API (usa java.net.http.HttpClient)
+      - AbstractProcessTest.java: base con Testcontainers (bonita:2025.2)
+      - GDriveBonitaRuntimeIT.java: 5 tests BTT
+    </description>
+    <reference>Patron MS Teams: C:\PSProjects\bonita-connector-msteams\bonita-connector-msteams-all\src\test\java\com\bonitasoft\connectors\msteams\btt\</reference>
+  </task>
+
+  <task id="2" priority="critical">
+    <title>Ejecutar BTT con Docker (mvn verify -P btt)</title>
+    <description>
+      Requiere Docker Desktop arrancado. Testcontainers levanta bonita:2025.2,
+      GDriveProcessBarBuilder genera el .bar, BonitaRestApiDeployer lo despliega,
+      y GDriveBonitaRuntimeIT ejecuta los tests.
+      Comando: mvn verify -pl bonita-connector-gdrive-all -P btt
+      Con credenciales: mvn verify -P btt -DGDRIVE_SA_JSON_PATH=... -DGDRIVE_SHARED_FOLDER_ID=...
+    </description>
+  </task>
+
+  <task id="3" priority="high">
+    <title>Investigar storageQuotaExceeded en el proceso</title>
+    <description>
+      El conector CreateFolder funciona pero Upload falla con 403 storageQuotaExceeded
+      cuando se ejecuta dentro del proceso Bonita. Los integration tests (Level 4) con
+      ConnectorTestToolkit SI funcionan con el mismo SA y Shared Drive.
+      Hipotesis: el parentFolderId del Shared Drive no se pasa correctamente al primer
+      CreateFolder en el proceso, o hay un problema de contexto entre CreateFolder output
+      (gdriveFolderId) y Upload input (parentFolderId).
+      SA JSON: C:/BonitaStudioSubscription-2025.2-u3/bonitasoft-conectores-06171232f32e.json
+      Shared Drive folder: 1E7UnzYxYzWtRNVJGIFw0YAcX4a-ARVvM
+    </description>
+  </task>
+
+  <task id="4" priority="medium">
+    <title>Limpiar ficheros obsoletos del enfoque toolkit anterior</title>
+    <description>
+      Hay ficheros del enfoque anterior (profile toolkit con deploy via Studio Runtime) que
+      pueden eliminarse o consolidarse con el enfoque btt (Testcontainers):
+      - GDriveProcessToolkitIT.java (usa @BonitaTests, enfoque Studio Runtime)
+      - BarPatcher.java (parchea .bar existente, reemplazado por GDriveProcessBarBuilder)
+      - BonitaDeployer.java (HttpURLConnection, reemplazado por btt/BonitaRestApiDeployer)
+      - Evaluar si mantener ambos profiles (toolkit + btt) o unificar en uno solo
+    </description>
+  </task>
+
+  <task id="5" priority="medium">
+    <title>Verificar .proc XMI con referencedElements fix</title>
+    <description>
+      Se anadio referencedElements a los scripts Groovy de serviceAccountJsonPath en el .proc,
+      pero el .bar generado desde Studio ANTES del fix no los tiene. Hay que:
+      1. Verificar que el .proc actualizado se abre bien en Studio
+      2. Re-deployar desde Studio con el fix
+      3. O confiar en el GDriveProcessBarBuilder que genera el process-design.xml desde cero
+         (el BarBuilder no tiene el problema de referencedElements porque usa TYPE_VARIABLE directamente)
+    </description>
+  </task>
+
+  <task id="6" priority="low">
+    <title>Actualizar documentacion (README, CLAUDE.md)</title>
+    <description>
+      Actualizar con:
+      - Tabla de niveles de testing (5 niveles)
+      - Instrucciones para ejecutar BTT (-P btt + Docker)
+      - Estructura del .bar documentada
+      - Error Prevention Checklist actualizado
+    </description>
+  </task>
+</what_needs_work>
+
+<known_issues>
+  - Docker Desktop necesita estar arrancado para -P btt
+  - JFrog credentials (bonitasoft.jfrog.io) dan 401 — las dependencias estan en cache local
+  - Usar -o (offline) para evitar timeouts de JFrog durante builds
+  - El .bar de 22MB NO va en git (esta en .gitignore)
+  - BTT 3.1.0 groupId es com.bonitasoft (NO com.bonitasoft.test)
+  - @BonitaTests annotation no funciona contra Studio Runtime (usar BonitaTestToolkitFactory.INSTANCE.get() con try-catch)
+</known_issues>
+
+<key_files>
+  <file>bonita-connector-gdrive-all/pom.xml</file>
+  <file>bonita-connector-gdrive-all/src/test/resources/GDriveConnectorTestProcess-1.0.proc</file>
+  <file>bonita-connector-gdrive-all/src/test/java/.../GDriveProcessDefinitionTest.java</file>
+  <file>bonita-connector-gdrive-all/src/test/java/.../GDriveProcessToolkitIT.java</file>
+  <file>bonita-connector-gdrive-all/src/test/java/.../BarPatcher.java</file>
+  <file>bonita-connector-gdrive-all/src/test/java/.../BonitaDeployer.java</file>
+  <file>bonita-connector-gdrive-all/src/test/java/.../btt/GDriveProcessBarBuilder.java</file>
+  <file>bonita-connector-gdrive-all/src/test/java/.../btt/BonitaRestApiDeployer.java</file>
+  <file>bonita-connector-gdrive-all/src/test/java/.../btt/AbstractProcessTest.java</file>
+  <file>bonita-connector-gdrive-all/src/test/java/.../btt/GDriveBonitaRuntimeIT.java</file>
+</key_files>
+
+<learning_proposals>
+  Se han propuesto 18 learnings al MCP Bonita AI Agent (PROP-1773662723040 a PROP-1773663403497).
+  Todos estan pendientes de revision. Consulta con search_knowledge o list_proposals si necesitas contexto.
+</learning_proposals>
+</context>
+
+<instructions>
+1. Lee los ficheros clave para entender el estado actual
+2. Empieza por la tarea 1: verificar que los ficheros btt/ compilan correctamente
+3. Si Docker esta disponible, ejecuta la tarea 2: mvn verify -P btt
+4. Si hay errores, debuguea y corrige
+5. Investiga la tarea 3 si los tests BTT llegan a ejecutar el proceso
+6. Limpia la tarea 4 cuando todo funcione
+7. Consulta el MCP de Bonita AI Agent (search_knowledge, get_connector_knowledge) si necesitas contexto
+8. Proponer nuevos learnings si descubres algo nuevo
+</instructions>
+</generated_prompt>

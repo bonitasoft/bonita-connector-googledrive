@@ -1,0 +1,1214 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xmi:XMI xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:actormapping="http://www.bonitasoft.org/ns/actormapping/6.0" xmlns:configuration="http://www.bonitasoft.org/ns/bpm/configuration" xmlns:connectorconfiguration="http://www.bonitasoft.org/model/connector/configuration" xmlns:decision="http://www.bonitasoft.org/ns/bpm/process/decision" xmlns:definition="http://www.bonitasoft.org/ns/connector/definition/6.1" xmlns:expression="http://www.bonitasoft.org/ns/bpm/expression" xmlns:notation="http://www.eclipse.org/gmf/runtime/1.0.3/notation" xmlns:process="http://www.bonitasoft.org/ns/bpm/process">
+  <process:MainProcess xmi:id="_P90ZIBxyEfGG87QOs41BhQ" name="GDriveConnectorTest" bonitaModelVersion="9">
+    <elements xmi:type="process:Pool" xmi:id="_P90ZIRxyEfGG87QOs41BhQ" name="GDrive Connector Test">
+      <elements xmi:type="process:Lane" xmi:id="_P90ZIhxyEfGG87QOs41BhQ" name="Automation lane" actor="_P90ZOxxyEfGG87QOs41BhQ">
+        <elements xmi:type="process:StartEvent" xmi:id="_P90ZIxxyEfGG87QOs41BhQ" name="Start" outgoing="_SF_01">
+          <dynamicLabel xmi:type="expression:Expression" xmi:id="_P90ZJBxyEfGG87QOs41BhQ" name="" content="" returnTypeFixed="true"/>
+          <dynamicDescription xmi:type="expression:Expression" xmi:id="_P90ZJRxyEfGG87QOs41BhQ" name="" content="" returnTypeFixed="true"/>
+          <stepSummary xmi:type="expression:Expression" xmi:id="_P90ZJhxyEfGG87QOs41BhQ" name="" content="" returnTypeFixed="true"/>
+        </elements>
+        <elements xmi:type="process:EndEvent" xmi:id="_5cCXMBzSEfGG87QOs41BhQ" name="End" incoming="_SF_11">
+          <dynamicLabel xmi:type="expression:Expression" xmi:id="_5cS14BzSEfGG87QOs41BhQ" name="" content="" returnTypeFixed="true"/>
+          <dynamicDescription xmi:type="expression:Expression" xmi:id="_5cSO0BzSEfGG87QOs41BhQ" name="" content="" returnTypeFixed="true"/>
+          <stepSummary xmi:type="expression:Expression" xmi:id="_5cS14RzSEfGG87QOs41BhQ" name="" content="" returnTypeFixed="true"/>
+        </elements>
+        <elements xmi:type="process:ServiceTask" xmi:id="_T_SEARCH" name="GDrive Search" outgoing="_SF_04" incoming="_SF_03">
+          <dynamicLabel xmi:type="expression:Expression" xmi:id="_DLSR0067" name="" content="" returnTypeFixed="true"/>
+          <dynamicDescription xmi:type="expression:Expression" xmi:id="_DDSR0068" name="" content="Searches for files named 'Test' in Google Drive" returnTypeFixed="true"/>
+          <stepSummary xmi:type="expression:Expression" xmi:id="_SSSR0069" name="" content="" returnTypeFixed="true"/>
+          <connectors xmi:type="process:Connector" xmi:id="_C_SEARCH" name="Test Search" definitionId="gdrive-search" event="ON_ENTER" definitionVersion="1.0.0">
+            <configuration xmi:type="connectorconfiguration:ConnectorConfiguration" xmi:id="_CCSR0070" definitionId="gdrive-search" version="1.0.0" modelVersion="9">
+              <parameters xmi:type="connectorconfiguration:ConnectorParameter" xmi:id="_PSR0001" key="serviceAccountJson">
+                <expression xmi:type="expression:Expression" xmi:id="_PESR0002" name="readServiceAccountJson" content="new File(serviceAccountJsonPath).text" interpreter="GROOVY" type="TYPE_READ_ONLY_SCRIPT" returnTypeFixed="true">
+                  <!-- referencedElements: declares dependency on serviceAccountJsonPath process variable for Groovy script context -->
+                  <referencedElements xmi:type="process:Data" xmi:id="_REF_SA_PATH" name="serviceAccountJsonPath" dataType="_P90ZURxyEfGG87QOs41BhQ"/>
+                </expression>
+              </parameters>
+              <parameters xmi:type="connectorconfiguration:ConnectorParameter" xmi:id="_PSR0003" key="impersonateUser">
+                <expression xmi:type="expression:Expression" xmi:id="_PESR0004" content="" returnTypeFixed="true"/>
+              </parameters>
+              <parameters xmi:type="connectorconfiguration:ConnectorParameter" xmi:id="_PSR0005" key="clientId">
+                <expression xmi:type="expression:Expression" xmi:id="_PESR0006" returnTypeFixed="true"/>
+              </parameters>
+              <parameters xmi:type="connectorconfiguration:ConnectorParameter" xmi:id="_PSR0007" key="clientSecret">
+                <expression xmi:type="expression:Expression" xmi:id="_PESR0008" returnTypeFixed="true"/>
+              </parameters>
+              <parameters xmi:type="connectorconfiguration:ConnectorParameter" xmi:id="_PSR0009" key="refreshToken">
+                <expression xmi:type="expression:Expression" xmi:id="_PESR0010" returnTypeFixed="true"/>
+              </parameters>
+              <parameters xmi:type="connectorconfiguration:ConnectorParameter" xmi:id="_PSR0011" key="applicationName">
+                <expression xmi:type="expression:Expression" xmi:id="_PESR0012" returnTypeFixed="true"/>
+              </parameters>
+              <parameters xmi:type="connectorconfiguration:ConnectorParameter" xmi:id="_PSR0013" key="connectTimeout">
+                <expression xmi:type="expression:Expression" xmi:id="_PESR0014" content="" returnType="java.lang.Integer" returnTypeFixed="true"/>
+              </parameters>
+              <parameters xmi:type="connectorconfiguration:ConnectorParameter" xmi:id="_PSR0015" key="readTimeout">
+                <expression xmi:type="expression:Expression" xmi:id="_PESR0016" content="" returnType="java.lang.Integer" returnTypeFixed="true"/>
+              </parameters>
+              <parameters xmi:type="connectorconfiguration:ConnectorParameter" xmi:id="_PSR0017" key="query">
+                <expression xmi:type="expression:Expression" xmi:id="_PESR0018" name="&lt;pattern-expression>" type="TYPE_PATTERN" returnTypeFixed="true"/>
+              </parameters>
+              <parameters xmi:type="connectorconfiguration:ConnectorParameter" xmi:id="_PSR0019" key="nameContains">
+                <expression xmi:type="expression:Expression" xmi:id="_PESR0020" name="bonita-test" content="'bonita-test'" interpreter="GROOVY" type="TYPE_READ_ONLY_SCRIPT" returnTypeFixed="true"/>
+              </parameters>
+              <parameters xmi:type="connectorconfiguration:ConnectorParameter" xmi:id="_PSR0021" key="mimeType">
+                <expression xmi:type="expression:Expression" xmi:id="_PESR0022" content="" returnTypeFixed="true"/>
+              </parameters>
+              <parameters xmi:type="connectorconfiguration:ConnectorParameter" xmi:id="_PSR0023" key="fullTextSearch">
+                <expression xmi:type="expression:Expression" xmi:id="_PESR0024" content="" returnTypeFixed="true"/>
+              </parameters>
+              <parameters xmi:type="connectorconfiguration:ConnectorParameter" xmi:id="_PSR0025" key="modifiedAfter">
+                <expression xmi:type="expression:Expression" xmi:id="_PESR0026" content="" returnTypeFixed="true"/>
+              </parameters>
+              <parameters xmi:type="connectorconfiguration:ConnectorParameter" xmi:id="_PSR0027" key="modifiedBefore">
+                <expression xmi:type="expression:Expression" xmi:id="_PESR0028" content="" returnTypeFixed="true"/>
+              </parameters>
+              <parameters xmi:type="connectorconfiguration:ConnectorParameter" xmi:id="_PSR0029" key="includeTrashed">
+                <expression xmi:type="expression:Expression" xmi:id="_PESR0030" name="false" content="false" returnType="java.lang.Boolean" returnTypeFixed="true"/>
+              </parameters>
+              <parameters xmi:type="connectorconfiguration:ConnectorParameter" xmi:id="_PSR0031" key="maxResults">
+                <expression xmi:type="expression:Expression" xmi:id="_PESR0032" content="" returnType="java.lang.Integer" returnTypeFixed="true"/>
+              </parameters>
+              <parameters xmi:type="connectorconfiguration:ConnectorParameter" xmi:id="_PSR0033" key="orderBy">
+                <expression xmi:type="expression:Expression" xmi:id="_PESR0034" content="" returnTypeFixed="true"/>
+              </parameters>
+              <parameters xmi:type="connectorconfiguration:ConnectorParameter" xmi:id="_PSR0035" key="parentFolderId">
+                <expression xmi:type="expression:Expression" xmi:id="_PESR0036" name="gdriveFolderId" content="gdriveFolderId" type="TYPE_VARIABLE" returnTypeFixed="true">
+                  <referencedElements xmi:type="process:Data" xmi:id="_VRSR0036b" name="gdriveFolderId" dataType="_P90ZURxyEfGG87QOs41BhQ"/>
+                </expression>
+              </parameters>
+            </configuration>
+            <outputs xmi:type="expression:Operation" xmi:id="_OOSR0037">
+              <leftOperand xmi:type="expression:Expression" xmi:id="_OLSR0038" name="gdriveSuccess" content="gdriveSuccess" type="TYPE_VARIABLE" returnType="java.lang.Boolean">
+                <referencedElements xmi:type="process:Data" xmi:id="_OLRSR0039" name="gdriveSuccess" dataType="_P90ZTBxyEfGG87QOs41BhQ"/>
+              </leftOperand>
+              <rightOperand xmi:type="expression:Expression" xmi:id="_ORSR0040" name="success" content="success" type="CONNECTOR_OUTPUT_TYPE" returnType="java.lang.Boolean">
+                <referencedElements xmi:type="definition:Output" xmi:id="_ORRSR0041" name="success" type="java.lang.Boolean"/>
+              </rightOperand>
+              <operator xmi:type="expression:Operator" xmi:id="_OPSR0042" type="ASSIGNMENT"/>
+            </outputs>
+            <outputs xmi:type="expression:Operation" xmi:id="_OOSR0043">
+              <leftOperand xmi:type="expression:Expression" xmi:id="_OLSR0044" name="gdriveErrorMessage" content="gdriveErrorMessage" type="TYPE_VARIABLE">
+                <referencedElements xmi:type="process:Data" xmi:id="_OLRSR0045" name="gdriveErrorMessage" dataType="_P90ZURxyEfGG87QOs41BhQ"/>
+              </leftOperand>
+              <rightOperand xmi:type="expression:Expression" xmi:id="_ORSR0046" name="errorMessage" content="errorMessage" type="CONNECTOR_OUTPUT_TYPE">
+                <referencedElements xmi:type="definition:Output" xmi:id="_ORRSR0047" name="errorMessage" type="java.lang.String"/>
+              </rightOperand>
+              <operator xmi:type="expression:Operator" xmi:id="_OPSR0048" type="ASSIGNMENT"/>
+            </outputs>
+            <outputs xmi:type="expression:Operation" xmi:id="_OOSR0049">
+              <leftOperand xmi:type="expression:Expression" xmi:id="_OLSR0050" name="gdriveFiles" content="gdriveFiles" type="TYPE_VARIABLE" returnType="java.util.List">
+                <referencedElements xmi:type="process:JavaObjectData" xmi:id="_OLRSR0051" name="gdriveFiles" dataType="_P90ZUhxyEfGG87QOs41BhQ" className="java.util.List"/>
+              </leftOperand>
+              <rightOperand xmi:type="expression:Expression" xmi:id="_ORSR0052" name="files" content="files" type="CONNECTOR_OUTPUT_TYPE" returnType="java.util.List">
+                <referencedElements xmi:type="definition:Output" xmi:id="_ORRSR0053" name="files" type="java.util.List"/>
+              </rightOperand>
+              <operator xmi:type="expression:Operator" xmi:id="_OPSR0054" type="ASSIGNMENT"/>
+            </outputs>
+            <outputs xmi:type="expression:Operation" xmi:id="_OOSR0055">
+              <leftOperand xmi:type="expression:Expression" xmi:id="_OLSR0056" name="gdriveTotalResults" content="gdriveTotalResults" type="TYPE_VARIABLE" returnType="java.lang.Integer">
+                <referencedElements xmi:type="process:Data" xmi:id="_OLRSR0057" name="gdriveTotalResults" dataType="_P90ZThxyEfGG87QOs41BhQ"/>
+              </leftOperand>
+              <rightOperand xmi:type="expression:Expression" xmi:id="_ORSR0058" name="totalResults" content="totalResults" type="CONNECTOR_OUTPUT_TYPE" returnType="java.lang.Integer">
+                <referencedElements xmi:type="definition:Output" xmi:id="_ORRSR0059" name="totalResults" type="java.lang.Integer"/>
+              </rightOperand>
+              <operator xmi:type="expression:Operator" xmi:id="_OPSR0060" type="ASSIGNMENT"/>
+            </outputs>
+            <outputs xmi:type="expression:Operation" xmi:id="_OOSR0061">
+              <leftOperand xmi:type="expression:Expression" xmi:id="_OLSR0062" name="gdriveNextPageToken" content="gdriveNextPageToken" type="TYPE_VARIABLE">
+                <referencedElements xmi:type="process:Data" xmi:id="_OLRSR0063" name="gdriveNextPageToken" dataType="_P90ZURxyEfGG87QOs41BhQ"/>
+              </leftOperand>
+              <rightOperand xmi:type="expression:Expression" xmi:id="_ORSR0064" name="nextPageToken" content="nextPageToken" type="CONNECTOR_OUTPUT_TYPE">
+                <referencedElements xmi:type="definition:Output" xmi:id="_ORRSR0065" name="nextPageToken" type="java.lang.String"/>
+              </rightOperand>
+              <operator xmi:type="expression:Operator" xmi:id="_OPSR0066" type="ASSIGNMENT"/>
+            </outputs>
+          </connectors>
+          <loopCondition xmi:type="expression:Expression" xmi:id="_LCSR0071" name="" content="" returnType="java.lang.Boolean" returnTypeFixed="true"/>
+          <loopMaximum xmi:type="expression:Expression" xmi:id="_LMSR0072" name="" content="" returnType="java.lang.Integer" returnTypeFixed="true"/>
+          <cardinalityExpression xmi:type="expression:Expression" xmi:id="_CESR0073" name="" content="" returnType="java.lang.Integer" returnTypeFixed="true"/>
+          <iteratorExpression xmi:type="expression:Expression" xmi:id="_IESR0074" name="multiInstanceIterator" content="multiInstanceIterator" type="MULTIINSTANCE_ITERATOR_TYPE" returnType="java.lang.Object" returnTypeFixed="true"/>
+          <completionCondition xmi:type="expression:Expression" xmi:id="_CCOSR0075" name="" content="" returnType="java.lang.Boolean" returnTypeFixed="true"/>
+        </elements>
+        <elements xmi:type="process:ServiceTask" xmi:id="_T_CFOLDER" name="GDrive CreateFolder" outgoing="_SF_02" incoming="_SF_01">
+          <dynamicLabel xmi:type="expression:Expression" xmi:id="_DLCF0122" name="" content="" returnTypeFixed="true"/>
+          <dynamicDescription xmi:type="expression:Expression" xmi:id="_DDCF0123" name="" content="Creates a test folder named 'Bonita-IT-Test'" returnTypeFixed="true"/>
+          <stepSummary xmi:type="expression:Expression" xmi:id="_SSCF0124" name="" content="" returnTypeFixed="true"/>
+          <connectors xmi:type="process:Connector" xmi:id="_C_CFOLDER" name="Test CreateFolder" definitionId="gdrive-create-folder" event="ON_ENTER" definitionVersion="1.0.0">
+            <configuration xmi:type="connectorconfiguration:ConnectorConfiguration" xmi:id="_CCCF0125" definitionId="gdrive-create-folder" version="1.0.0" modelVersion="9">
+              <parameters xmi:type="connectorconfiguration:ConnectorParameter" xmi:id="_PCF0076" key="serviceAccountJson">
+                <expression xmi:type="expression:Expression" xmi:id="_PECF0077" name="readServiceAccountJson" content="new File(serviceAccountJsonPath).text" interpreter="GROOVY" type="TYPE_READ_ONLY_SCRIPT" returnTypeFixed="true">
+                  <!-- referencedElements: declares dependency on serviceAccountJsonPath process variable for Groovy script context -->
+                  <referencedElements xmi:type="process:Data" xmi:id="_REF_SA_PATH" name="serviceAccountJsonPath" dataType="_P90ZURxyEfGG87QOs41BhQ"/>
+                </expression>
+              </parameters>
+              <parameters xmi:type="connectorconfiguration:ConnectorParameter" xmi:id="_PCF0078" key="impersonateUser">
+                <expression xmi:type="expression:Expression" xmi:id="_PECF0079" content="" returnTypeFixed="true"/>
+              </parameters>
+              <parameters xmi:type="connectorconfiguration:ConnectorParameter" xmi:id="_PCF0080" key="connectTimeout">
+                <expression xmi:type="expression:Expression" xmi:id="_PECF0081" content="" returnType="java.lang.Integer" returnTypeFixed="true"/>
+              </parameters>
+              <parameters xmi:type="connectorconfiguration:ConnectorParameter" xmi:id="_PCF0082" key="readTimeout">
+                <expression xmi:type="expression:Expression" xmi:id="_PECF0083" content="" returnType="java.lang.Integer" returnTypeFixed="true"/>
+              </parameters>
+              <parameters xmi:type="connectorconfiguration:ConnectorParameter" xmi:id="_PCF0084" key="folderName">
+                <expression xmi:type="expression:Expression" xmi:id="_PECF0085" name="Bonita-IT-Test" content="'Bonita-IT-Test'" interpreter="GROOVY" type="TYPE_READ_ONLY_SCRIPT" returnTypeFixed="true"/>
+              </parameters>
+              <!-- parentFolderId: Shared Drive folder where SA has write access (SA has no own storage quota) -->
+              <!-- Value: "Test Conector Drive" folder in Shared Drive — change this to your own folder ID -->
+              <parameters xmi:type="connectorconfiguration:ConnectorParameter" xmi:id="_PCF0086" key="parentFolderId">
+                <expression xmi:type="expression:Expression" xmi:id="_PECF0087" name="sharedDriveFolderId" content="'1E7UnzYxYzWtRNVJGIFw0YAcX4a-ARVvM'" interpreter="GROOVY" type="TYPE_READ_ONLY_SCRIPT" returnTypeFixed="true"/>
+              </parameters>
+              <parameters xmi:type="connectorconfiguration:ConnectorParameter" xmi:id="_PCF0088" key="description">
+                <expression xmi:type="expression:Expression" xmi:id="_PECF0089" name="Test folder" content="'Test folder from Bonita IT'" interpreter="GROOVY" type="TYPE_READ_ONLY_SCRIPT" returnTypeFixed="true"/>
+              </parameters>
+              <parameters xmi:type="connectorconfiguration:ConnectorParameter" xmi:id="_PCF0090" key="customProperties">
+                <expression xmi:type="expression:Expression" xmi:id="_PECF0091" content="" returnType="java.util.Map" returnTypeFixed="true"/>
+              </parameters>
+            </configuration>
+            <outputs xmi:type="expression:Operation" xmi:id="_OOCF0092">
+              <leftOperand xmi:type="expression:Expression" xmi:id="_OLCF0093" name="gdriveSuccess" content="gdriveSuccess" type="TYPE_VARIABLE" returnType="java.lang.Boolean">
+                <referencedElements xmi:type="process:Data" xmi:id="_OLRCF0094" name="gdriveSuccess" dataType="_P90ZTBxyEfGG87QOs41BhQ"/>
+              </leftOperand>
+              <rightOperand xmi:type="expression:Expression" xmi:id="_ORCF0095" name="success" content="success" type="CONNECTOR_OUTPUT_TYPE" returnType="java.lang.Boolean">
+                <referencedElements xmi:type="definition:Output" xmi:id="_ORRCF0096" name="success" type="java.lang.Boolean"/>
+              </rightOperand>
+              <operator xmi:type="expression:Operator" xmi:id="_OPCF0097" type="ASSIGNMENT"/>
+            </outputs>
+            <outputs xmi:type="expression:Operation" xmi:id="_OOCF0098">
+              <leftOperand xmi:type="expression:Expression" xmi:id="_OLCF0099" name="gdriveErrorMessage" content="gdriveErrorMessage" type="TYPE_VARIABLE">
+                <referencedElements xmi:type="process:Data" xmi:id="_OLRCF0100" name="gdriveErrorMessage" dataType="_P90ZURxyEfGG87QOs41BhQ"/>
+              </leftOperand>
+              <rightOperand xmi:type="expression:Expression" xmi:id="_ORCF0101" name="errorMessage" content="errorMessage" type="CONNECTOR_OUTPUT_TYPE">
+                <referencedElements xmi:type="definition:Output" xmi:id="_ORRCF0102" name="errorMessage" type="java.lang.String"/>
+              </rightOperand>
+              <operator xmi:type="expression:Operator" xmi:id="_OPCF0103" type="ASSIGNMENT"/>
+            </outputs>
+            <outputs xmi:type="expression:Operation" xmi:id="_OOCF0104">
+              <leftOperand xmi:type="expression:Expression" xmi:id="_OLCF0105" name="gdriveFolderId" content="gdriveFolderId" type="TYPE_VARIABLE">
+                <referencedElements xmi:type="process:Data" xmi:id="_OLRCF0106" name="gdriveFolderId" dataType="_P90ZURxyEfGG87QOs41BhQ"/>
+              </leftOperand>
+              <rightOperand xmi:type="expression:Expression" xmi:id="_ORCF0107" name="folderId" content="folderId" type="CONNECTOR_OUTPUT_TYPE">
+                <referencedElements xmi:type="definition:Output" xmi:id="_ORRCF0108" name="folderId" type="java.lang.String"/>
+              </rightOperand>
+              <operator xmi:type="expression:Operator" xmi:id="_OPCF0109" type="ASSIGNMENT"/>
+            </outputs>
+            <outputs xmi:type="expression:Operation" xmi:id="_OOCF0110">
+              <leftOperand xmi:type="expression:Expression" xmi:id="_OLCF0111" name="gdriveFileName" content="gdriveFileName" type="TYPE_VARIABLE">
+                <referencedElements xmi:type="process:Data" xmi:id="_OLRCF0112" name="gdriveFileName" dataType="_P90ZURxyEfGG87QOs41BhQ"/>
+              </leftOperand>
+              <rightOperand xmi:type="expression:Expression" xmi:id="_ORCF0113" name="folderName" content="folderName" type="CONNECTOR_OUTPUT_TYPE">
+                <referencedElements xmi:type="definition:Output" xmi:id="_ORRCF0114" name="folderName" type="java.lang.String"/>
+              </rightOperand>
+              <operator xmi:type="expression:Operator" xmi:id="_OPCF0115" type="ASSIGNMENT"/>
+            </outputs>
+            <outputs xmi:type="expression:Operation" xmi:id="_OOCF0116">
+              <leftOperand xmi:type="expression:Expression" xmi:id="_OLCF0117" name="gdriveWebViewLink" content="gdriveWebViewLink" type="TYPE_VARIABLE">
+                <referencedElements xmi:type="process:Data" xmi:id="_OLRCF0118" name="gdriveWebViewLink" dataType="_P90ZURxyEfGG87QOs41BhQ"/>
+              </leftOperand>
+              <rightOperand xmi:type="expression:Expression" xmi:id="_ORCF0119" name="webViewLink" content="webViewLink" type="CONNECTOR_OUTPUT_TYPE">
+                <referencedElements xmi:type="definition:Output" xmi:id="_ORRCF0120" name="webViewLink" type="java.lang.String"/>
+              </rightOperand>
+              <operator xmi:type="expression:Operator" xmi:id="_OPCF0121" type="ASSIGNMENT"/>
+            </outputs>
+          </connectors>
+          <loopCondition xmi:type="expression:Expression" xmi:id="_LCCF0126" name="" content="" returnType="java.lang.Boolean" returnTypeFixed="true"/>
+          <loopMaximum xmi:type="expression:Expression" xmi:id="_LMCF0127" name="" content="" returnType="java.lang.Integer" returnTypeFixed="true"/>
+          <cardinalityExpression xmi:type="expression:Expression" xmi:id="_CECF0128" name="" content="" returnType="java.lang.Integer" returnTypeFixed="true"/>
+          <iteratorExpression xmi:type="expression:Expression" xmi:id="_IECF0129" name="multiInstanceIterator" content="multiInstanceIterator" type="MULTIINSTANCE_ITERATOR_TYPE" returnType="java.lang.Object" returnTypeFixed="true"/>
+          <completionCondition xmi:type="expression:Expression" xmi:id="_CCOCF0130" name="" content="" returnType="java.lang.Boolean" returnTypeFixed="true"/>
+        </elements>
+        <elements xmi:type="process:ServiceTask" xmi:id="_T_UPLOAD" name="GDrive Upload" outgoing="_SF_03" incoming="_SF_02">
+          <dynamicLabel xmi:type="expression:Expression" xmi:id="_DLUP0192" name="" content="" returnTypeFixed="true"/>
+          <dynamicDescription xmi:type="expression:Expression" xmi:id="_DDUP0193" name="" content="Uploads a test file to the created folder" returnTypeFixed="true"/>
+          <stepSummary xmi:type="expression:Expression" xmi:id="_SSUP0194" name="" content="" returnTypeFixed="true"/>
+          <connectors xmi:type="process:Connector" xmi:id="_C_UPLOAD" name="Test Upload" definitionId="gdrive-upload" event="ON_ENTER" definitionVersion="1.0.0">
+            <configuration xmi:type="connectorconfiguration:ConnectorConfiguration" xmi:id="_CCUP0195" definitionId="gdrive-upload" version="1.0.0" modelVersion="9">
+              <parameters xmi:type="connectorconfiguration:ConnectorParameter" xmi:id="_PUP0131" key="serviceAccountJson">
+                <expression xmi:type="expression:Expression" xmi:id="_PEUP0132" name="readServiceAccountJson" content="new File(serviceAccountJsonPath).text" interpreter="GROOVY" type="TYPE_READ_ONLY_SCRIPT" returnTypeFixed="true">
+                  <!-- referencedElements: declares dependency on serviceAccountJsonPath process variable for Groovy script context -->
+                  <referencedElements xmi:type="process:Data" xmi:id="_REF_SA_PATH" name="serviceAccountJsonPath" dataType="_P90ZURxyEfGG87QOs41BhQ"/>
+                </expression>
+              </parameters>
+              <parameters xmi:type="connectorconfiguration:ConnectorParameter" xmi:id="_PUP0133" key="impersonateUser">
+                <expression xmi:type="expression:Expression" xmi:id="_PEUP0134" content="" returnTypeFixed="true"/>
+              </parameters>
+              <parameters xmi:type="connectorconfiguration:ConnectorParameter" xmi:id="_PUP0135" key="clientId">
+                <expression xmi:type="expression:Expression" xmi:id="_PEUP0136" returnTypeFixed="true"/>
+              </parameters>
+              <parameters xmi:type="connectorconfiguration:ConnectorParameter" xmi:id="_PUP0137" key="clientSecret">
+                <expression xmi:type="expression:Expression" xmi:id="_PEUP0138" returnTypeFixed="true"/>
+              </parameters>
+              <parameters xmi:type="connectorconfiguration:ConnectorParameter" xmi:id="_PUP0139" key="refreshToken">
+                <expression xmi:type="expression:Expression" xmi:id="_PEUP0140" returnTypeFixed="true"/>
+              </parameters>
+              <parameters xmi:type="connectorconfiguration:ConnectorParameter" xmi:id="_PUP0141" key="applicationName">
+                <expression xmi:type="expression:Expression" xmi:id="_PEUP0142" returnTypeFixed="true"/>
+              </parameters>
+              <parameters xmi:type="connectorconfiguration:ConnectorParameter" xmi:id="_PUP0143" key="connectTimeout">
+                <expression xmi:type="expression:Expression" xmi:id="_PEUP0144" content="" returnType="java.lang.Integer" returnTypeFixed="true"/>
+              </parameters>
+              <parameters xmi:type="connectorconfiguration:ConnectorParameter" xmi:id="_PUP0145" key="readTimeout">
+                <expression xmi:type="expression:Expression" xmi:id="_PEUP0146" content="" returnType="java.lang.Integer" returnTypeFixed="true"/>
+              </parameters>
+              <parameters xmi:type="connectorconfiguration:ConnectorParameter" xmi:id="_PUP0147" key="fileName">
+                <expression xmi:type="expression:Expression" xmi:id="_PEUP0148" name="bonita-test.txt" content="'bonita-test.txt'" interpreter="GROOVY" type="TYPE_READ_ONLY_SCRIPT" returnTypeFixed="true"/>
+              </parameters>
+              <parameters xmi:type="connectorconfiguration:ConnectorParameter" xmi:id="_PUP0149" key="fileContent">
+                <expression xmi:type="expression:Expression" xmi:id="_PEUP0150" name="Test content" content="'Hello from Bonita GDrive IT'.bytes.encodeBase64().toString()" interpreter="GROOVY" type="TYPE_READ_ONLY_SCRIPT" returnTypeFixed="true"/>
+              </parameters>
+              <parameters xmi:type="connectorconfiguration:ConnectorParameter" xmi:id="_PUP0151" key="mimeType">
+                <expression xmi:type="expression:Expression" xmi:id="_PEUP0152" name="text/plain" content="'text/plain'" interpreter="GROOVY" type="TYPE_READ_ONLY_SCRIPT" returnTypeFixed="true"/>
+              </parameters>
+              <parameters xmi:type="connectorconfiguration:ConnectorParameter" xmi:id="_PUP0153" key="description">
+                <expression xmi:type="expression:Expression" xmi:id="_PEUP0154" name="Test upload" content="'Test upload from Bonita'" interpreter="GROOVY" type="TYPE_READ_ONLY_SCRIPT" returnTypeFixed="true"/>
+              </parameters>
+              <parameters xmi:type="connectorconfiguration:ConnectorParameter" xmi:id="_PUP0155" key="customProperties">
+                <expression xmi:type="expression:Expression" xmi:id="_PEUP0156" content="" returnType="java.util.Map" returnTypeFixed="true"/>
+              </parameters>
+              <parameters xmi:type="connectorconfiguration:ConnectorParameter" xmi:id="_PUP0157" key="convertToGoogleFormat">
+                <expression xmi:type="expression:Expression" xmi:id="_PEUP0158" name="false" content="false" returnType="java.lang.Boolean" returnTypeFixed="true"/>
+              </parameters>
+              <parameters xmi:type="connectorconfiguration:ConnectorParameter" xmi:id="_PUP0159" key="parentFolderId">
+                <expression xmi:type="expression:Expression" xmi:id="_PEUP0160" name="gdriveFolderId" content="gdriveFolderId" type="TYPE_VARIABLE" returnTypeFixed="true">
+                  <referencedElements xmi:type="process:Data" xmi:id="_VRUP0161" name="gdriveFolderId" dataType="_P90ZURxyEfGG87QOs41BhQ"/>
+                </expression>
+              </parameters>
+            </configuration>
+            <outputs xmi:type="expression:Operation" xmi:id="_OOUP0162">
+              <leftOperand xmi:type="expression:Expression" xmi:id="_OLUP0163" name="gdriveSuccess" content="gdriveSuccess" type="TYPE_VARIABLE" returnType="java.lang.Boolean">
+                <referencedElements xmi:type="process:Data" xmi:id="_OLRUP0164" name="gdriveSuccess" dataType="_P90ZTBxyEfGG87QOs41BhQ"/>
+              </leftOperand>
+              <rightOperand xmi:type="expression:Expression" xmi:id="_ORUP0165" name="success" content="success" type="CONNECTOR_OUTPUT_TYPE" returnType="java.lang.Boolean">
+                <referencedElements xmi:type="definition:Output" xmi:id="_ORRUP0166" name="success" type="java.lang.Boolean"/>
+              </rightOperand>
+              <operator xmi:type="expression:Operator" xmi:id="_OPUP0167" type="ASSIGNMENT"/>
+            </outputs>
+            <outputs xmi:type="expression:Operation" xmi:id="_OOUP0168">
+              <leftOperand xmi:type="expression:Expression" xmi:id="_OLUP0169" name="gdriveErrorMessage" content="gdriveErrorMessage" type="TYPE_VARIABLE">
+                <referencedElements xmi:type="process:Data" xmi:id="_OLRUP0170" name="gdriveErrorMessage" dataType="_P90ZURxyEfGG87QOs41BhQ"/>
+              </leftOperand>
+              <rightOperand xmi:type="expression:Expression" xmi:id="_ORUP0171" name="errorMessage" content="errorMessage" type="CONNECTOR_OUTPUT_TYPE">
+                <referencedElements xmi:type="definition:Output" xmi:id="_ORRUP0172" name="errorMessage" type="java.lang.String"/>
+              </rightOperand>
+              <operator xmi:type="expression:Operator" xmi:id="_OPUP0173" type="ASSIGNMENT"/>
+            </outputs>
+            <outputs xmi:type="expression:Operation" xmi:id="_OOUP0174">
+              <leftOperand xmi:type="expression:Expression" xmi:id="_OLUP0175" name="gdriveFileId" content="gdriveFileId" type="TYPE_VARIABLE">
+                <referencedElements xmi:type="process:Data" xmi:id="_OLRUP0176" name="gdriveFileId" dataType="_P90ZURxyEfGG87QOs41BhQ"/>
+              </leftOperand>
+              <rightOperand xmi:type="expression:Expression" xmi:id="_ORUP0177" name="fileId" content="fileId" type="CONNECTOR_OUTPUT_TYPE">
+                <referencedElements xmi:type="definition:Output" xmi:id="_ORRUP0178" name="fileId" type="java.lang.String"/>
+              </rightOperand>
+              <operator xmi:type="expression:Operator" xmi:id="_OPUP0179" type="ASSIGNMENT"/>
+            </outputs>
+            <outputs xmi:type="expression:Operation" xmi:id="_OOUP0180">
+              <leftOperand xmi:type="expression:Expression" xmi:id="_OLUP0181" name="gdriveFileName" content="gdriveFileName" type="TYPE_VARIABLE">
+                <referencedElements xmi:type="process:Data" xmi:id="_OLRUP0182" name="gdriveFileName" dataType="_P90ZURxyEfGG87QOs41BhQ"/>
+              </leftOperand>
+              <rightOperand xmi:type="expression:Expression" xmi:id="_ORUP0183" name="fileName" content="fileName" type="CONNECTOR_OUTPUT_TYPE">
+                <referencedElements xmi:type="definition:Output" xmi:id="_ORRUP0184" name="fileName" type="java.lang.String"/>
+              </rightOperand>
+              <operator xmi:type="expression:Operator" xmi:id="_OPUP0185" type="ASSIGNMENT"/>
+            </outputs>
+            <outputs xmi:type="expression:Operation" xmi:id="_OOUP0186">
+              <leftOperand xmi:type="expression:Expression" xmi:id="_OLUP0187" name="gdriveWebViewLink" content="gdriveWebViewLink" type="TYPE_VARIABLE">
+                <referencedElements xmi:type="process:Data" xmi:id="_OLRUP0188" name="gdriveWebViewLink" dataType="_P90ZURxyEfGG87QOs41BhQ"/>
+              </leftOperand>
+              <rightOperand xmi:type="expression:Expression" xmi:id="_ORUP0189" name="webViewLink" content="webViewLink" type="CONNECTOR_OUTPUT_TYPE">
+                <referencedElements xmi:type="definition:Output" xmi:id="_ORRUP0190" name="webViewLink" type="java.lang.String"/>
+              </rightOperand>
+              <operator xmi:type="expression:Operator" xmi:id="_OPUP0191" type="ASSIGNMENT"/>
+            </outputs>
+          </connectors>
+          <loopCondition xmi:type="expression:Expression" xmi:id="_LCUP0196" name="" content="" returnType="java.lang.Boolean" returnTypeFixed="true"/>
+          <loopMaximum xmi:type="expression:Expression" xmi:id="_LMUP0197" name="" content="" returnType="java.lang.Integer" returnTypeFixed="true"/>
+          <cardinalityExpression xmi:type="expression:Expression" xmi:id="_CEUP0198" name="" content="" returnType="java.lang.Integer" returnTypeFixed="true"/>
+          <iteratorExpression xmi:type="expression:Expression" xmi:id="_IEUP0199" name="multiInstanceIterator" content="multiInstanceIterator" type="MULTIINSTANCE_ITERATOR_TYPE" returnType="java.lang.Object" returnTypeFixed="true"/>
+          <completionCondition xmi:type="expression:Expression" xmi:id="_CCOUP0200" name="" content="" returnType="java.lang.Boolean" returnTypeFixed="true"/>
+        </elements>
+        <elements xmi:type="process:ServiceTask" xmi:id="_T_COPY" name="GDrive Copy" outgoing="_SF_06" incoming="_SF_05">
+          <dynamicLabel xmi:type="expression:Expression" xmi:id="_DLCP0246" name="" content="" returnTypeFixed="true"/>
+          <dynamicDescription xmi:type="expression:Expression" xmi:id="_DDCP0247" name="" content="Creates a copy of the uploaded file" returnTypeFixed="true"/>
+          <stepSummary xmi:type="expression:Expression" xmi:id="_SSCP0248" name="" content="" returnTypeFixed="true"/>
+          <connectors xmi:type="process:Connector" xmi:id="_C_COPY" name="Test Copy" definitionId="gdrive-copy" event="ON_ENTER" definitionVersion="1.0.0">
+            <configuration xmi:type="connectorconfiguration:ConnectorConfiguration" xmi:id="_CCCP0249" definitionId="gdrive-copy" version="1.0.0" modelVersion="9">
+              <parameters xmi:type="connectorconfiguration:ConnectorParameter" xmi:id="_PCP0201" key="serviceAccountJson">
+                <expression xmi:type="expression:Expression" xmi:id="_PECP0202" name="readServiceAccountJson" content="new File(serviceAccountJsonPath).text" interpreter="GROOVY" type="TYPE_READ_ONLY_SCRIPT" returnTypeFixed="true">
+                  <!-- referencedElements: declares dependency on serviceAccountJsonPath process variable for Groovy script context -->
+                  <referencedElements xmi:type="process:Data" xmi:id="_REF_SA_PATH" name="serviceAccountJsonPath" dataType="_P90ZURxyEfGG87QOs41BhQ"/>
+                </expression>
+              </parameters>
+              <parameters xmi:type="connectorconfiguration:ConnectorParameter" xmi:id="_PCP0203" key="impersonateUser">
+                <expression xmi:type="expression:Expression" xmi:id="_PECP0204" content="" returnTypeFixed="true"/>
+              </parameters>
+              <parameters xmi:type="connectorconfiguration:ConnectorParameter" xmi:id="_PCP0205" key="connectTimeout">
+                <expression xmi:type="expression:Expression" xmi:id="_PECP0206" content="" returnType="java.lang.Integer" returnTypeFixed="true"/>
+              </parameters>
+              <parameters xmi:type="connectorconfiguration:ConnectorParameter" xmi:id="_PCP0207" key="readTimeout">
+                <expression xmi:type="expression:Expression" xmi:id="_PECP0208" content="" returnType="java.lang.Integer" returnTypeFixed="true"/>
+              </parameters>
+              <parameters xmi:type="connectorconfiguration:ConnectorParameter" xmi:id="_PCP0209" key="sourceFileId">
+                <expression xmi:type="expression:Expression" xmi:id="_PECP0210" name="gdriveFileId" content="gdriveFileId" type="TYPE_VARIABLE" returnTypeFixed="true">
+                  <referencedElements xmi:type="process:Data" xmi:id="_VRCP0211" name="gdriveFileId" dataType="_P90ZURxyEfGG87QOs41BhQ"/>
+                </expression>
+              </parameters>
+              <parameters xmi:type="connectorconfiguration:ConnectorParameter" xmi:id="_PCP0212" key="newName">
+                <expression xmi:type="expression:Expression" xmi:id="_PECP0213" name="bonita-test-copy.txt" content="'bonita-test-copy.txt'" interpreter="GROOVY" type="TYPE_READ_ONLY_SCRIPT" returnTypeFixed="true"/>
+              </parameters>
+              <parameters xmi:type="connectorconfiguration:ConnectorParameter" xmi:id="_PCP0214" key="destinationFolderId">
+                <expression xmi:type="expression:Expression" xmi:id="_PECP0215" content="" returnTypeFixed="true"/>
+              </parameters>
+            </configuration>
+            <outputs xmi:type="expression:Operation" xmi:id="_OOCP0216">
+              <leftOperand xmi:type="expression:Expression" xmi:id="_OLCP0217" name="gdriveSuccess" content="gdriveSuccess" type="TYPE_VARIABLE" returnType="java.lang.Boolean">
+                <referencedElements xmi:type="process:Data" xmi:id="_OLRCP0218" name="gdriveSuccess" dataType="_P90ZTBxyEfGG87QOs41BhQ"/>
+              </leftOperand>
+              <rightOperand xmi:type="expression:Expression" xmi:id="_ORCP0219" name="success" content="success" type="CONNECTOR_OUTPUT_TYPE" returnType="java.lang.Boolean">
+                <referencedElements xmi:type="definition:Output" xmi:id="_ORRCP0220" name="success" type="java.lang.Boolean"/>
+              </rightOperand>
+              <operator xmi:type="expression:Operator" xmi:id="_OPCP0221" type="ASSIGNMENT"/>
+            </outputs>
+            <outputs xmi:type="expression:Operation" xmi:id="_OOCP0222">
+              <leftOperand xmi:type="expression:Expression" xmi:id="_OLCP0223" name="gdriveErrorMessage" content="gdriveErrorMessage" type="TYPE_VARIABLE">
+                <referencedElements xmi:type="process:Data" xmi:id="_OLRCP0224" name="gdriveErrorMessage" dataType="_P90ZURxyEfGG87QOs41BhQ"/>
+              </leftOperand>
+              <rightOperand xmi:type="expression:Expression" xmi:id="_ORCP0225" name="errorMessage" content="errorMessage" type="CONNECTOR_OUTPUT_TYPE">
+                <referencedElements xmi:type="definition:Output" xmi:id="_ORRCP0226" name="errorMessage" type="java.lang.String"/>
+              </rightOperand>
+              <operator xmi:type="expression:Operator" xmi:id="_OPCP0227" type="ASSIGNMENT"/>
+            </outputs>
+            <outputs xmi:type="expression:Operation" xmi:id="_OOCP0228">
+              <leftOperand xmi:type="expression:Expression" xmi:id="_OLCP0229" name="gdriveCopiedFileId" content="gdriveCopiedFileId" type="TYPE_VARIABLE">
+                <referencedElements xmi:type="process:Data" xmi:id="_OLRCP0230" name="gdriveCopiedFileId" dataType="_P90ZURxyEfGG87QOs41BhQ"/>
+              </leftOperand>
+              <rightOperand xmi:type="expression:Expression" xmi:id="_ORCP0231" name="newFileId" content="newFileId" type="CONNECTOR_OUTPUT_TYPE">
+                <referencedElements xmi:type="definition:Output" xmi:id="_ORRCP0232" name="newFileId" type="java.lang.String"/>
+              </rightOperand>
+              <operator xmi:type="expression:Operator" xmi:id="_OPCP0233" type="ASSIGNMENT"/>
+            </outputs>
+            <outputs xmi:type="expression:Operation" xmi:id="_OOCP0234">
+              <leftOperand xmi:type="expression:Expression" xmi:id="_OLCP0235" name="gdriveFileName" content="gdriveFileName" type="TYPE_VARIABLE">
+                <referencedElements xmi:type="process:Data" xmi:id="_OLRCP0236" name="gdriveFileName" dataType="_P90ZURxyEfGG87QOs41BhQ"/>
+              </leftOperand>
+              <rightOperand xmi:type="expression:Expression" xmi:id="_ORCP0237" name="fileName" content="fileName" type="CONNECTOR_OUTPUT_TYPE">
+                <referencedElements xmi:type="definition:Output" xmi:id="_ORRCP0238" name="fileName" type="java.lang.String"/>
+              </rightOperand>
+              <operator xmi:type="expression:Operator" xmi:id="_OPCP0239" type="ASSIGNMENT"/>
+            </outputs>
+            <outputs xmi:type="expression:Operation" xmi:id="_OOCP0240">
+              <leftOperand xmi:type="expression:Expression" xmi:id="_OLCP0241" name="gdriveWebViewLink" content="gdriveWebViewLink" type="TYPE_VARIABLE">
+                <referencedElements xmi:type="process:Data" xmi:id="_OLRCP0242" name="gdriveWebViewLink" dataType="_P90ZURxyEfGG87QOs41BhQ"/>
+              </leftOperand>
+              <rightOperand xmi:type="expression:Expression" xmi:id="_ORCP0243" name="webViewLink" content="webViewLink" type="CONNECTOR_OUTPUT_TYPE">
+                <referencedElements xmi:type="definition:Output" xmi:id="_ORRCP0244" name="webViewLink" type="java.lang.String"/>
+              </rightOperand>
+              <operator xmi:type="expression:Operator" xmi:id="_OPCP0245" type="ASSIGNMENT"/>
+            </outputs>
+          </connectors>
+          <loopCondition xmi:type="expression:Expression" xmi:id="_LCCP0250" name="" content="" returnType="java.lang.Boolean" returnTypeFixed="true"/>
+          <loopMaximum xmi:type="expression:Expression" xmi:id="_LMCP0251" name="" content="" returnType="java.lang.Integer" returnTypeFixed="true"/>
+          <cardinalityExpression xmi:type="expression:Expression" xmi:id="_CECP0252" name="" content="" returnType="java.lang.Integer" returnTypeFixed="true"/>
+          <iteratorExpression xmi:type="expression:Expression" xmi:id="_IECP0253" name="multiInstanceIterator" content="multiInstanceIterator" type="MULTIINSTANCE_ITERATOR_TYPE" returnType="java.lang.Object" returnTypeFixed="true"/>
+          <completionCondition xmi:type="expression:Expression" xmi:id="_CCOCP0254" name="" content="" returnType="java.lang.Boolean" returnTypeFixed="true"/>
+        </elements>
+        <elements xmi:type="process:ServiceTask" xmi:id="_T_CARCHIVE" name="GDrive CreateArchiveFolder" outgoing="_SF_07" incoming="_SF_06">
+          <dynamicLabel xmi:type="expression:Expression" xmi:id="_DLCA1001" name="" content="" returnTypeFixed="true"/>
+          <dynamicDescription xmi:type="expression:Expression" xmi:id="_DDCA1002" name="" content="Creates an Archive subfolder inside the test folder" returnTypeFixed="true"/>
+          <stepSummary xmi:type="expression:Expression" xmi:id="_SSCA1003" name="" content="" returnTypeFixed="true"/>
+          <connectors xmi:type="process:Connector" xmi:id="_C_CARCHIVE" name="Test CreateArchiveFolder" definitionId="gdrive-create-folder" event="ON_ENTER" definitionVersion="1.0.0">
+            <configuration xmi:type="connectorconfiguration:ConnectorConfiguration" xmi:id="_CCCA1004" definitionId="gdrive-create-folder" version="1.0.0" modelVersion="9">
+              <parameters xmi:type="connectorconfiguration:ConnectorParameter" xmi:id="_PCA1005" key="serviceAccountJson">
+                <expression xmi:type="expression:Expression" xmi:id="_PECA1006" name="readServiceAccountJson" content="new File(serviceAccountJsonPath).text" interpreter="GROOVY" type="TYPE_READ_ONLY_SCRIPT" returnTypeFixed="true">
+                  <!-- referencedElements: declares dependency on serviceAccountJsonPath process variable for Groovy script context -->
+                  <referencedElements xmi:type="process:Data" xmi:id="_REF_SA_PATH" name="serviceAccountJsonPath" dataType="_P90ZURxyEfGG87QOs41BhQ"/>
+                </expression>
+              </parameters>
+              <parameters xmi:type="connectorconfiguration:ConnectorParameter" xmi:id="_PCA1007" key="impersonateUser">
+                <expression xmi:type="expression:Expression" xmi:id="_PECA1008" content="" returnTypeFixed="true"/>
+              </parameters>
+              <parameters xmi:type="connectorconfiguration:ConnectorParameter" xmi:id="_PCA1009" key="connectTimeout">
+                <expression xmi:type="expression:Expression" xmi:id="_PECA1010" content="" returnType="java.lang.Integer" returnTypeFixed="true"/>
+              </parameters>
+              <parameters xmi:type="connectorconfiguration:ConnectorParameter" xmi:id="_PCA1011" key="readTimeout">
+                <expression xmi:type="expression:Expression" xmi:id="_PECA1012" content="" returnType="java.lang.Integer" returnTypeFixed="true"/>
+              </parameters>
+              <parameters xmi:type="connectorconfiguration:ConnectorParameter" xmi:id="_PCA1013" key="folderName">
+                <expression xmi:type="expression:Expression" xmi:id="_PECA1014" name="Archive" content="'Archive'" interpreter="GROOVY" type="TYPE_READ_ONLY_SCRIPT" returnTypeFixed="true"/>
+              </parameters>
+              <parameters xmi:type="connectorconfiguration:ConnectorParameter" xmi:id="_PCA1015" key="parentFolderId">
+                <expression xmi:type="expression:Expression" xmi:id="_PECA1016" name="gdriveFolderId" content="gdriveFolderId" type="TYPE_VARIABLE" returnTypeFixed="true">
+                  <referencedElements xmi:type="process:Data" xmi:id="_VRCA1017" name="gdriveFolderId" dataType="_P90ZURxyEfGG87QOs41BhQ"/>
+                </expression>
+              </parameters>
+              <parameters xmi:type="connectorconfiguration:ConnectorParameter" xmi:id="_PCA1018" key="description">
+                <expression xmi:type="expression:Expression" xmi:id="_PECA1019" name="Archive subfolder" content="'Archive subfolder for move tests'" interpreter="GROOVY" type="TYPE_READ_ONLY_SCRIPT" returnTypeFixed="true"/>
+              </parameters>
+              <parameters xmi:type="connectorconfiguration:ConnectorParameter" xmi:id="_PCA1020" key="customProperties">
+                <expression xmi:type="expression:Expression" xmi:id="_PECA1021" content="" returnType="java.util.Map" returnTypeFixed="true"/>
+              </parameters>
+            </configuration>
+            <outputs xmi:type="expression:Operation" xmi:id="_OOCA1022">
+              <leftOperand xmi:type="expression:Expression" xmi:id="_OLCA1023" name="gdriveSuccess" content="gdriveSuccess" type="TYPE_VARIABLE" returnType="java.lang.Boolean">
+                <referencedElements xmi:type="process:Data" xmi:id="_OLRCA1024" name="gdriveSuccess" dataType="_P90ZTBxyEfGG87QOs41BhQ"/>
+              </leftOperand>
+              <rightOperand xmi:type="expression:Expression" xmi:id="_ORCA1025" name="success" content="success" type="CONNECTOR_OUTPUT_TYPE" returnType="java.lang.Boolean">
+                <referencedElements xmi:type="definition:Output" xmi:id="_ORRCA1026" name="success" type="java.lang.Boolean"/>
+              </rightOperand>
+              <operator xmi:type="expression:Operator" xmi:id="_OPCA1027" type="ASSIGNMENT"/>
+            </outputs>
+            <outputs xmi:type="expression:Operation" xmi:id="_OOCA1028">
+              <leftOperand xmi:type="expression:Expression" xmi:id="_OLCA1029" name="gdriveErrorMessage" content="gdriveErrorMessage" type="TYPE_VARIABLE">
+                <referencedElements xmi:type="process:Data" xmi:id="_OLRCA1030" name="gdriveErrorMessage" dataType="_P90ZURxyEfGG87QOs41BhQ"/>
+              </leftOperand>
+              <rightOperand xmi:type="expression:Expression" xmi:id="_ORCA1031" name="errorMessage" content="errorMessage" type="CONNECTOR_OUTPUT_TYPE">
+                <referencedElements xmi:type="definition:Output" xmi:id="_ORRCA1032" name="errorMessage" type="java.lang.String"/>
+              </rightOperand>
+              <operator xmi:type="expression:Operator" xmi:id="_OPCA1033" type="ASSIGNMENT"/>
+            </outputs>
+            <outputs xmi:type="expression:Operation" xmi:id="_OOCA1034">
+              <leftOperand xmi:type="expression:Expression" xmi:id="_OLCA1035" name="gdriveSubFolderId" content="gdriveSubFolderId" type="TYPE_VARIABLE">
+                <referencedElements xmi:type="process:Data" xmi:id="_OLRCA1036" name="gdriveSubFolderId" dataType="_P90ZURxyEfGG87QOs41BhQ"/>
+              </leftOperand>
+              <rightOperand xmi:type="expression:Expression" xmi:id="_ORCA1037" name="folderId" content="folderId" type="CONNECTOR_OUTPUT_TYPE">
+                <referencedElements xmi:type="definition:Output" xmi:id="_ORRCA1038" name="folderId" type="java.lang.String"/>
+              </rightOperand>
+              <operator xmi:type="expression:Operator" xmi:id="_OPCA1039" type="ASSIGNMENT"/>
+            </outputs>
+          </connectors>
+          <loopCondition xmi:type="expression:Expression" xmi:id="_LCCA1040" name="" content="" returnType="java.lang.Boolean" returnTypeFixed="true"/>
+          <loopMaximum xmi:type="expression:Expression" xmi:id="_LMCA1041" name="" content="" returnType="java.lang.Integer" returnTypeFixed="true"/>
+          <cardinalityExpression xmi:type="expression:Expression" xmi:id="_CECA1042" name="" content="" returnType="java.lang.Integer" returnTypeFixed="true"/>
+          <iteratorExpression xmi:type="expression:Expression" xmi:id="_IECA1043" name="multiInstanceIterator" content="multiInstanceIterator" type="MULTIINSTANCE_ITERATOR_TYPE" returnType="java.lang.Object" returnTypeFixed="true"/>
+          <completionCondition xmi:type="expression:Expression" xmi:id="_CCOCA1044" name="" content="" returnType="java.lang.Boolean" returnTypeFixed="true"/>
+        </elements>
+        <elements xmi:type="process:ServiceTask" xmi:id="_T_MOVE" name="GDrive Move" outgoing="_SF_08" incoming="_SF_07">
+          <dynamicLabel xmi:type="expression:Expression" xmi:id="_DLMV0283" name="" content="" returnTypeFixed="true"/>
+          <dynamicDescription xmi:type="expression:Expression" xmi:id="_DDMV0284" name="" content="Moves the copied file to root folder" returnTypeFixed="true"/>
+          <stepSummary xmi:type="expression:Expression" xmi:id="_SSMV0285" name="" content="" returnTypeFixed="true"/>
+          <connectors xmi:type="process:Connector" xmi:id="_C_MOVE" name="Test Move" definitionId="gdrive-move" event="ON_ENTER" definitionVersion="1.0.0">
+            <configuration xmi:type="connectorconfiguration:ConnectorConfiguration" xmi:id="_CCMV0286" definitionId="gdrive-move" version="1.0.0" modelVersion="9">
+              <parameters xmi:type="connectorconfiguration:ConnectorParameter" xmi:id="_PMV0255" key="serviceAccountJson">
+                <expression xmi:type="expression:Expression" xmi:id="_PEMV0256" name="readServiceAccountJson" content="new File(serviceAccountJsonPath).text" interpreter="GROOVY" type="TYPE_READ_ONLY_SCRIPT" returnTypeFixed="true">
+                  <!-- referencedElements: declares dependency on serviceAccountJsonPath process variable for Groovy script context -->
+                  <referencedElements xmi:type="process:Data" xmi:id="_REF_SA_PATH" name="serviceAccountJsonPath" dataType="_P90ZURxyEfGG87QOs41BhQ"/>
+                </expression>
+              </parameters>
+              <parameters xmi:type="connectorconfiguration:ConnectorParameter" xmi:id="_PMV0257" key="impersonateUser">
+                <expression xmi:type="expression:Expression" xmi:id="_PEMV0258" content="" returnTypeFixed="true"/>
+              </parameters>
+              <parameters xmi:type="connectorconfiguration:ConnectorParameter" xmi:id="_PMV0259" key="connectTimeout">
+                <expression xmi:type="expression:Expression" xmi:id="_PEMV0260" content="" returnType="java.lang.Integer" returnTypeFixed="true"/>
+              </parameters>
+              <parameters xmi:type="connectorconfiguration:ConnectorParameter" xmi:id="_PMV0261" key="readTimeout">
+                <expression xmi:type="expression:Expression" xmi:id="_PEMV0262" content="" returnType="java.lang.Integer" returnTypeFixed="true"/>
+              </parameters>
+              <parameters xmi:type="connectorconfiguration:ConnectorParameter" xmi:id="_PMV0263" key="fileId">
+                <expression xmi:type="expression:Expression" xmi:id="_PEMV0264" name="gdriveCopiedFileId" content="gdriveCopiedFileId" type="TYPE_VARIABLE" returnTypeFixed="true">
+                  <referencedElements xmi:type="process:Data" xmi:id="_VRMV0265" name="gdriveCopiedFileId" dataType="_P90ZURxyEfGG87QOs41BhQ"/>
+                </expression>
+              </parameters>
+              <parameters xmi:type="connectorconfiguration:ConnectorParameter" xmi:id="_PMV0266" key="destinationFolderId">
+                <expression xmi:type="expression:Expression" xmi:id="_PEMV0267" name="gdriveSubFolderId" content="gdriveSubFolderId" type="TYPE_VARIABLE" returnTypeFixed="true">
+                  <referencedElements xmi:type="process:Data" xmi:id="_VRMV0268" name="gdriveSubFolderId" dataType="_P90ZURxyEfGG87QOs41BhQ"/>
+                </expression>
+              </parameters>
+              <parameters xmi:type="connectorconfiguration:ConnectorParameter" xmi:id="_PMV0269" key="removeFromCurrentParent">
+                <expression xmi:type="expression:Expression" xmi:id="_PEMV0270" name="true" content="true" returnType="java.lang.Boolean" returnTypeFixed="true"/>
+              </parameters>
+            </configuration>
+            <outputs xmi:type="expression:Operation" xmi:id="_OOMV0271">
+              <leftOperand xmi:type="expression:Expression" xmi:id="_OLMV0272" name="gdriveSuccess" content="gdriveSuccess" type="TYPE_VARIABLE" returnType="java.lang.Boolean">
+                <referencedElements xmi:type="process:Data" xmi:id="_OLRMV0273" name="gdriveSuccess" dataType="_P90ZTBxyEfGG87QOs41BhQ"/>
+              </leftOperand>
+              <rightOperand xmi:type="expression:Expression" xmi:id="_ORMV0274" name="success" content="success" type="CONNECTOR_OUTPUT_TYPE" returnType="java.lang.Boolean">
+                <referencedElements xmi:type="definition:Output" xmi:id="_ORRMV0275" name="success" type="java.lang.Boolean"/>
+              </rightOperand>
+              <operator xmi:type="expression:Operator" xmi:id="_OPMV0276" type="ASSIGNMENT"/>
+            </outputs>
+            <outputs xmi:type="expression:Operation" xmi:id="_OOMV0277">
+              <leftOperand xmi:type="expression:Expression" xmi:id="_OLMV0278" name="gdriveErrorMessage" content="gdriveErrorMessage" type="TYPE_VARIABLE">
+                <referencedElements xmi:type="process:Data" xmi:id="_OLRMV0279" name="gdriveErrorMessage" dataType="_P90ZURxyEfGG87QOs41BhQ"/>
+              </leftOperand>
+              <rightOperand xmi:type="expression:Expression" xmi:id="_ORMV0280" name="errorMessage" content="errorMessage" type="CONNECTOR_OUTPUT_TYPE">
+                <referencedElements xmi:type="definition:Output" xmi:id="_ORRMV0281" name="errorMessage" type="java.lang.String"/>
+              </rightOperand>
+              <operator xmi:type="expression:Operator" xmi:id="_OPMV0282" type="ASSIGNMENT"/>
+            </outputs>
+          </connectors>
+          <loopCondition xmi:type="expression:Expression" xmi:id="_LCMV0287" name="" content="" returnType="java.lang.Boolean" returnTypeFixed="true"/>
+          <loopMaximum xmi:type="expression:Expression" xmi:id="_LMMV0288" name="" content="" returnType="java.lang.Integer" returnTypeFixed="true"/>
+          <cardinalityExpression xmi:type="expression:Expression" xmi:id="_CEMV0289" name="" content="" returnType="java.lang.Integer" returnTypeFixed="true"/>
+          <iteratorExpression xmi:type="expression:Expression" xmi:id="_IEMV0290" name="multiInstanceIterator" content="multiInstanceIterator" type="MULTIINSTANCE_ITERATOR_TYPE" returnType="java.lang.Object" returnTypeFixed="true"/>
+          <completionCondition xmi:type="expression:Expression" xmi:id="_CCOMV0291" name="" content="" returnType="java.lang.Boolean" returnTypeFixed="true"/>
+        </elements>
+        <elements xmi:type="process:ServiceTask" xmi:id="_T_DOWNLOAD" name="GDrive Download" outgoing="_SF_05" incoming="_SF_04">
+          <dynamicLabel xmi:type="expression:Expression" xmi:id="_DLDL0337" name="" content="" returnTypeFixed="true"/>
+          <dynamicDescription xmi:type="expression:Expression" xmi:id="_DDDL0338" name="" content="Downloads the moved file content" returnTypeFixed="true"/>
+          <stepSummary xmi:type="expression:Expression" xmi:id="_SSDL0339" name="" content="" returnTypeFixed="true"/>
+          <connectors xmi:type="process:Connector" xmi:id="_C_DOWNLOAD" name="Test Download" definitionId="gdrive-download" event="ON_ENTER" definitionVersion="1.0.0">
+            <configuration xmi:type="connectorconfiguration:ConnectorConfiguration" xmi:id="_CCDL0340" definitionId="gdrive-download" version="1.0.0" modelVersion="9">
+              <parameters xmi:type="connectorconfiguration:ConnectorParameter" xmi:id="_PDL0292" key="serviceAccountJson">
+                <expression xmi:type="expression:Expression" xmi:id="_PEDL0293" name="readServiceAccountJson" content="new File(serviceAccountJsonPath).text" interpreter="GROOVY" type="TYPE_READ_ONLY_SCRIPT" returnTypeFixed="true">
+                  <!-- referencedElements: declares dependency on serviceAccountJsonPath process variable for Groovy script context -->
+                  <referencedElements xmi:type="process:Data" xmi:id="_REF_SA_PATH" name="serviceAccountJsonPath" dataType="_P90ZURxyEfGG87QOs41BhQ"/>
+                </expression>
+              </parameters>
+              <parameters xmi:type="connectorconfiguration:ConnectorParameter" xmi:id="_PDL0294" key="impersonateUser">
+                <expression xmi:type="expression:Expression" xmi:id="_PEDL0295" content="" returnTypeFixed="true"/>
+              </parameters>
+              <parameters xmi:type="connectorconfiguration:ConnectorParameter" xmi:id="_PDL0296" key="clientId">
+                <expression xmi:type="expression:Expression" xmi:id="_PEDL0297" returnTypeFixed="true"/>
+              </parameters>
+              <parameters xmi:type="connectorconfiguration:ConnectorParameter" xmi:id="_PDL0298" key="clientSecret">
+                <expression xmi:type="expression:Expression" xmi:id="_PEDL0299" returnTypeFixed="true"/>
+              </parameters>
+              <parameters xmi:type="connectorconfiguration:ConnectorParameter" xmi:id="_PDL0300" key="refreshToken">
+                <expression xmi:type="expression:Expression" xmi:id="_PEDL0301" returnTypeFixed="true"/>
+              </parameters>
+              <parameters xmi:type="connectorconfiguration:ConnectorParameter" xmi:id="_PDL0302" key="applicationName">
+                <expression xmi:type="expression:Expression" xmi:id="_PEDL0303" returnTypeFixed="true"/>
+              </parameters>
+              <parameters xmi:type="connectorconfiguration:ConnectorParameter" xmi:id="_PDL0304" key="connectTimeout">
+                <expression xmi:type="expression:Expression" xmi:id="_PEDL0305" content="" returnType="java.lang.Integer" returnTypeFixed="true"/>
+              </parameters>
+              <parameters xmi:type="connectorconfiguration:ConnectorParameter" xmi:id="_PDL0306" key="readTimeout">
+                <expression xmi:type="expression:Expression" xmi:id="_PEDL0307" content="" returnType="java.lang.Integer" returnTypeFixed="true"/>
+              </parameters>
+              <parameters xmi:type="connectorconfiguration:ConnectorParameter" xmi:id="_PDL0308" key="fileId">
+                <expression xmi:type="expression:Expression" xmi:id="_PEDL0309" name="gdriveFileId" content="gdriveFileId" type="TYPE_VARIABLE" returnTypeFixed="true">
+                  <referencedElements xmi:type="process:Data" xmi:id="_VRDL0310" name="gdriveFileId" dataType="_P90ZURxyEfGG87QOs41BhQ"/>
+                </expression>
+              </parameters>
+              <parameters xmi:type="connectorconfiguration:ConnectorParameter" xmi:id="_PDL0311" key="acknowledgeAbuse">
+                <expression xmi:type="expression:Expression" xmi:id="_PEDL0312" name="false" content="false" returnType="java.lang.Boolean" returnTypeFixed="true"/>
+              </parameters>
+            </configuration>
+            <outputs xmi:type="expression:Operation" xmi:id="_OODL0313">
+              <leftOperand xmi:type="expression:Expression" xmi:id="_OLDL0314" name="gdriveSuccess" content="gdriveSuccess" type="TYPE_VARIABLE" returnType="java.lang.Boolean">
+                <referencedElements xmi:type="process:Data" xmi:id="_OLRDL0315" name="gdriveSuccess" dataType="_P90ZTBxyEfGG87QOs41BhQ"/>
+              </leftOperand>
+              <rightOperand xmi:type="expression:Expression" xmi:id="_ORDL0316" name="success" content="success" type="CONNECTOR_OUTPUT_TYPE" returnType="java.lang.Boolean">
+                <referencedElements xmi:type="definition:Output" xmi:id="_ORRDL0317" name="success" type="java.lang.Boolean"/>
+              </rightOperand>
+              <operator xmi:type="expression:Operator" xmi:id="_OPDL0318" type="ASSIGNMENT"/>
+            </outputs>
+            <outputs xmi:type="expression:Operation" xmi:id="_OODL0319">
+              <leftOperand xmi:type="expression:Expression" xmi:id="_OLDL0320" name="gdriveErrorMessage" content="gdriveErrorMessage" type="TYPE_VARIABLE">
+                <referencedElements xmi:type="process:Data" xmi:id="_OLRDL0321" name="gdriveErrorMessage" dataType="_P90ZURxyEfGG87QOs41BhQ"/>
+              </leftOperand>
+              <rightOperand xmi:type="expression:Expression" xmi:id="_ORDL0322" name="errorMessage" content="errorMessage" type="CONNECTOR_OUTPUT_TYPE">
+                <referencedElements xmi:type="definition:Output" xmi:id="_ORRDL0323" name="errorMessage" type="java.lang.String"/>
+              </rightOperand>
+              <operator xmi:type="expression:Operator" xmi:id="_OPDL0324" type="ASSIGNMENT"/>
+            </outputs>
+            <outputs xmi:type="expression:Operation" xmi:id="_OODL0325">
+              <leftOperand xmi:type="expression:Expression" xmi:id="_OLDL0326" name="gdriveFileContent" content="gdriveFileContent" type="TYPE_VARIABLE">
+                <referencedElements xmi:type="process:Data" xmi:id="_OLRDL0327" name="gdriveFileContent" dataType="_P90ZURxyEfGG87QOs41BhQ"/>
+              </leftOperand>
+              <rightOperand xmi:type="expression:Expression" xmi:id="_ORDL0328" name="fileContent" content="fileContent" type="CONNECTOR_OUTPUT_TYPE">
+                <referencedElements xmi:type="definition:Output" xmi:id="_ORRDL0329" name="fileContent" type="java.lang.String"/>
+              </rightOperand>
+              <operator xmi:type="expression:Operator" xmi:id="_OPDL0330" type="ASSIGNMENT"/>
+            </outputs>
+            <outputs xmi:type="expression:Operation" xmi:id="_OODL0331">
+              <leftOperand xmi:type="expression:Expression" xmi:id="_OLDL0332" name="gdriveFileName" content="gdriveFileName" type="TYPE_VARIABLE">
+                <referencedElements xmi:type="process:Data" xmi:id="_OLRDL0333" name="gdriveFileName" dataType="_P90ZURxyEfGG87QOs41BhQ"/>
+              </leftOperand>
+              <rightOperand xmi:type="expression:Expression" xmi:id="_ORDL0334" name="fileName" content="fileName" type="CONNECTOR_OUTPUT_TYPE">
+                <referencedElements xmi:type="definition:Output" xmi:id="_ORRDL0335" name="fileName" type="java.lang.String"/>
+              </rightOperand>
+              <operator xmi:type="expression:Operator" xmi:id="_OPDL0336" type="ASSIGNMENT"/>
+            </outputs>
+          </connectors>
+          <loopCondition xmi:type="expression:Expression" xmi:id="_LCDL0341" name="" content="" returnType="java.lang.Boolean" returnTypeFixed="true"/>
+          <loopMaximum xmi:type="expression:Expression" xmi:id="_LMDL0342" name="" content="" returnType="java.lang.Integer" returnTypeFixed="true"/>
+          <cardinalityExpression xmi:type="expression:Expression" xmi:id="_CEDL0343" name="" content="" returnType="java.lang.Integer" returnTypeFixed="true"/>
+          <iteratorExpression xmi:type="expression:Expression" xmi:id="_IEDL0344" name="multiInstanceIterator" content="multiInstanceIterator" type="MULTIINSTANCE_ITERATOR_TYPE" returnType="java.lang.Object" returnTypeFixed="true"/>
+          <completionCondition xmi:type="expression:Expression" xmi:id="_CCODL0345" name="" content="" returnType="java.lang.Boolean" returnTypeFixed="true"/>
+        </elements>
+        <elements xmi:type="process:ServiceTask" xmi:id="_T_UPCONV" name="GDrive UploadConvert" outgoing="_SF_09" incoming="_SF_08">
+          <dynamicLabel xmi:type="expression:Expression" xmi:id="_DLUC1101" name="" content="" returnTypeFixed="true"/>
+          <dynamicDescription xmi:type="expression:Expression" xmi:id="_DDUC1102" name="" content="Uploads a text file and converts it to Google Docs format" returnTypeFixed="true"/>
+          <stepSummary xmi:type="expression:Expression" xmi:id="_SSUC1103" name="" content="" returnTypeFixed="true"/>
+          <connectors xmi:type="process:Connector" xmi:id="_C_UPCONV" name="Test UploadConvert" definitionId="gdrive-upload" event="ON_ENTER" definitionVersion="1.0.0">
+            <configuration xmi:type="connectorconfiguration:ConnectorConfiguration" xmi:id="_CCUC1104" definitionId="gdrive-upload" version="1.0.0" modelVersion="9">
+              <parameters xmi:type="connectorconfiguration:ConnectorParameter" xmi:id="_PUC1105" key="serviceAccountJson">
+                <expression xmi:type="expression:Expression" xmi:id="_PEUC1106" name="readServiceAccountJson" content="new File(serviceAccountJsonPath).text" interpreter="GROOVY" type="TYPE_READ_ONLY_SCRIPT" returnTypeFixed="true">
+                  <!-- referencedElements: declares dependency on serviceAccountJsonPath process variable for Groovy script context -->
+                  <referencedElements xmi:type="process:Data" xmi:id="_REF_SA_PATH" name="serviceAccountJsonPath" dataType="_P90ZURxyEfGG87QOs41BhQ"/>
+                </expression>
+              </parameters>
+              <parameters xmi:type="connectorconfiguration:ConnectorParameter" xmi:id="_PUC1107" key="impersonateUser">
+                <expression xmi:type="expression:Expression" xmi:id="_PEUC1108" content="" returnTypeFixed="true"/>
+              </parameters>
+              <parameters xmi:type="connectorconfiguration:ConnectorParameter" xmi:id="_PUC1109" key="clientId">
+                <expression xmi:type="expression:Expression" xmi:id="_PEUC1110" returnTypeFixed="true"/>
+              </parameters>
+              <parameters xmi:type="connectorconfiguration:ConnectorParameter" xmi:id="_PUC1111" key="clientSecret">
+                <expression xmi:type="expression:Expression" xmi:id="_PEUC1112" returnTypeFixed="true"/>
+              </parameters>
+              <parameters xmi:type="connectorconfiguration:ConnectorParameter" xmi:id="_PUC1113" key="refreshToken">
+                <expression xmi:type="expression:Expression" xmi:id="_PEUC1114" returnTypeFixed="true"/>
+              </parameters>
+              <parameters xmi:type="connectorconfiguration:ConnectorParameter" xmi:id="_PUC1115" key="applicationName">
+                <expression xmi:type="expression:Expression" xmi:id="_PEUC1116" returnTypeFixed="true"/>
+              </parameters>
+              <parameters xmi:type="connectorconfiguration:ConnectorParameter" xmi:id="_PUC1117" key="connectTimeout">
+                <expression xmi:type="expression:Expression" xmi:id="_PEUC1118" content="" returnType="java.lang.Integer" returnTypeFixed="true"/>
+              </parameters>
+              <parameters xmi:type="connectorconfiguration:ConnectorParameter" xmi:id="_PUC1119" key="readTimeout">
+                <expression xmi:type="expression:Expression" xmi:id="_PEUC1120" content="" returnType="java.lang.Integer" returnTypeFixed="true"/>
+              </parameters>
+              <parameters xmi:type="connectorconfiguration:ConnectorParameter" xmi:id="_PUC1121" key="fileName">
+                <expression xmi:type="expression:Expression" xmi:id="_PEUC1122" name="ConvertedDoc.txt" content="'ConvertedDoc.txt'" interpreter="GROOVY" type="TYPE_READ_ONLY_SCRIPT" returnTypeFixed="true"/>
+              </parameters>
+              <parameters xmi:type="connectorconfiguration:ConnectorParameter" xmi:id="_PUC1123" key="fileContent">
+                <expression xmi:type="expression:Expression" xmi:id="_PEUC1124" name="Converted content" content="'Document for Google Docs conversion test'.bytes.encodeBase64().toString()" interpreter="GROOVY" type="TYPE_READ_ONLY_SCRIPT" returnTypeFixed="true"/>
+              </parameters>
+              <parameters xmi:type="connectorconfiguration:ConnectorParameter" xmi:id="_PUC1125" key="mimeType">
+                <expression xmi:type="expression:Expression" xmi:id="_PEUC1126" name="text/plain" content="'text/plain'" interpreter="GROOVY" type="TYPE_READ_ONLY_SCRIPT" returnTypeFixed="true"/>
+              </parameters>
+              <parameters xmi:type="connectorconfiguration:ConnectorParameter" xmi:id="_PUC1127" key="description">
+                <expression xmi:type="expression:Expression" xmi:id="_PEUC1128" name="Upload with conversion" content="'Upload with Google Docs conversion'" interpreter="GROOVY" type="TYPE_READ_ONLY_SCRIPT" returnTypeFixed="true"/>
+              </parameters>
+              <parameters xmi:type="connectorconfiguration:ConnectorParameter" xmi:id="_PUC1129" key="customProperties">
+                <expression xmi:type="expression:Expression" xmi:id="_PEUC1130" content="" returnType="java.util.Map" returnTypeFixed="true"/>
+              </parameters>
+              <parameters xmi:type="connectorconfiguration:ConnectorParameter" xmi:id="_PUC1131" key="convertToGoogleFormat">
+                <expression xmi:type="expression:Expression" xmi:id="_PEUC1132" name="true" content="true" returnType="java.lang.Boolean" returnTypeFixed="true"/>
+              </parameters>
+              <parameters xmi:type="connectorconfiguration:ConnectorParameter" xmi:id="_PUC1133" key="parentFolderId">
+                <expression xmi:type="expression:Expression" xmi:id="_PEUC1134" name="gdriveFolderId" content="gdriveFolderId" type="TYPE_VARIABLE" returnTypeFixed="true">
+                  <referencedElements xmi:type="process:Data" xmi:id="_VRUC1135" name="gdriveFolderId" dataType="_P90ZURxyEfGG87QOs41BhQ"/>
+                </expression>
+              </parameters>
+            </configuration>
+            <outputs xmi:type="expression:Operation" xmi:id="_OOUC1136">
+              <leftOperand xmi:type="expression:Expression" xmi:id="_OLUC1137" name="gdriveSuccess" content="gdriveSuccess" type="TYPE_VARIABLE" returnType="java.lang.Boolean">
+                <referencedElements xmi:type="process:Data" xmi:id="_OLRUC1138" name="gdriveSuccess" dataType="_P90ZTBxyEfGG87QOs41BhQ"/>
+              </leftOperand>
+              <rightOperand xmi:type="expression:Expression" xmi:id="_ORUC1139" name="success" content="success" type="CONNECTOR_OUTPUT_TYPE" returnType="java.lang.Boolean">
+                <referencedElements xmi:type="definition:Output" xmi:id="_ORRUC1140" name="success" type="java.lang.Boolean"/>
+              </rightOperand>
+              <operator xmi:type="expression:Operator" xmi:id="_OPUC1141" type="ASSIGNMENT"/>
+            </outputs>
+            <outputs xmi:type="expression:Operation" xmi:id="_OOUC1142">
+              <leftOperand xmi:type="expression:Expression" xmi:id="_OLUC1143" name="gdriveErrorMessage" content="gdriveErrorMessage" type="TYPE_VARIABLE">
+                <referencedElements xmi:type="process:Data" xmi:id="_OLRUC1144" name="gdriveErrorMessage" dataType="_P90ZURxyEfGG87QOs41BhQ"/>
+              </leftOperand>
+              <rightOperand xmi:type="expression:Expression" xmi:id="_ORUC1145" name="errorMessage" content="errorMessage" type="CONNECTOR_OUTPUT_TYPE">
+                <referencedElements xmi:type="definition:Output" xmi:id="_ORRUC1146" name="errorMessage" type="java.lang.String"/>
+              </rightOperand>
+              <operator xmi:type="expression:Operator" xmi:id="_OPUC1147" type="ASSIGNMENT"/>
+            </outputs>
+            <outputs xmi:type="expression:Operation" xmi:id="_OOUC1148">
+              <leftOperand xmi:type="expression:Expression" xmi:id="_OLUC1149" name="gdriveGoogleDocId" content="gdriveGoogleDocId" type="TYPE_VARIABLE">
+                <referencedElements xmi:type="process:Data" xmi:id="_OLRUC1150" name="gdriveGoogleDocId" dataType="_P90ZURxyEfGG87QOs41BhQ"/>
+              </leftOperand>
+              <rightOperand xmi:type="expression:Expression" xmi:id="_ORUC1151" name="fileId" content="fileId" type="CONNECTOR_OUTPUT_TYPE">
+                <referencedElements xmi:type="definition:Output" xmi:id="_ORRUC1152" name="fileId" type="java.lang.String"/>
+              </rightOperand>
+              <operator xmi:type="expression:Operator" xmi:id="_OPUC1153" type="ASSIGNMENT"/>
+            </outputs>
+            <outputs xmi:type="expression:Operation" xmi:id="_OOUC1154">
+              <leftOperand xmi:type="expression:Expression" xmi:id="_OLUC1155" name="gdriveFileName" content="gdriveFileName" type="TYPE_VARIABLE">
+                <referencedElements xmi:type="process:Data" xmi:id="_OLRUC1156" name="gdriveFileName" dataType="_P90ZURxyEfGG87QOs41BhQ"/>
+              </leftOperand>
+              <rightOperand xmi:type="expression:Expression" xmi:id="_ORUC1157" name="fileName" content="fileName" type="CONNECTOR_OUTPUT_TYPE">
+                <referencedElements xmi:type="definition:Output" xmi:id="_ORRUC1158" name="fileName" type="java.lang.String"/>
+              </rightOperand>
+              <operator xmi:type="expression:Operator" xmi:id="_OPUC1159" type="ASSIGNMENT"/>
+            </outputs>
+            <outputs xmi:type="expression:Operation" xmi:id="_OOUC1160">
+              <leftOperand xmi:type="expression:Expression" xmi:id="_OLUC1161" name="gdriveWebViewLink" content="gdriveWebViewLink" type="TYPE_VARIABLE">
+                <referencedElements xmi:type="process:Data" xmi:id="_OLRUC1162" name="gdriveWebViewLink" dataType="_P90ZURxyEfGG87QOs41BhQ"/>
+              </leftOperand>
+              <rightOperand xmi:type="expression:Expression" xmi:id="_ORUC1163" name="webViewLink" content="webViewLink" type="CONNECTOR_OUTPUT_TYPE">
+                <referencedElements xmi:type="definition:Output" xmi:id="_ORRUC1164" name="webViewLink" type="java.lang.String"/>
+              </rightOperand>
+              <operator xmi:type="expression:Operator" xmi:id="_OPUC1165" type="ASSIGNMENT"/>
+            </outputs>
+          </connectors>
+          <loopCondition xmi:type="expression:Expression" xmi:id="_LCUC1166" name="" content="" returnType="java.lang.Boolean" returnTypeFixed="true"/>
+          <loopMaximum xmi:type="expression:Expression" xmi:id="_LMUC1167" name="" content="" returnType="java.lang.Integer" returnTypeFixed="true"/>
+          <cardinalityExpression xmi:type="expression:Expression" xmi:id="_CEUC1168" name="" content="" returnType="java.lang.Integer" returnTypeFixed="true"/>
+          <iteratorExpression xmi:type="expression:Expression" xmi:id="_IEUC1169" name="multiInstanceIterator" content="multiInstanceIterator" type="MULTIINSTANCE_ITERATOR_TYPE" returnType="java.lang.Object" returnTypeFixed="true"/>
+          <completionCondition xmi:type="expression:Expression" xmi:id="_CCOUC1170" name="" content="" returnType="java.lang.Boolean" returnTypeFixed="true"/>
+        </elements>
+        <elements xmi:type="process:ServiceTask" xmi:id="_T_EXPORT" name="GDrive Export" outgoing="_SF_10" incoming="_SF_09">
+          <dynamicLabel xmi:type="expression:Expression" xmi:id="_DLEX0383" name="" content="" returnTypeFixed="true"/>
+          <dynamicDescription xmi:type="expression:Expression" xmi:id="_DDEX0384" name="" content="Exports a Google Workspace file to PDF" returnTypeFixed="true"/>
+          <stepSummary xmi:type="expression:Expression" xmi:id="_SSEX0385" name="" content="" returnTypeFixed="true"/>
+          <connectors xmi:type="process:Connector" xmi:id="_C_EXPORT" name="Test Export" definitionId="gdrive-export" event="ON_ENTER" definitionVersion="1.0.0">
+            <configuration xmi:type="connectorconfiguration:ConnectorConfiguration" xmi:id="_CCEX0386" definitionId="gdrive-export" version="1.0.0" modelVersion="9">
+              <parameters xmi:type="connectorconfiguration:ConnectorParameter" xmi:id="_PEX0346" key="serviceAccountJson">
+                <expression xmi:type="expression:Expression" xmi:id="_PEEX0347" name="readServiceAccountJson" content="new File(serviceAccountJsonPath).text" interpreter="GROOVY" type="TYPE_READ_ONLY_SCRIPT" returnTypeFixed="true">
+                  <!-- referencedElements: declares dependency on serviceAccountJsonPath process variable for Groovy script context -->
+                  <referencedElements xmi:type="process:Data" xmi:id="_REF_SA_PATH" name="serviceAccountJsonPath" dataType="_P90ZURxyEfGG87QOs41BhQ"/>
+                </expression>
+              </parameters>
+              <parameters xmi:type="connectorconfiguration:ConnectorParameter" xmi:id="_PEX0348" key="impersonateUser">
+                <expression xmi:type="expression:Expression" xmi:id="_PEEX0349" content="" returnTypeFixed="true"/>
+              </parameters>
+              <parameters xmi:type="connectorconfiguration:ConnectorParameter" xmi:id="_PEX0350" key="connectTimeout">
+                <expression xmi:type="expression:Expression" xmi:id="_PEEX0351" content="" returnType="java.lang.Integer" returnTypeFixed="true"/>
+              </parameters>
+              <parameters xmi:type="connectorconfiguration:ConnectorParameter" xmi:id="_PEX0352" key="readTimeout">
+                <expression xmi:type="expression:Expression" xmi:id="_PEEX0353" content="" returnType="java.lang.Integer" returnTypeFixed="true"/>
+              </parameters>
+              <parameters xmi:type="connectorconfiguration:ConnectorParameter" xmi:id="_PEX0354" key="fileId">
+                <expression xmi:type="expression:Expression" xmi:id="_PEEX0355" name="gdriveGoogleDocId" content="gdriveGoogleDocId" type="TYPE_VARIABLE" returnTypeFixed="true">
+                  <referencedElements xmi:type="process:Data" xmi:id="_VREX0356" name="gdriveGoogleDocId" dataType="_P90ZURxyEfGG87QOs41BhQ"/>
+                </expression>
+              </parameters>
+              <parameters xmi:type="connectorconfiguration:ConnectorParameter" xmi:id="_PEX0357" key="exportMimeType">
+                <expression xmi:type="expression:Expression" xmi:id="_PEEX0358" name="application/pdf" content="'application/pdf'" interpreter="GROOVY" type="TYPE_READ_ONLY_SCRIPT" returnTypeFixed="true"/>
+              </parameters>
+            </configuration>
+            <outputs xmi:type="expression:Operation" xmi:id="_OOEX0359">
+              <leftOperand xmi:type="expression:Expression" xmi:id="_OLEX0360" name="gdriveSuccess" content="gdriveSuccess" type="TYPE_VARIABLE" returnType="java.lang.Boolean">
+                <referencedElements xmi:type="process:Data" xmi:id="_OLREX0361" name="gdriveSuccess" dataType="_P90ZTBxyEfGG87QOs41BhQ"/>
+              </leftOperand>
+              <rightOperand xmi:type="expression:Expression" xmi:id="_OREX0362" name="success" content="success" type="CONNECTOR_OUTPUT_TYPE" returnType="java.lang.Boolean">
+                <referencedElements xmi:type="definition:Output" xmi:id="_ORREX0363" name="success" type="java.lang.Boolean"/>
+              </rightOperand>
+              <operator xmi:type="expression:Operator" xmi:id="_OPEX0364" type="ASSIGNMENT"/>
+            </outputs>
+            <outputs xmi:type="expression:Operation" xmi:id="_OOEX0365">
+              <leftOperand xmi:type="expression:Expression" xmi:id="_OLEX0366" name="gdriveErrorMessage" content="gdriveErrorMessage" type="TYPE_VARIABLE">
+                <referencedElements xmi:type="process:Data" xmi:id="_OLREX0367" name="gdriveErrorMessage" dataType="_P90ZURxyEfGG87QOs41BhQ"/>
+              </leftOperand>
+              <rightOperand xmi:type="expression:Expression" xmi:id="_OREX0368" name="errorMessage" content="errorMessage" type="CONNECTOR_OUTPUT_TYPE">
+                <referencedElements xmi:type="definition:Output" xmi:id="_ORREX0369" name="errorMessage" type="java.lang.String"/>
+              </rightOperand>
+              <operator xmi:type="expression:Operator" xmi:id="_OPEX0370" type="ASSIGNMENT"/>
+            </outputs>
+            <outputs xmi:type="expression:Operation" xmi:id="_OOEX0371">
+              <leftOperand xmi:type="expression:Expression" xmi:id="_OLEX0372" name="gdriveFileContent" content="gdriveFileContent" type="TYPE_VARIABLE">
+                <referencedElements xmi:type="process:Data" xmi:id="_OLREX0373" name="gdriveFileContent" dataType="_P90ZURxyEfGG87QOs41BhQ"/>
+              </leftOperand>
+              <rightOperand xmi:type="expression:Expression" xmi:id="_OREX0374" name="fileContent" content="fileContent" type="CONNECTOR_OUTPUT_TYPE">
+                <referencedElements xmi:type="definition:Output" xmi:id="_ORREX0375" name="fileContent" type="java.lang.String"/>
+              </rightOperand>
+              <operator xmi:type="expression:Operator" xmi:id="_OPEX0376" type="ASSIGNMENT"/>
+            </outputs>
+            <outputs xmi:type="expression:Operation" xmi:id="_OOEX0377">
+              <leftOperand xmi:type="expression:Expression" xmi:id="_OLEX0378" name="gdriveFileName" content="gdriveFileName" type="TYPE_VARIABLE">
+                <referencedElements xmi:type="process:Data" xmi:id="_OLREX0379" name="gdriveFileName" dataType="_P90ZURxyEfGG87QOs41BhQ"/>
+              </leftOperand>
+              <rightOperand xmi:type="expression:Expression" xmi:id="_OREX0380" name="fileName" content="fileName" type="CONNECTOR_OUTPUT_TYPE">
+                <referencedElements xmi:type="definition:Output" xmi:id="_ORREX0381" name="fileName" type="java.lang.String"/>
+              </rightOperand>
+              <operator xmi:type="expression:Operator" xmi:id="_OPEX0382" type="ASSIGNMENT"/>
+            </outputs>
+          </connectors>
+          <loopCondition xmi:type="expression:Expression" xmi:id="_LCEX0387" name="" content="" returnType="java.lang.Boolean" returnTypeFixed="true"/>
+          <loopMaximum xmi:type="expression:Expression" xmi:id="_LMEX0388" name="" content="" returnType="java.lang.Integer" returnTypeFixed="true"/>
+          <cardinalityExpression xmi:type="expression:Expression" xmi:id="_CEEX0389" name="" content="" returnType="java.lang.Integer" returnTypeFixed="true"/>
+          <iteratorExpression xmi:type="expression:Expression" xmi:id="_IEEX0390" name="multiInstanceIterator" content="multiInstanceIterator" type="MULTIINSTANCE_ITERATOR_TYPE" returnType="java.lang.Object" returnTypeFixed="true"/>
+          <completionCondition xmi:type="expression:Expression" xmi:id="_CCOEX0391" name="" content="" returnType="java.lang.Boolean" returnTypeFixed="true"/>
+        </elements>
+        <elements xmi:type="process:ServiceTask" xmi:id="_T_DELETE" name="GDrive Delete" outgoing="_SF_11" incoming="_SF_10">
+          <dynamicLabel xmi:type="expression:Expression" xmi:id="_DLDE0417" name="" content="" returnTypeFixed="true"/>
+          <dynamicDescription xmi:type="expression:Expression" xmi:id="_DDDE0418" name="" content="Deletes the test folder and its contents" returnTypeFixed="true"/>
+          <stepSummary xmi:type="expression:Expression" xmi:id="_SSDE0419" name="" content="" returnTypeFixed="true"/>
+          <connectors xmi:type="process:Connector" xmi:id="_C_DELETE" name="Test Delete" definitionId="gdrive-delete" event="ON_ENTER" definitionVersion="1.0.0">
+            <configuration xmi:type="connectorconfiguration:ConnectorConfiguration" xmi:id="_CCDE0420" definitionId="gdrive-delete" version="1.0.0" modelVersion="9">
+              <parameters xmi:type="connectorconfiguration:ConnectorParameter" xmi:id="_PDE0392" key="serviceAccountJson">
+                <expression xmi:type="expression:Expression" xmi:id="_PEDE0393" name="readServiceAccountJson" content="new File(serviceAccountJsonPath).text" interpreter="GROOVY" type="TYPE_READ_ONLY_SCRIPT" returnTypeFixed="true">
+                  <!-- referencedElements: declares dependency on serviceAccountJsonPath process variable for Groovy script context -->
+                  <referencedElements xmi:type="process:Data" xmi:id="_REF_SA_PATH" name="serviceAccountJsonPath" dataType="_P90ZURxyEfGG87QOs41BhQ"/>
+                </expression>
+              </parameters>
+              <parameters xmi:type="connectorconfiguration:ConnectorParameter" xmi:id="_PDE0394" key="impersonateUser">
+                <expression xmi:type="expression:Expression" xmi:id="_PEDE0395" content="" returnTypeFixed="true"/>
+              </parameters>
+              <parameters xmi:type="connectorconfiguration:ConnectorParameter" xmi:id="_PDE0396" key="connectTimeout">
+                <expression xmi:type="expression:Expression" xmi:id="_PEDE0397" content="" returnType="java.lang.Integer" returnTypeFixed="true"/>
+              </parameters>
+              <parameters xmi:type="connectorconfiguration:ConnectorParameter" xmi:id="_PDE0398" key="readTimeout">
+                <expression xmi:type="expression:Expression" xmi:id="_PEDE0399" content="" returnType="java.lang.Integer" returnTypeFixed="true"/>
+              </parameters>
+              <parameters xmi:type="connectorconfiguration:ConnectorParameter" xmi:id="_PDE0400" key="fileId">
+                <expression xmi:type="expression:Expression" xmi:id="_PEDE0401" name="gdriveFolderId" content="gdriveFolderId" type="TYPE_VARIABLE" returnTypeFixed="true">
+                  <referencedElements xmi:type="process:Data" xmi:id="_VRDE0402" name="gdriveFolderId" dataType="_P90ZURxyEfGG87QOs41BhQ"/>
+                </expression>
+              </parameters>
+              <parameters xmi:type="connectorconfiguration:ConnectorParameter" xmi:id="_PDE0403" key="permanent">
+                <expression xmi:type="expression:Expression" xmi:id="_PEDE0404" name="false" content="false" returnType="java.lang.Boolean" returnTypeFixed="true"/>
+              </parameters>
+            </configuration>
+            <outputs xmi:type="expression:Operation" xmi:id="_OODE0405">
+              <leftOperand xmi:type="expression:Expression" xmi:id="_OLDE0406" name="gdriveSuccess" content="gdriveSuccess" type="TYPE_VARIABLE" returnType="java.lang.Boolean">
+                <referencedElements xmi:type="process:Data" xmi:id="_OLRDE0407" name="gdriveSuccess" dataType="_P90ZTBxyEfGG87QOs41BhQ"/>
+              </leftOperand>
+              <rightOperand xmi:type="expression:Expression" xmi:id="_ORDE0408" name="success" content="success" type="CONNECTOR_OUTPUT_TYPE" returnType="java.lang.Boolean">
+                <referencedElements xmi:type="definition:Output" xmi:id="_ORRDE0409" name="success" type="java.lang.Boolean"/>
+              </rightOperand>
+              <operator xmi:type="expression:Operator" xmi:id="_OPDE0410" type="ASSIGNMENT"/>
+            </outputs>
+            <outputs xmi:type="expression:Operation" xmi:id="_OODE0411">
+              <leftOperand xmi:type="expression:Expression" xmi:id="_OLDE0412" name="gdriveErrorMessage" content="gdriveErrorMessage" type="TYPE_VARIABLE">
+                <referencedElements xmi:type="process:Data" xmi:id="_OLRDE0413" name="gdriveErrorMessage" dataType="_P90ZURxyEfGG87QOs41BhQ"/>
+              </leftOperand>
+              <rightOperand xmi:type="expression:Expression" xmi:id="_ORDE0414" name="errorMessage" content="errorMessage" type="CONNECTOR_OUTPUT_TYPE">
+                <referencedElements xmi:type="definition:Output" xmi:id="_ORRDE0415" name="errorMessage" type="java.lang.String"/>
+              </rightOperand>
+              <operator xmi:type="expression:Operator" xmi:id="_OPDE0416" type="ASSIGNMENT"/>
+            </outputs>
+          </connectors>
+          <loopCondition xmi:type="expression:Expression" xmi:id="_LCDE0421" name="" content="" returnType="java.lang.Boolean" returnTypeFixed="true"/>
+          <loopMaximum xmi:type="expression:Expression" xmi:id="_LMDE0422" name="" content="" returnType="java.lang.Integer" returnTypeFixed="true"/>
+          <cardinalityExpression xmi:type="expression:Expression" xmi:id="_CEDE0423" name="" content="" returnType="java.lang.Integer" returnTypeFixed="true"/>
+          <iteratorExpression xmi:type="expression:Expression" xmi:id="_IEDE0424" name="multiInstanceIterator" content="multiInstanceIterator" type="MULTIINSTANCE_ITERATOR_TYPE" returnType="java.lang.Object" returnTypeFixed="true"/>
+          <completionCondition xmi:type="expression:Expression" xmi:id="_CCODE0425" name="" content="" returnType="java.lang.Boolean" returnTypeFixed="true"/>
+        </elements>
+      </elements>
+      <data xmi:type="process:Data" xmi:id="_GDV_success01" name="gdriveSuccess" dataType="_P90ZTBxyEfGG87QOs41BhQ">
+        <defaultValue xmi:type="expression:Expression" xmi:id="_DV0426" name="" content="" returnType="java.lang.Boolean" returnTypeFixed="true"/>
+      </data>
+      <data xmi:type="process:Data" xmi:id="_GDV_errMsg01" name="gdriveErrorMessage" dataType="_P90ZURxyEfGG87QOs41BhQ">
+        <defaultValue xmi:type="expression:Expression" xmi:id="_DV0427" name="" content="" returnTypeFixed="true"/>
+      </data>
+      <data xmi:type="process:JavaObjectData" xmi:id="_GDV_files01" name="gdriveFiles" dataType="_P90ZUhxyEfGG87QOs41BhQ" className="java.util.List">
+        <defaultValue xmi:type="expression:Expression" xmi:id="_DV0428" name="" content="" returnType="java.util.List" returnTypeFixed="true"/>
+      </data>
+      <data xmi:type="process:Data" xmi:id="_GDV_total01" name="gdriveTotalResults" dataType="_P90ZThxyEfGG87QOs41BhQ">
+        <defaultValue xmi:type="expression:Expression" xmi:id="_DV0429" name="" content="" returnType="java.lang.Integer" returnTypeFixed="true"/>
+      </data>
+      <data xmi:type="process:Data" xmi:id="_GDV_token01" name="gdriveNextPageToken" dataType="_P90ZURxyEfGG87QOs41BhQ">
+        <defaultValue xmi:type="expression:Expression" xmi:id="_DV0430" name="" content="" returnTypeFixed="true"/>
+      </data>
+      <data xmi:type="process:Data" xmi:id="_GDV_fileId01" name="gdriveFileId" dataType="_P90ZURxyEfGG87QOs41BhQ">
+        <defaultValue xmi:type="expression:Expression" xmi:id="_DV0431" name="" content="" returnTypeFixed="true"/>
+      </data>
+      <data xmi:type="process:Data" xmi:id="_GDV_folderId01" name="gdriveFolderId" dataType="_P90ZURxyEfGG87QOs41BhQ">
+        <defaultValue xmi:type="expression:Expression" xmi:id="_DV0432" name="" content="" returnTypeFixed="true"/>
+      </data>
+      <data xmi:type="process:Data" xmi:id="_GDV_copiedFileId01" name="gdriveCopiedFileId" dataType="_P90ZURxyEfGG87QOs41BhQ">
+        <defaultValue xmi:type="expression:Expression" xmi:id="_DV0433" name="" content="" returnTypeFixed="true"/>
+      </data>
+      <data xmi:type="process:Data" xmi:id="_GDV_fileContent01" name="gdriveFileContent" dataType="_P90ZURxyEfGG87QOs41BhQ">
+        <defaultValue xmi:type="expression:Expression" xmi:id="_DV0434" name="" content="" returnTypeFixed="true"/>
+      </data>
+      <data xmi:type="process:Data" xmi:id="_GDV_fileName01" name="gdriveFileName" dataType="_P90ZURxyEfGG87QOs41BhQ">
+        <defaultValue xmi:type="expression:Expression" xmi:id="_DV0435" name="" content="" returnTypeFixed="true"/>
+      </data>
+      <data xmi:type="process:Data" xmi:id="_GDV_webViewLink01" name="gdriveWebViewLink" dataType="_P90ZURxyEfGG87QOs41BhQ">
+        <defaultValue xmi:type="expression:Expression" xmi:id="_DV0436" name="" content="" returnTypeFixed="true"/>
+      </data>
+      <data xmi:type="process:Data" xmi:id="_GDV_subFolderId01" name="gdriveSubFolderId" dataType="_P90ZURxyEfGG87QOs41BhQ">
+        <defaultValue xmi:type="expression:Expression" xmi:id="_DV1201" name="" content="" returnTypeFixed="true"/>
+      </data>
+      <data xmi:type="process:Data" xmi:id="_GDV_googleDocId01" name="gdriveGoogleDocId" dataType="_P90ZURxyEfGG87QOs41BhQ">
+        <defaultValue xmi:type="expression:Expression" xmi:id="_DV1202" name="" content="" returnTypeFixed="true"/>
+      </data>
+      <data xmi:type="process:Data" xmi:id="_GDV_saJsonPath01" name="serviceAccountJsonPath" dataType="_P90ZURxyEfGG87QOs41BhQ">
+        <defaultValue xmi:type="expression:Expression" xmi:id="_DV0437b" name="default-sa-path" content="C:/BonitaStudioSubscription-2025.2-u3/bonitasoft-conectores-06171232f32e.json" returnTypeFixed="true"/>
+      </data>
+      <formMapping xmi:type="process:FormMapping" xmi:id="_P90ZNBxyEfGG87QOs41BhQ" type="NONE">
+        <targetForm xmi:type="expression:Expression" xmi:id="_P90ZNRxyEfGG87QOs41BhQ" name="" content="" type="FORM_REFERENCE_TYPE" returnTypeFixed="true"/>
+      </formMapping>
+      <overviewFormMapping xmi:type="process:FormMapping" xmi:id="_P90ZNhxyEfGG87QOs41BhQ" type="NONE">
+        <targetForm xmi:type="expression:Expression" xmi:id="_P90ZNxxyEfGG87QOs41BhQ" name="" content="" type="FORM_REFERENCE_TYPE" returnTypeFixed="true"/>
+      </overviewFormMapping>
+      <connections xmi:type="process:SequenceFlow" xmi:id="_SF_01" target="_T_CFOLDER" source="_P90ZIxxyEfGG87QOs41BhQ">
+        <decisionTable xmi:type="decision:DecisionTable" xmi:id="_DT0437"/>
+        <condition xmi:type="expression:Expression" xmi:id="_CN0438" name="" returnType="java.lang.Boolean" returnTypeFixed="true"/>
+      </connections>
+      <connections xmi:type="process:SequenceFlow" xmi:id="_SF_02" target="_T_UPLOAD" source="_T_CFOLDER">
+        <decisionTable xmi:type="decision:DecisionTable" xmi:id="_DT0441"/>
+        <condition xmi:type="expression:Expression" xmi:id="_CN0442" name="" returnType="java.lang.Boolean" returnTypeFixed="true"/>
+      </connections>
+      <connections xmi:type="process:SequenceFlow" xmi:id="_SF_03" target="_T_SEARCH" source="_T_UPLOAD">
+        <decisionTable xmi:type="decision:DecisionTable" xmi:id="_DT0443"/>
+        <condition xmi:type="expression:Expression" xmi:id="_CN0444" name="" returnType="java.lang.Boolean" returnTypeFixed="true"/>
+      </connections>
+      <connections xmi:type="process:SequenceFlow" xmi:id="_SF_04" target="_T_DOWNLOAD" source="_T_SEARCH">
+        <decisionTable xmi:type="decision:DecisionTable" xmi:id="_DT0445"/>
+        <condition xmi:type="expression:Expression" xmi:id="_CN0446" name="" returnType="java.lang.Boolean" returnTypeFixed="true"/>
+      </connections>
+      <connections xmi:type="process:SequenceFlow" xmi:id="_SF_05" target="_T_COPY" source="_T_DOWNLOAD">
+        <decisionTable xmi:type="decision:DecisionTable" xmi:id="_DT0447"/>
+        <condition xmi:type="expression:Expression" xmi:id="_CN0448" name="" returnType="java.lang.Boolean" returnTypeFixed="true"/>
+      </connections>
+      <connections xmi:type="process:SequenceFlow" xmi:id="_SF_06" target="_T_CARCHIVE" source="_T_COPY">
+        <decisionTable xmi:type="decision:DecisionTable" xmi:id="_DT0449"/>
+        <condition xmi:type="expression:Expression" xmi:id="_CN0450" name="" returnType="java.lang.Boolean" returnTypeFixed="true"/>
+      </connections>
+      <connections xmi:type="process:SequenceFlow" xmi:id="_SF_07" target="_T_MOVE" source="_T_CARCHIVE">
+        <decisionTable xmi:type="decision:DecisionTable" xmi:id="_DT0451"/>
+        <condition xmi:type="expression:Expression" xmi:id="_CN0452" name="" returnType="java.lang.Boolean" returnTypeFixed="true"/>
+      </connections>
+      <connections xmi:type="process:SequenceFlow" xmi:id="_SF_08" target="_T_UPCONV" source="_T_MOVE">
+        <decisionTable xmi:type="decision:DecisionTable" xmi:id="_DT0453"/>
+        <condition xmi:type="expression:Expression" xmi:id="_CN0454" name="" returnType="java.lang.Boolean" returnTypeFixed="true"/>
+      </connections>
+      <connections xmi:type="process:SequenceFlow" xmi:id="_SF_09" target="_T_EXPORT" source="_T_UPCONV">
+        <decisionTable xmi:type="decision:DecisionTable" xmi:id="_DT1301"/>
+        <condition xmi:type="expression:Expression" xmi:id="_CN1302" name="" returnType="java.lang.Boolean" returnTypeFixed="true"/>
+      </connections>
+      <connections xmi:type="process:SequenceFlow" xmi:id="_SF_10" target="_T_DELETE" source="_T_EXPORT">
+        <decisionTable xmi:type="decision:DecisionTable" xmi:id="_DT1303"/>
+        <condition xmi:type="expression:Expression" xmi:id="_CN1304" name="" returnType="java.lang.Boolean" returnTypeFixed="true"/>
+      </connections>
+      <connections xmi:type="process:SequenceFlow" xmi:id="_SF_11" target="_5cCXMBzSEfGG87QOs41BhQ" source="_T_DELETE">
+        <decisionTable xmi:type="decision:DecisionTable" xmi:id="_DT1305"/>
+        <condition xmi:type="expression:Expression" xmi:id="_CN1306" name="" returnType="java.lang.Boolean" returnTypeFixed="true"/>
+      </connections>
+      <actors xmi:type="process:Actor" xmi:id="_P90ZOxxyEfGG87QOs41BhQ" documentation="This is an example of actor that is mapped to any ACME users" name="Automation actor" initiator="true"/>
+      <configurations xmi:type="configuration:Configuration" xmi:id="_CFG_01" name="presales" version="9" username="william.jobs">
+        <actorMappings xmi:type="actormapping:ActorMappingsType" xmi:id="_CFG_AM01">
+          <actorMapping xmi:type="actormapping:ActorMapping" xmi:id="_CFG_AM02" name="Automation actor">
+            <groups xmi:type="actormapping:Groups" xmi:id="_CFG_AM03"><group>/acme</group></groups>
+            <memberships xmi:type="actormapping:Membership" xmi:id="_CFG_AM04"/>
+            <roles xmi:type="actormapping:Roles" xmi:id="_CFG_AM05"/>
+            <users xmi:type="actormapping:Users" xmi:id="_CFG_AM06"/>
+          </actorMapping>
+        </actorMappings>
+        <definitionMappings xmi:type="configuration:DefinitionMapping" xmi:id="_CFG_DM_search" type="CONNECTOR" definitionId="gdrive-search" definitionVersion="1.0.0" implementationId="gdrive-search-impl" implementationVersion="1.0.0-SNAPSHOT"/>
+        <definitionMappings xmi:type="configuration:DefinitionMapping" xmi:id="_CFG_DM_cfolder" type="CONNECTOR" definitionId="gdrive-create-folder" definitionVersion="1.0.0" implementationId="gdrive-create-folder-impl" implementationVersion="1.0.0-SNAPSHOT"/>
+        <definitionMappings xmi:type="configuration:DefinitionMapping" xmi:id="_CFG_DM_upload" type="CONNECTOR" definitionId="gdrive-upload" definitionVersion="1.0.0" implementationId="gdrive-upload-impl" implementationVersion="1.0.0-SNAPSHOT"/>
+        <definitionMappings xmi:type="configuration:DefinitionMapping" xmi:id="_CFG_DM_copy" type="CONNECTOR" definitionId="gdrive-copy" definitionVersion="1.0.0" implementationId="gdrive-copy-impl" implementationVersion="1.0.0-SNAPSHOT"/>
+        <definitionMappings xmi:type="configuration:DefinitionMapping" xmi:id="_CFG_DM_move" type="CONNECTOR" definitionId="gdrive-move" definitionVersion="1.0.0" implementationId="gdrive-move-impl" implementationVersion="1.0.0-SNAPSHOT"/>
+        <definitionMappings xmi:type="configuration:DefinitionMapping" xmi:id="_CFG_DM_download" type="CONNECTOR" definitionId="gdrive-download" definitionVersion="1.0.0" implementationId="gdrive-download-impl" implementationVersion="1.0.0-SNAPSHOT"/>
+        <definitionMappings xmi:type="configuration:DefinitionMapping" xmi:id="_CFG_DM_export" type="CONNECTOR" definitionId="gdrive-export" definitionVersion="1.0.0" implementationId="gdrive-export-impl" implementationVersion="1.0.0-SNAPSHOT"/>
+        <definitionMappings xmi:type="configuration:DefinitionMapping" xmi:id="_CFG_DM_delete" type="CONNECTOR" definitionId="gdrive-delete" definitionVersion="1.0.0" implementationId="gdrive-delete-impl" implementationVersion="1.0.0-SNAPSHOT"/>
+        <processDependencies xmi:type="configuration:FragmentContainer" xmi:id="_CFG_PD_CONN" id="CONNECTOR">
+          <children xmi:type="configuration:FragmentContainer" xmi:id="_CFG_PD_search" id="gdrive-search-impl-1.0.0-SNAPSHOT">
+            <fragments xmi:type="configuration:Fragment" xmi:id="_FR0455" key="gdrive-search-impl -- 1.0.0-SNAPSHOT" value="bonita-connector-gdrive-all-1.0.0-SNAPSHOT-bonita.jar" type="CONNECTOR"/>
+          </children>
+          <children xmi:type="configuration:FragmentContainer" xmi:id="_CFG_PD_cfolder" id="gdrive-create-folder-impl-1.0.0-SNAPSHOT">
+            <fragments xmi:type="configuration:Fragment" xmi:id="_FR0484" key="gdrive-create-folder-impl -- 1.0.0-SNAPSHOT" value="bonita-connector-gdrive-all-1.0.0-SNAPSHOT-bonita.jar" type="CONNECTOR"/>
+          </children>
+          <children xmi:type="configuration:FragmentContainer" xmi:id="_CFG_PD_upload" id="gdrive-upload-impl-1.0.0-SNAPSHOT">
+            <fragments xmi:type="configuration:Fragment" xmi:id="_FR0513" key="gdrive-upload-impl -- 1.0.0-SNAPSHOT" value="bonita-connector-gdrive-all-1.0.0-SNAPSHOT-bonita.jar" type="CONNECTOR"/>
+          </children>
+          <children xmi:type="configuration:FragmentContainer" xmi:id="_CFG_PD_copy" id="gdrive-copy-impl-1.0.0-SNAPSHOT">
+            <fragments xmi:type="configuration:Fragment" xmi:id="_FR0542" key="gdrive-copy-impl -- 1.0.0-SNAPSHOT" value="bonita-connector-gdrive-all-1.0.0-SNAPSHOT-bonita.jar" type="CONNECTOR"/>
+          </children>
+          <children xmi:type="configuration:FragmentContainer" xmi:id="_CFG_PD_move" id="gdrive-move-impl-1.0.0-SNAPSHOT">
+            <fragments xmi:type="configuration:Fragment" xmi:id="_FR0571" key="gdrive-move-impl -- 1.0.0-SNAPSHOT" value="bonita-connector-gdrive-all-1.0.0-SNAPSHOT-bonita.jar" type="CONNECTOR"/>
+          </children>
+          <children xmi:type="configuration:FragmentContainer" xmi:id="_CFG_PD_download" id="gdrive-download-impl-1.0.0-SNAPSHOT">
+            <fragments xmi:type="configuration:Fragment" xmi:id="_FR0600" key="gdrive-download-impl -- 1.0.0-SNAPSHOT" value="bonita-connector-gdrive-all-1.0.0-SNAPSHOT-bonita.jar" type="CONNECTOR"/>
+          </children>
+          <children xmi:type="configuration:FragmentContainer" xmi:id="_CFG_PD_export" id="gdrive-export-impl-1.0.0-SNAPSHOT">
+            <fragments xmi:type="configuration:Fragment" xmi:id="_FR0629" key="gdrive-export-impl -- 1.0.0-SNAPSHOT" value="bonita-connector-gdrive-all-1.0.0-SNAPSHOT-bonita.jar" type="CONNECTOR"/>
+          </children>
+          <children xmi:type="configuration:FragmentContainer" xmi:id="_CFG_PD_delete" id="gdrive-delete-impl-1.0.0-SNAPSHOT">
+            <fragments xmi:type="configuration:Fragment" xmi:id="_FR0658" key="gdrive-delete-impl -- 1.0.0-SNAPSHOT" value="bonita-connector-gdrive-all-1.0.0-SNAPSHOT-bonita.jar" type="CONNECTOR"/>
+          </children>
+        </processDependencies>
+        <processDependencies xmi:type="configuration:FragmentContainer" xmi:id="_CFG_PD_AF" id="ACTOR_FILTER"/>
+        <processDependencies xmi:type="configuration:FragmentContainer" xmi:id="_CFG_PD_OTHER" id="OTHER"/>
+      </configurations>
+      <contract xmi:type="process:Contract" xmi:id="_P90ZPBxyEfGG87QOs41BhQ"/>
+      <searchIndexes xmi:type="process:SearchIndex" xmi:id="_SI0687">
+        <name xmi:type="expression:Expression" xmi:id="_SN0688" content="" returnTypeFixed="true"/>
+        <value xmi:type="expression:Expression" xmi:id="_SV0689" content="" returnTypeFixed="true"/>
+      </searchIndexes>
+      <searchIndexes xmi:type="process:SearchIndex" xmi:id="_SI0690">
+        <name xmi:type="expression:Expression" xmi:id="_SN0691" content="" returnTypeFixed="true"/>
+        <value xmi:type="expression:Expression" xmi:id="_SV0692" content="" returnTypeFixed="true"/>
+      </searchIndexes>
+      <searchIndexes xmi:type="process:SearchIndex" xmi:id="_SI0693">
+        <name xmi:type="expression:Expression" xmi:id="_SN0694" content="" returnTypeFixed="true"/>
+        <value xmi:type="expression:Expression" xmi:id="_SV0695" content="" returnTypeFixed="true"/>
+      </searchIndexes>
+      <searchIndexes xmi:type="process:SearchIndex" xmi:id="_SI0696">
+        <name xmi:type="expression:Expression" xmi:id="_SN0697" content="" returnTypeFixed="true"/>
+        <value xmi:type="expression:Expression" xmi:id="_SV0698" content="" returnTypeFixed="true"/>
+      </searchIndexes>
+      <searchIndexes xmi:type="process:SearchIndex" xmi:id="_SI0699">
+        <name xmi:type="expression:Expression" xmi:id="_SN0700" content="" returnTypeFixed="true"/>
+        <value xmi:type="expression:Expression" xmi:id="_SV0701" content="" returnTypeFixed="true"/>
+      </searchIndexes>
+    </elements>
+    <datatypes xmi:type="process:BooleanType" xmi:id="_P90ZTBxyEfGG87QOs41BhQ" name="Boolean"/>
+    <datatypes xmi:type="process:DateType" xmi:id="_P90ZTRxyEfGG87QOs41BhQ" name="Date"/>
+    <datatypes xmi:type="process:IntegerType" xmi:id="_P90ZThxyEfGG87QOs41BhQ" name="Integer"/>
+    <datatypes xmi:type="process:LongType" xmi:id="_P90ZTxxyEfGG87QOs41BhQ" name="Long"/>
+    <datatypes xmi:type="process:DoubleType" xmi:id="_P90ZUBxyEfGG87QOs41BhQ" name="Double"/>
+    <datatypes xmi:type="process:StringType" xmi:id="_P90ZURxyEfGG87QOs41BhQ" name="Text"/>
+    <datatypes xmi:type="process:JavaType" xmi:id="_P90ZUhxyEfGG87QOs41BhQ" name="Java_object"/>
+    <datatypes xmi:type="process:XMLType" xmi:id="_P90ZUxxyEfGG87QOs41BhQ" name="XML"/>
+    <datatypes xmi:type="process:BusinessObjectType" xmi:id="_P90ZVBxyEfGG87QOs41BhQ" name="Business_Object"/>
+  </process:MainProcess>
+  <notation:Diagram xmi:id="_P90ZVRxyEfGG87QOs41BhQ" type="Process" element="_P90ZIBxyEfGG87QOs41BhQ" name="GDriveConnectorTest" measurementUnit="Pixel">
+    <children xmi:type="notation:Node" xmi:id="_PN0712" type="2007" element="_P90ZIRxyEfGG87QOs41BhQ">
+      <children xmi:type="notation:DecorationNode" xmi:id="_PD0713" type="5008"/>
+      <children xmi:type="notation:DecorationNode" xmi:id="_LC0714" type="7001">
+        <children xmi:type="notation:Node" xmi:id="_LN0715" type="3007" element="_P90ZIhxyEfGG87QOs41BhQ">
+          <children xmi:type="notation:DecorationNode" xmi:id="_LD0716" type="5007"/>
+          <children xmi:type="notation:DecorationNode" xmi:id="_SC0717" type="7002">
+            <children xmi:type="notation:Shape" xmi:id="_SH0702" type="3002" element="_P90ZIxxyEfGG87QOs41BhQ" fontName="Segoe UI">
+              <children xmi:type="notation:DecorationNode" xmi:id="_DN0718" type="5024">
+                <layoutConstraint xmi:type="notation:Location" xmi:id="_LO0719" y="5"/>
+              </children>
+              <layoutConstraint xmi:type="notation:Bounds" xmi:id="_BN0720" x="48" y="75"/>
+            </children>
+            <children xmi:type="notation:Shape" xmi:id="_SH0703" type="3003" element="_5cCXMBzSEfGG87QOs41BhQ" fontName="Segoe UI">
+              <children xmi:type="notation:DecorationNode" xmi:id="_DN0721" type="5025">
+                <layoutConstraint xmi:type="notation:Location" xmi:id="_LO0722" y="5"/>
+              </children>
+              <layoutConstraint xmi:type="notation:Bounds" xmi:id="_BN0723" x="1980" y="75" width="30" height="30"/>
+            </children>
+            <children xmi:type="notation:Shape" xmi:id="_SH0704" type="3027" element="_T_SEARCH" fontName="Segoe UI" fillColor="14334392" lineColor="10710316">
+              <children xmi:type="notation:DecorationNode" xmi:id="_DN0724" type="5017"/>
+              <layoutConstraint xmi:type="notation:Bounds" xmi:id="_BN0725" x="448" y="60" width="120" height="60"/>
+            </children>
+            <children xmi:type="notation:Shape" xmi:id="_SH0705" type="3027" element="_T_CFOLDER" fontName="Segoe UI" fillColor="14334392" lineColor="10710316">
+              <children xmi:type="notation:DecorationNode" xmi:id="_DN0726" type="5017"/>
+              <layoutConstraint xmi:type="notation:Bounds" xmi:id="_BN0727" x="128" y="60" width="120" height="60"/>
+            </children>
+            <children xmi:type="notation:Shape" xmi:id="_SH0706" type="3027" element="_T_UPLOAD" fontName="Segoe UI" fillColor="14334392" lineColor="10710316">
+              <children xmi:type="notation:DecorationNode" xmi:id="_DN0728" type="5017"/>
+              <layoutConstraint xmi:type="notation:Bounds" xmi:id="_BN0729" x="288" y="60" width="120" height="60"/>
+            </children>
+            <children xmi:type="notation:Shape" xmi:id="_SH0707" type="3027" element="_T_COPY" fontName="Segoe UI" fillColor="14334392" lineColor="10710316">
+              <children xmi:type="notation:DecorationNode" xmi:id="_DN0730" type="5017"/>
+              <layoutConstraint xmi:type="notation:Bounds" xmi:id="_BN0731" x="768" y="60" width="120" height="60"/>
+            </children>
+            <children xmi:type="notation:Shape" xmi:id="_SH0708" type="3027" element="_T_MOVE" fontName="Segoe UI" fillColor="14334392" lineColor="10710316">
+              <children xmi:type="notation:DecorationNode" xmi:id="_DN0732" type="5017"/>
+              <layoutConstraint xmi:type="notation:Bounds" xmi:id="_BN0733" x="1088" y="60" width="120" height="60"/>
+            </children>
+            <children xmi:type="notation:Shape" xmi:id="_SH0709" type="3027" element="_T_DOWNLOAD" fontName="Segoe UI" fillColor="14334392" lineColor="10710316">
+              <children xmi:type="notation:DecorationNode" xmi:id="_DN0734" type="5017"/>
+              <layoutConstraint xmi:type="notation:Bounds" xmi:id="_BN0735" x="608" y="60" width="120" height="60"/>
+            </children>
+            <children xmi:type="notation:Shape" xmi:id="_SH0710" type="3027" element="_T_EXPORT" fontName="Segoe UI" fillColor="14334392" lineColor="10710316">
+              <children xmi:type="notation:DecorationNode" xmi:id="_DN0736" type="5017"/>
+              <layoutConstraint xmi:type="notation:Bounds" xmi:id="_BN0737" x="1408" y="60" width="120" height="60"/>
+            </children>
+            <children xmi:type="notation:Shape" xmi:id="_SH0711" type="3027" element="_T_DELETE" fontName="Segoe UI" fillColor="14334392" lineColor="10710316">
+              <children xmi:type="notation:DecorationNode" xmi:id="_DN0738" type="5017"/>
+              <layoutConstraint xmi:type="notation:Bounds" xmi:id="_BN0739" x="1568" y="60" width="120" height="60"/>
+            </children>
+            <children xmi:type="notation:Shape" xmi:id="_SH1401" type="3027" element="_T_CARCHIVE" fontName="Segoe UI" fillColor="14334392" lineColor="10710316">
+              <children xmi:type="notation:DecorationNode" xmi:id="_DN1402" type="5017"/>
+              <layoutConstraint xmi:type="notation:Bounds" xmi:id="_BN1403" x="928" y="60" width="120" height="60"/>
+            </children>
+            <children xmi:type="notation:Shape" xmi:id="_SH1404" type="3027" element="_T_UPCONV" fontName="Segoe UI" fillColor="14334392" lineColor="10710316">
+              <children xmi:type="notation:DecorationNode" xmi:id="_DN1405" type="5017"/>
+              <layoutConstraint xmi:type="notation:Bounds" xmi:id="_BN1406" x="1248" y="60" width="120" height="60"/>
+            </children>
+          </children>
+          <styles xmi:type="notation:DescriptionStyle" xmi:id="_DS0740"/>
+          <styles xmi:type="notation:FontStyle" xmi:id="_FS0741" fontName="Segoe UI"/>
+          <styles xmi:type="notation:LineStyle" xmi:id="_LS0742"/>
+          <styles xmi:type="notation:FillStyle" xmi:id="_FLS0743"/>
+          <layoutConstraint xmi:type="notation:Bounds" xmi:id="_BN0744"/>
+        </children>
+      </children>
+      <styles xmi:type="notation:DescriptionStyle" xmi:id="_DS0745"/>
+      <styles xmi:type="notation:FontStyle" xmi:id="_FS0746" fontName="Segoe UI"/>
+      <styles xmi:type="notation:LineStyle" xmi:id="_LS0747"/>
+      <styles xmi:type="notation:FillStyle" xmi:id="_FLS0748"/>
+      <layoutConstraint xmi:type="notation:Bounds" xmi:id="_BN0749" width="2100" height="280"/>
+    </children>
+    <styles xmi:type="notation:DiagramStyle" xmi:id="_DGS0750"/>
+    <edges xmi:type="notation:Connector" xmi:id="_ED0751" type="4001" element="_SF_01" source="_SH0702" target="_SH0705" roundedBendpointsRadius="10" routing="Rectilinear">
+      <children xmi:type="notation:DecorationNode" xmi:id="_DN0752" type="6001">
+        <layoutConstraint xmi:type="notation:Location" xmi:id="_LO0753" y="-10"/>
+      </children>
+      <styles xmi:type="notation:FontStyle" xmi:id="_FS0754" fontName="Segoe UI"/>
+      <bendpoints xmi:type="notation:RelativeBendpoints" xmi:id="_BP0755" points="[15, 0, -110, 0]$[65, 0, -60, 0]"/>
+      <sourceAnchor xmi:type="notation:IdentityAnchor" xmi:id="_SA0756" id="(1.0,0.5)"/>
+      <targetAnchor xmi:type="notation:IdentityAnchor" xmi:id="_TA0757" id="(0.0,0.5)"/>
+    </edges>
+    <edges xmi:type="notation:Connector" xmi:id="_ED0765" type="4001" element="_SF_02" source="_SH0705" target="_SH0706" roundedBendpointsRadius="10" routing="Rectilinear">
+      <children xmi:type="notation:DecorationNode" xmi:id="_DN0766" type="6001">
+        <layoutConstraint xmi:type="notation:Location" xmi:id="_LO0767" y="-10"/>
+      </children>
+      <styles xmi:type="notation:FontStyle" xmi:id="_FS0768" fontName="Segoe UI"/>
+      <bendpoints xmi:type="notation:RelativeBendpoints" xmi:id="_BP0769" points="[60, 0, -100, 0]$[100, 0, -60, 0]"/>
+      <sourceAnchor xmi:type="notation:IdentityAnchor" xmi:id="_SA0770" id="(1.0,0.5)"/>
+      <targetAnchor xmi:type="notation:IdentityAnchor" xmi:id="_TA0771" id="(0.0,0.5)"/>
+    </edges>
+    <edges xmi:type="notation:Connector" xmi:id="_ED0772" type="4001" element="_SF_03" source="_SH0706" target="_SH0704" roundedBendpointsRadius="10" routing="Rectilinear">
+      <children xmi:type="notation:DecorationNode" xmi:id="_DN0773" type="6001">
+        <layoutConstraint xmi:type="notation:Location" xmi:id="_LO0774" y="-10"/>
+      </children>
+      <styles xmi:type="notation:FontStyle" xmi:id="_FS0775" fontName="Segoe UI"/>
+      <bendpoints xmi:type="notation:RelativeBendpoints" xmi:id="_BP0776" points="[60, 0, -100, 0]$[100, 0, -60, 0]"/>
+      <sourceAnchor xmi:type="notation:IdentityAnchor" xmi:id="_SA0777" id="(1.0,0.5)"/>
+      <targetAnchor xmi:type="notation:IdentityAnchor" xmi:id="_TA0778" id="(0.0,0.5)"/>
+    </edges>
+    <edges xmi:type="notation:Connector" xmi:id="_ED0779" type="4001" element="_SF_04" source="_SH0704" target="_SH0709" roundedBendpointsRadius="10" routing="Rectilinear">
+      <children xmi:type="notation:DecorationNode" xmi:id="_DN0780" type="6001">
+        <layoutConstraint xmi:type="notation:Location" xmi:id="_LO0781" y="-10"/>
+      </children>
+      <styles xmi:type="notation:FontStyle" xmi:id="_FS0782" fontName="Segoe UI"/>
+      <bendpoints xmi:type="notation:RelativeBendpoints" xmi:id="_BP0783" points="[60, 0, -100, 0]$[100, 0, -60, 0]"/>
+      <sourceAnchor xmi:type="notation:IdentityAnchor" xmi:id="_SA0784" id="(1.0,0.5)"/>
+      <targetAnchor xmi:type="notation:IdentityAnchor" xmi:id="_TA0785" id="(0.0,0.5)"/>
+    </edges>
+    <edges xmi:type="notation:Connector" xmi:id="_ED0786" type="4001" element="_SF_05" source="_SH0709" target="_SH0707" roundedBendpointsRadius="10" routing="Rectilinear">
+      <children xmi:type="notation:DecorationNode" xmi:id="_DN0787" type="6001">
+        <layoutConstraint xmi:type="notation:Location" xmi:id="_LO0788" y="-10"/>
+      </children>
+      <styles xmi:type="notation:FontStyle" xmi:id="_FS0789" fontName="Segoe UI"/>
+      <bendpoints xmi:type="notation:RelativeBendpoints" xmi:id="_BP0790" points="[60, 0, -100, 0]$[100, 0, -60, 0]"/>
+      <sourceAnchor xmi:type="notation:IdentityAnchor" xmi:id="_SA0791" id="(1.0,0.5)"/>
+      <targetAnchor xmi:type="notation:IdentityAnchor" xmi:id="_TA0792" id="(0.0,0.5)"/>
+    </edges>
+    <edges xmi:type="notation:Connector" xmi:id="_ED0793" type="4001" element="_SF_06" source="_SH0707" target="_SH1401" roundedBendpointsRadius="10" routing="Rectilinear">
+      <children xmi:type="notation:DecorationNode" xmi:id="_DN0794" type="6001">
+        <layoutConstraint xmi:type="notation:Location" xmi:id="_LO0795" y="-10"/>
+      </children>
+      <styles xmi:type="notation:FontStyle" xmi:id="_FS0796" fontName="Segoe UI"/>
+      <bendpoints xmi:type="notation:RelativeBendpoints" xmi:id="_BP0797" points="[60, 0, -100, 0]$[100, 0, -60, 0]"/>
+      <sourceAnchor xmi:type="notation:IdentityAnchor" xmi:id="_SA0798" id="(1.0,0.5)"/>
+      <targetAnchor xmi:type="notation:IdentityAnchor" xmi:id="_TA0799" id="(0.0,0.5)"/>
+    </edges>
+    <edges xmi:type="notation:Connector" xmi:id="_ED0800" type="4001" element="_SF_07" source="_SH1401" target="_SH0708" roundedBendpointsRadius="10" routing="Rectilinear">
+      <children xmi:type="notation:DecorationNode" xmi:id="_DN0801" type="6001">
+        <layoutConstraint xmi:type="notation:Location" xmi:id="_LO0802" y="-10"/>
+      </children>
+      <styles xmi:type="notation:FontStyle" xmi:id="_FS0803" fontName="Segoe UI"/>
+      <bendpoints xmi:type="notation:RelativeBendpoints" xmi:id="_BP0804" points="[60, 0, -100, 0]$[100, 0, -60, 0]"/>
+      <sourceAnchor xmi:type="notation:IdentityAnchor" xmi:id="_SA0805" id="(1.0,0.5)"/>
+      <targetAnchor xmi:type="notation:IdentityAnchor" xmi:id="_TA0806" id="(0.0,0.5)"/>
+    </edges>
+    <edges xmi:type="notation:Connector" xmi:id="_ED0807" type="4001" element="_SF_08" source="_SH0708" target="_SH1404" roundedBendpointsRadius="10" routing="Rectilinear">
+      <children xmi:type="notation:DecorationNode" xmi:id="_DN0808" type="6001">
+        <layoutConstraint xmi:type="notation:Location" xmi:id="_LO0809" y="-10"/>
+      </children>
+      <styles xmi:type="notation:FontStyle" xmi:id="_FS0810" fontName="Segoe UI"/>
+      <bendpoints xmi:type="notation:RelativeBendpoints" xmi:id="_BP0811" points="[60, 0, -107, 0]$[152, 0, -15, 0]"/>
+      <sourceAnchor xmi:type="notation:IdentityAnchor" xmi:id="_SA0812" id="(1.0,0.5)"/>
+      <targetAnchor xmi:type="notation:IdentityAnchor" xmi:id="_TA0813" id="(0.0,0.5)"/>
+    </edges>
+    <edges xmi:type="notation:Connector" xmi:id="_ED1501" type="4001" element="_SF_09" source="_SH1404" target="_SH0710" roundedBendpointsRadius="10" routing="Rectilinear">
+      <children xmi:type="notation:DecorationNode" xmi:id="_DN1502" type="6001">
+        <layoutConstraint xmi:type="notation:Location" xmi:id="_LO1503" y="-10"/>
+      </children>
+      <styles xmi:type="notation:FontStyle" xmi:id="_FS1504" fontName="Segoe UI"/>
+      <bendpoints xmi:type="notation:RelativeBendpoints" xmi:id="_BP1505" points="[60, 0, -100, 0]$[100, 0, -60, 0]"/>
+      <sourceAnchor xmi:type="notation:IdentityAnchor" xmi:id="_SA1506" id="(1.0,0.5)"/>
+      <targetAnchor xmi:type="notation:IdentityAnchor" xmi:id="_TA1507" id="(0.0,0.5)"/>
+    </edges>
+    <edges xmi:type="notation:Connector" xmi:id="_ED1508" type="4001" element="_SF_10" source="_SH0710" target="_SH0711" roundedBendpointsRadius="10" routing="Rectilinear">
+      <children xmi:type="notation:DecorationNode" xmi:id="_DN1509" type="6001">
+        <layoutConstraint xmi:type="notation:Location" xmi:id="_LO1510" y="-10"/>
+      </children>
+      <styles xmi:type="notation:FontStyle" xmi:id="_FS1511" fontName="Segoe UI"/>
+      <bendpoints xmi:type="notation:RelativeBendpoints" xmi:id="_BP1512" points="[60, 0, -100, 0]$[100, 0, -60, 0]"/>
+      <sourceAnchor xmi:type="notation:IdentityAnchor" xmi:id="_SA1513" id="(1.0,0.5)"/>
+      <targetAnchor xmi:type="notation:IdentityAnchor" xmi:id="_TA1514" id="(0.0,0.5)"/>
+    </edges>
+    <edges xmi:type="notation:Connector" xmi:id="_ED1515" type="4001" element="_SF_11" source="_SH0711" target="_SH0703" roundedBendpointsRadius="10" routing="Rectilinear">
+      <children xmi:type="notation:DecorationNode" xmi:id="_DN1516" type="6001">
+        <layoutConstraint xmi:type="notation:Location" xmi:id="_LO1517" y="-10"/>
+      </children>
+      <styles xmi:type="notation:FontStyle" xmi:id="_FS1518" fontName="Segoe UI"/>
+      <bendpoints xmi:type="notation:RelativeBendpoints" xmi:id="_BP1519" points="[60, 0, -107, 0]$[152, 0, -15, 0]"/>
+      <sourceAnchor xmi:type="notation:IdentityAnchor" xmi:id="_SA1520" id="(1.0,0.5)"/>
+      <targetAnchor xmi:type="notation:IdentityAnchor" xmi:id="_TA1521" id="(0.0,0.5)"/>
+    </edges>
+  </notation:Diagram>
+</xmi:XMI>

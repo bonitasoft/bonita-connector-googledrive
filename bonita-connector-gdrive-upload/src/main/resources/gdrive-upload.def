@@ -1,0 +1,87 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<definition:ConnectorDefinition xmlns:definition="http://www.bonitasoft.org/ns/connector/definition/6.1"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+
+    <id>gdrive-upload</id>
+    <version>1.0.0</version>
+    <icon>gdrive.png</icon>
+
+    <category icon="gdrive.png" id="google-drive"/>
+
+    <!-- ======================== -->
+    <!-- INPUT PARAMETERS         -->
+    <!-- ======================== -->
+
+    <!-- Auth / Connection (Project/Runtime scope) -->
+    <input name="serviceAccountJson" type="java.lang.String" mandatory="false"/>
+    <input name="impersonateUser" type="java.lang.String" mandatory="false"/>
+    <input name="clientId" type="java.lang.String" mandatory="false"/>
+    <input name="clientSecret" type="java.lang.String" mandatory="false"/>
+    <input name="refreshToken" type="java.lang.String" mandatory="false"/>
+    <input name="applicationName" type="java.lang.String" mandatory="false"/>
+    <input name="connectTimeout" type="java.lang.Integer" mandatory="false"/>
+    <input name="readTimeout" type="java.lang.Integer" mandatory="false"/>
+
+    <!-- Operation Parameters (Connector scope) -->
+    <input name="fileName" type="java.lang.String" mandatory="true"/>
+    <input name="fileContent" type="java.lang.String" mandatory="true"/>
+    <input name="mimeType" type="java.lang.String" mandatory="false"/>
+    <input name="description" type="java.lang.String" mandatory="false"/>
+    <input name="customProperties" type="java.util.Map" mandatory="false"/>
+    <input name="convertToGoogleFormat" type="java.lang.Boolean" mandatory="false"/>
+
+    <!-- Configuration Parameters (Process scope) -->
+    <input name="parentFolderId" type="java.lang.String" mandatory="false"/>
+
+    <!-- ======================== -->
+    <!-- OUTPUT PARAMETERS        -->
+    <!-- ======================== -->
+    <output name="success" type="java.lang.Boolean"/>
+    <output name="errorMessage" type="java.lang.String"/>
+    <output name="fileId" type="java.lang.String"/>
+    <output name="fileName" type="java.lang.String"/>
+    <output name="webViewLink" type="java.lang.String"/>
+    <output name="webContentLink" type="java.lang.String"/>
+    <output name="mimeType" type="java.lang.String"/>
+    <output name="size" type="java.lang.Long"/>
+    <output name="md5Checksum" type="java.lang.String"/>
+
+    <!-- ======================== -->
+    <!-- UI PAGES                 -->
+    <!-- ======================== -->
+
+    <!-- Page 1: Service Account Authentication -->
+    <page id="serviceAccountPage">
+        <widget xsi:type="definition:Password" id="serviceAccountJsonWidget" inputName="serviceAccountJson"/>
+        <widget xsi:type="definition:Text" id="impersonateUserWidget" inputName="impersonateUser"/>
+        <widget xsi:type="definition:Text" id="applicationNameWidget" inputName="applicationName"/>
+    </page>
+
+    <!-- Page 2: OAuth 2.0 Authentication (Alternative) -->
+    <page id="oauthPage">
+        <widget xsi:type="definition:Text" id="clientIdWidget" inputName="clientId"/>
+        <widget xsi:type="definition:Password" id="clientSecretWidget" inputName="clientSecret"/>
+        <widget xsi:type="definition:Password" id="refreshTokenWidget" inputName="refreshToken"/>
+    </page>
+
+    <!-- Page 3: File Upload Details -->
+    <page id="uploadPage">
+        <widget xsi:type="definition:Text" id="fileNameWidget" inputName="fileName"/>
+        <widget xsi:type="definition:TextArea" id="fileContentWidget" inputName="fileContent"/>
+        <widget xsi:type="definition:Text" id="mimeTypeWidget" inputName="mimeType"/>
+        <widget xsi:type="definition:TextArea" id="descriptionWidget" inputName="description"/>
+        <widget xsi:type="definition:Checkbox" id="convertToGoogleFormatWidget" inputName="convertToGoogleFormat"/>
+    </page>
+
+    <!-- Page 4: Destination & Options -->
+    <page id="destinationPage">
+        <widget xsi:type="definition:Text" id="parentFolderIdWidget" inputName="parentFolderId"/>
+        <widget xsi:type="definition:Array" id="customPropertiesWidget" inputName="customProperties"/>
+    </page>
+
+    <!-- Page 5: Connection Settings -->
+    <page id="advancedPage">
+        <widget xsi:type="definition:Text" id="connectTimeoutWidget" inputName="connectTimeout"/>
+        <widget xsi:type="definition:Text" id="readTimeoutWidget" inputName="readTimeout"/>
+    </page>
+</definition:ConnectorDefinition>

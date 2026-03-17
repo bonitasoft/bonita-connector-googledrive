@@ -1,0 +1,73 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<definition:ConnectorDefinition xmlns:definition="http://www.bonitasoft.org/ns/connector/definition/6.1"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+
+    <id>gdrive-search</id>
+    <version>1.0.0</version>
+    <icon>gdrive.png</icon>
+
+    <category icon="gdrive.png" id="google-drive"/>
+
+    <!-- Auth / Connection -->
+    <input name="serviceAccountJson" type="java.lang.String" mandatory="false"/>
+    <input name="impersonateUser" type="java.lang.String" mandatory="false"/>
+    <input name="clientId" type="java.lang.String" mandatory="false"/>
+    <input name="clientSecret" type="java.lang.String" mandatory="false"/>
+    <input name="refreshToken" type="java.lang.String" mandatory="false"/>
+    <input name="applicationName" type="java.lang.String" mandatory="false"/>
+    <input name="connectTimeout" type="java.lang.Integer" mandatory="false"/>
+    <input name="readTimeout" type="java.lang.Integer" mandatory="false"/>
+
+    <!-- Search Parameters -->
+    <input name="query" type="java.lang.String" mandatory="false"/>
+    <input name="nameContains" type="java.lang.String" mandatory="false"/>
+    <input name="mimeType" type="java.lang.String" mandatory="false"/>
+    <input name="fullTextSearch" type="java.lang.String" mandatory="false"/>
+    <input name="modifiedAfter" type="java.lang.String" mandatory="false"/>
+    <input name="modifiedBefore" type="java.lang.String" mandatory="false"/>
+    <input name="includeTrashed" type="java.lang.Boolean" mandatory="false"/>
+    <input name="maxResults" type="java.lang.Integer" mandatory="false"/>
+    <input name="orderBy" type="java.lang.String" mandatory="false"/>
+    <input name="parentFolderId" type="java.lang.String" mandatory="false"/>
+
+    <!-- Outputs -->
+    <output name="success" type="java.lang.Boolean"/>
+    <output name="errorMessage" type="java.lang.String"/>
+    <output name="files" type="java.util.List"/>
+    <output name="totalResults" type="java.lang.Integer"/>
+    <output name="nextPageToken" type="java.lang.String"/>
+
+    <!-- Page 1: Authentication -->
+    <page id="authPage">
+        <widget id="serviceAccountJsonWidget" xsi:type="definition:Password" inputName="serviceAccountJson"/>
+        <widget id="impersonateUserWidget" xsi:type="definition:Text" inputName="impersonateUser"/>
+    </page>
+
+    <!-- Page 2: Search Criteria -->
+    <page id="searchCriteriaPage">
+        <widget id="queryWidget" xsi:type="definition:TextArea" inputName="query"/>
+        <widget id="nameContainsWidget" xsi:type="definition:Text" inputName="nameContains"/>
+        <widget id="mimeTypeWidget" xsi:type="definition:Text" inputName="mimeType"/>
+        <widget id="fullTextSearchWidget" xsi:type="definition:Text" inputName="fullTextSearch"/>
+    </page>
+
+    <!-- Page 3: Filters -->
+    <page id="filtersPage">
+        <widget id="parentFolderIdWidget" xsi:type="definition:Text" inputName="parentFolderId"/>
+        <widget id="modifiedAfterWidget" xsi:type="definition:Text" inputName="modifiedAfter"/>
+        <widget id="modifiedBeforeWidget" xsi:type="definition:Text" inputName="modifiedBefore"/>
+        <widget id="includeTrashedWidget" xsi:type="definition:Checkbox" inputName="includeTrashed"/>
+    </page>
+
+    <!-- Page 4: Results Options -->
+    <page id="resultsPage">
+        <widget id="maxResultsWidget" xsi:type="definition:Text" inputName="maxResults"/>
+        <widget id="orderByWidget" xsi:type="definition:Text" inputName="orderBy"/>
+    </page>
+
+    <!-- Page 5: Connection Settings -->
+    <page id="connectionPage">
+        <widget id="connectTimeoutWidget" xsi:type="definition:Text" inputName="connectTimeout"/>
+        <widget id="readTimeoutWidget" xsi:type="definition:Text" inputName="readTimeout"/>
+    </page>
+</definition:ConnectorDefinition>

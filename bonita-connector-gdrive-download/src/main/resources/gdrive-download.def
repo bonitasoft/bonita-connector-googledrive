@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<definition:ConnectorDefinition xmlns:definition="http://www.bonitasoft.org/ns/connector/definition/6.1"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+
+    <id>gdrive-download</id>
+    <version>1.0.0</version>
+    <icon>gdrive.png</icon>
+
+    <category icon="gdrive.png" id="google-drive"/>
+
+    <!-- Auth / Connection -->
+    <input name="serviceAccountJson" type="java.lang.String" mandatory="false"/>
+    <input name="impersonateUser" type="java.lang.String" mandatory="false"/>
+    <input name="clientId" type="java.lang.String" mandatory="false"/>
+    <input name="clientSecret" type="java.lang.String" mandatory="false"/>
+    <input name="refreshToken" type="java.lang.String" mandatory="false"/>
+    <input name="applicationName" type="java.lang.String" mandatory="false"/>
+    <input name="connectTimeout" type="java.lang.Integer" mandatory="false"/>
+    <input name="readTimeout" type="java.lang.Integer" mandatory="false"/>
+
+    <!-- Operation Parameters -->
+    <input name="fileId" type="java.lang.String" mandatory="true"/>
+    <input name="acknowledgeAbuse" type="java.lang.Boolean" mandatory="false"/>
+
+    <!-- Outputs -->
+    <output name="success" type="java.lang.Boolean"/>
+    <output name="errorMessage" type="java.lang.String"/>
+    <output name="fileContent" type="java.lang.String"/>
+    <output name="fileName" type="java.lang.String"/>
+    <output name="mimeType" type="java.lang.String"/>
+    <output name="size" type="java.lang.Long"/>
+    <output name="md5Checksum" type="java.lang.String"/>
+
+    <!-- Page 1: Authentication -->
+    <page id="authPage">
+        <widget xsi:type="definition:Password" id="serviceAccountJsonWidget" inputName="serviceAccountJson"/>
+        <widget xsi:type="definition:Text" id="impersonateUserWidget" inputName="impersonateUser"/>
+    </page>
+
+    <!-- Page 2: Download Settings -->
+    <page id="downloadPage">
+        <widget xsi:type="definition:Text" id="fileIdWidget" inputName="fileId"/>
+        <widget xsi:type="definition:Checkbox" id="acknowledgeAbuseWidget" inputName="acknowledgeAbuse"/>
+    </page>
+
+    <!-- Page 3: Connection Settings -->
+    <page id="connectionPage">
+        <widget xsi:type="definition:Text" id="connectTimeoutWidget" inputName="connectTimeout"/>
+        <widget xsi:type="definition:Text" id="readTimeoutWidget" inputName="readTimeout"/>
+    </page>
+</definition:ConnectorDefinition>

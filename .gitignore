@@ -1,13 +1,72 @@
+# Maven
 target/
-*.class
-*.jar
-*.log
+pom.xml.tag
+pom.xml.releaseBackup
+pom.xml.versionsBackup
+pom.xml.next
+release.properties
+dependency-reduced-pom.xml
+buildNumber.properties
+.mvn/timing.properties
+.mvn/wrapper/maven-wrapper.jar
+
+# IDE - IntelliJ IDEA
 .idea/
+*.iws
 *.iml
-.vscode/
-.settings/
+*.ipr
+out/
+
+# IDE - Eclipse
 .classpath
 .project
+.settings/
+bin/
+
+# IDE - VS Code
+.vscode/
+
+# IDE - NetBeans
+nbproject/private/
+nbbuild/
+dist/
+nbdist/
+.nb-gradle/
+
+# OS
+.DS_Store
+Thumbs.db
+*.swp
+*~
+
+# Logs
+*.log
+logs/
+
+# Test output
+surefire-reports/
+failsafe-reports/
+test-output/
+
+# Coverage and mutation reports
+jacoco.exec
+pit-reports/
+
+# Bonita Studio
+.bonita/
+
+# JQwik
 .jqwik-database
-.claude/
-engineering-external-services-*.json
+
+# Credentials (never commit!)
+*.json
+!**/src/test/resources/**/*.json
+credentials/
+secrets/
+
+# Package files
+*.jar
+*.war
+*.ear
+*.zip
+*.tar.gz

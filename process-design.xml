@@ -1,0 +1,690 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<tns:processDefinition id="_0" name="GDrive Connector Test" version="1.0" xmlns:tns="http://www.bonitasoft.org/ns/process/client/7.4">
+    <description></description>
+    <displayDescription></displayDescription>
+    <parameters/>
+    <actors>
+        <actor id="_7993389879195017309" name="Automation actor" initiator="true">
+            <description>This is an example of actor that is mapped to any ACME users</description>
+        </actor>
+    </actors>
+    <actorInitiator>_7993389879195017309</actorInitiator>
+    <flowElements id="_7793047920923006145">
+        <automaticTask id="_5521627051055184438" name="GDrive Search">
+            <incomingTransition>_6898395431269625031</incomingTransition>
+            <outgoingTransition>_9132133676453696168</outgoingTransition>
+            <connector id="_7243809038922041933" name="Test Search" connectorId="gdrive-search" activationEvent="ON_ENTER" version="1.0.0" failAction="FAIL">
+                <inputs>
+                    <input name="nameContains">
+                        <expression id="_5475787398239019646" name="bonita-test" expressionType="TYPE_READ_ONLY_SCRIPT" returnType="java.lang.String" interpreter="GROOVY">
+                            <content>'bonita-test'</content>
+                        </expression>
+                    </input>
+                    <input name="serviceAccountJson">
+                        <expression id="_5977040065515312676" name="readServiceAccountJson" expressionType="TYPE_READ_ONLY_SCRIPT" returnType="java.lang.String" interpreter="GROOVY">
+                            <content>new File(serviceAccountJsonPath).text</content>
+                        </expression>
+                    </input>
+                    <input name="parentFolderId">
+                        <expression id="_5670321365089146388" name="gdriveFolderId" expressionType="TYPE_VARIABLE" returnType="java.lang.String" interpreter="">
+                            <content>gdriveFolderId</content>
+                        </expression>
+                    </input>
+                    <input name="includeTrashed">
+                        <expression id="_8543449533338626035" name="false" expressionType="TYPE_CONSTANT" returnType="java.lang.Boolean" interpreter="">
+                            <content>false</content>
+                        </expression>
+                    </input>
+                </inputs>
+                <outputs>
+                    <operation operatorType="ASSIGNMENT">
+                        <leftOperand name="gdriveSuccess" type="DATA"/>
+                        <rightOperand id="_6809681234892057207" name="success" expressionType="TYPE_INPUT" returnType="java.lang.Boolean" interpreter="">
+                            <content>success</content>
+                        </rightOperand>
+                    </operation>
+                    <operation operatorType="ASSIGNMENT">
+                        <leftOperand name="gdriveErrorMessage" type="DATA"/>
+                        <rightOperand id="_7903018245335173031" name="errorMessage" expressionType="TYPE_INPUT" returnType="java.lang.String" interpreter="">
+                            <content>errorMessage</content>
+                        </rightOperand>
+                    </operation>
+                    <operation operatorType="ASSIGNMENT">
+                        <leftOperand name="gdriveFiles" type="DATA"/>
+                        <rightOperand id="_8927311788926449426" name="files" expressionType="TYPE_INPUT" returnType="java.util.List" interpreter="">
+                            <content>files</content>
+                        </rightOperand>
+                    </operation>
+                    <operation operatorType="ASSIGNMENT">
+                        <leftOperand name="gdriveTotalResults" type="DATA"/>
+                        <rightOperand id="_6537513619303799622" name="totalResults" expressionType="TYPE_INPUT" returnType="java.lang.Integer" interpreter="">
+                            <content>totalResults</content>
+                        </rightOperand>
+                    </operation>
+                    <operation operatorType="ASSIGNMENT">
+                        <leftOperand name="gdriveNextPageToken" type="DATA"/>
+                        <rightOperand id="_8628836965037648872" name="nextPageToken" expressionType="TYPE_INPUT" returnType="java.lang.String" interpreter="">
+                            <content>nextPageToken</content>
+                        </rightOperand>
+                    </operation>
+                </outputs>
+            </connector>
+            <displayDescription id="_8314666616327527197" name="&lt;empty-name&gt;" expressionType="TYPE_CONSTANT" returnType="java.lang.String" interpreter="">
+                <content>Searches for files named 'Test' in Google Drive</content>
+            </displayDescription>
+            <dataDefinitions/>
+            <businessDataDefinitions/>
+            <operations/>
+            <boundaryEvents/>
+        </automaticTask>
+        <automaticTask id="_7892551680209040510" name="GDrive CreateFolder">
+            <incomingTransition>_4761916009033507356</incomingTransition>
+            <outgoingTransition>_5286615090906040571</outgoingTransition>
+            <connector id="_4948579785692337332" name="Test CreateFolder" connectorId="gdrive-create-folder" activationEvent="ON_ENTER" version="1.0.0" failAction="FAIL">
+                <inputs>
+                    <input name="serviceAccountJson">
+                        <expression id="_7935653436458219690" name="readServiceAccountJson" expressionType="TYPE_READ_ONLY_SCRIPT" returnType="java.lang.String" interpreter="GROOVY">
+                            <content>new File(serviceAccountJsonPath).text</content>
+                        </expression>
+                    </input>
+                    <input name="parentFolderId">
+                        <expression id="_9059274643596293638" name="sharedDriveFolderId" expressionType="TYPE_READ_ONLY_SCRIPT" returnType="java.lang.String" interpreter="GROOVY">
+                            <content>'1E7UnzYxYzWtRNVJGIFw0YAcX4a-ARVvM'</content>
+                        </expression>
+                    </input>
+                    <input name="description">
+                        <expression id="_6084670489984951288" name="Test folder" expressionType="TYPE_READ_ONLY_SCRIPT" returnType="java.lang.String" interpreter="GROOVY">
+                            <content>'Test folder from Bonita IT'</content>
+                        </expression>
+                    </input>
+                    <input name="folderName">
+                        <expression id="_7259239014787091544" name="Bonita-IT-Test" expressionType="TYPE_READ_ONLY_SCRIPT" returnType="java.lang.String" interpreter="GROOVY">
+                            <content>'Bonita-IT-Test'</content>
+                        </expression>
+                    </input>
+                </inputs>
+                <outputs>
+                    <operation operatorType="ASSIGNMENT">
+                        <leftOperand name="gdriveSuccess" type="DATA"/>
+                        <rightOperand id="_5736935571083740006" name="success" expressionType="TYPE_INPUT" returnType="java.lang.Boolean" interpreter="">
+                            <content>success</content>
+                        </rightOperand>
+                    </operation>
+                    <operation operatorType="ASSIGNMENT">
+                        <leftOperand name="gdriveErrorMessage" type="DATA"/>
+                        <rightOperand id="_5239952744148520788" name="errorMessage" expressionType="TYPE_INPUT" returnType="java.lang.String" interpreter="">
+                            <content>errorMessage</content>
+                        </rightOperand>
+                    </operation>
+                    <operation operatorType="ASSIGNMENT">
+                        <leftOperand name="gdriveFolderId" type="DATA"/>
+                        <rightOperand id="_4774317033777401184" name="folderId" expressionType="TYPE_INPUT" returnType="java.lang.String" interpreter="">
+                            <content>folderId</content>
+                        </rightOperand>
+                    </operation>
+                    <operation operatorType="ASSIGNMENT">
+                        <leftOperand name="gdriveFileName" type="DATA"/>
+                        <rightOperand id="_5703853160701638156" name="folderName" expressionType="TYPE_INPUT" returnType="java.lang.String" interpreter="">
+                            <content>folderName</content>
+                        </rightOperand>
+                    </operation>
+                    <operation operatorType="ASSIGNMENT">
+                        <leftOperand name="gdriveWebViewLink" type="DATA"/>
+                        <rightOperand id="_7406120804088586589" name="webViewLink" expressionType="TYPE_INPUT" returnType="java.lang.String" interpreter="">
+                            <content>webViewLink</content>
+                        </rightOperand>
+                    </operation>
+                </outputs>
+            </connector>
+            <displayDescription id="_7364070573293741188" name="&lt;empty-name&gt;" expressionType="TYPE_CONSTANT" returnType="java.lang.String" interpreter="">
+                <content>Creates a test folder named 'Bonita-IT-Test'</content>
+            </displayDescription>
+            <dataDefinitions/>
+            <businessDataDefinitions/>
+            <operations/>
+            <boundaryEvents/>
+        </automaticTask>
+        <automaticTask id="_4829806903035518617" name="GDrive Upload">
+            <incomingTransition>_5286615090906040571</incomingTransition>
+            <outgoingTransition>_6898395431269625031</outgoingTransition>
+            <connector id="_9000209394191588878" name="Test Upload" connectorId="gdrive-upload" activationEvent="ON_ENTER" version="1.0.0" failAction="FAIL">
+                <inputs>
+                    <input name="fileName">
+                        <expression id="_6880795424687314091" name="bonita-test.txt" expressionType="TYPE_READ_ONLY_SCRIPT" returnType="java.lang.String" interpreter="GROOVY">
+                            <content>'bonita-test.txt'</content>
+                        </expression>
+                    </input>
+                    <input name="serviceAccountJson">
+                        <expression id="_8279967205653425728" name="readServiceAccountJson" expressionType="TYPE_READ_ONLY_SCRIPT" returnType="java.lang.String" interpreter="GROOVY">
+                            <content>new File(serviceAccountJsonPath).text</content>
+                        </expression>
+                    </input>
+                    <input name="convertToGoogleFormat">
+                        <expression id="_4989885143755605144" name="false" expressionType="TYPE_CONSTANT" returnType="java.lang.Boolean" interpreter="">
+                            <content>false</content>
+                        </expression>
+                    </input>
+                    <input name="parentFolderId">
+                        <expression id="_8764273913521519714" name="gdriveFolderId" expressionType="TYPE_VARIABLE" returnType="java.lang.String" interpreter="">
+                            <content>gdriveFolderId</content>
+                        </expression>
+                    </input>
+                    <input name="description">
+                        <expression id="_8926151433847263719" name="Test upload" expressionType="TYPE_READ_ONLY_SCRIPT" returnType="java.lang.String" interpreter="GROOVY">
+                            <content>'Test upload from Bonita'</content>
+                        </expression>
+                    </input>
+                    <input name="mimeType">
+                        <expression id="_8463726249395708179" name="text/plain" expressionType="TYPE_READ_ONLY_SCRIPT" returnType="java.lang.String" interpreter="GROOVY">
+                            <content>'text/plain'</content>
+                        </expression>
+                    </input>
+                    <input name="fileContent">
+                        <expression id="_9171613482500024316" name="Test content" expressionType="TYPE_READ_ONLY_SCRIPT" returnType="java.lang.String" interpreter="GROOVY">
+                            <content>'Hello from Bonita GDrive IT'.bytes.encodeBase64().toString()</content>
+                        </expression>
+                    </input>
+                </inputs>
+                <outputs>
+                    <operation operatorType="ASSIGNMENT">
+                        <leftOperand name="gdriveSuccess" type="DATA"/>
+                        <rightOperand id="_6564726175609604814" name="success" expressionType="TYPE_INPUT" returnType="java.lang.Boolean" interpreter="">
+                            <content>success</content>
+                        </rightOperand>
+                    </operation>
+                    <operation operatorType="ASSIGNMENT">
+                        <leftOperand name="gdriveErrorMessage" type="DATA"/>
+                        <rightOperand id="_9133490417969699056" name="errorMessage" expressionType="TYPE_INPUT" returnType="java.lang.String" interpreter="">
+                            <content>errorMessage</content>
+                        </rightOperand>
+                    </operation>
+                    <operation operatorType="ASSIGNMENT">
+                        <leftOperand name="gdriveFileId" type="DATA"/>
+                        <rightOperand id="_5055695038174046840" name="fileId" expressionType="TYPE_INPUT" returnType="java.lang.String" interpreter="">
+                            <content>fileId</content>
+                        </rightOperand>
+                    </operation>
+                    <operation operatorType="ASSIGNMENT">
+                        <leftOperand name="gdriveFileName" type="DATA"/>
+                        <rightOperand id="_9127545070985555601" name="fileName" expressionType="TYPE_INPUT" returnType="java.lang.String" interpreter="">
+                            <content>fileName</content>
+                        </rightOperand>
+                    </operation>
+                    <operation operatorType="ASSIGNMENT">
+                        <leftOperand name="gdriveWebViewLink" type="DATA"/>
+                        <rightOperand id="_6399295681668275701" name="webViewLink" expressionType="TYPE_INPUT" returnType="java.lang.String" interpreter="">
+                            <content>webViewLink</content>
+                        </rightOperand>
+                    </operation>
+                </outputs>
+            </connector>
+            <displayDescription id="_6528000196395916097" name="&lt;empty-name&gt;" expressionType="TYPE_CONSTANT" returnType="java.lang.String" interpreter="">
+                <content>Uploads a test file to the created folder</content>
+            </displayDescription>
+            <dataDefinitions/>
+            <businessDataDefinitions/>
+            <operations/>
+            <boundaryEvents/>
+        </automaticTask>
+        <automaticTask id="_7952149317454545064" name="GDrive Copy">
+            <incomingTransition>_7799666491812386543</incomingTransition>
+            <outgoingTransition>_6086602437574876802</outgoingTransition>
+            <connector id="_8903742791340725288" name="Test Copy" connectorId="gdrive-copy" activationEvent="ON_ENTER" version="1.0.0" failAction="FAIL">
+                <inputs>
+                    <input name="newName">
+                        <expression id="_4903896974552853462" name="bonita-test-copy.txt" expressionType="TYPE_READ_ONLY_SCRIPT" returnType="java.lang.String" interpreter="GROOVY">
+                            <content>'bonita-test-copy.txt'</content>
+                        </expression>
+                    </input>
+                    <input name="serviceAccountJson">
+                        <expression id="_7160492888353716427" name="readServiceAccountJson" expressionType="TYPE_READ_ONLY_SCRIPT" returnType="java.lang.String" interpreter="GROOVY">
+                            <content>new File(serviceAccountJsonPath).text</content>
+                        </expression>
+                    </input>
+                    <input name="sourceFileId">
+                        <expression id="_7803054466049666003" name="gdriveFileId" expressionType="TYPE_VARIABLE" returnType="java.lang.String" interpreter="">
+                            <content>gdriveFileId</content>
+                        </expression>
+                    </input>
+                </inputs>
+                <outputs>
+                    <operation operatorType="ASSIGNMENT">
+                        <leftOperand name="gdriveSuccess" type="DATA"/>
+                        <rightOperand id="_5630995664515271841" name="success" expressionType="TYPE_INPUT" returnType="java.lang.Boolean" interpreter="">
+                            <content>success</content>
+                        </rightOperand>
+                    </operation>
+                    <operation operatorType="ASSIGNMENT">
+                        <leftOperand name="gdriveErrorMessage" type="DATA"/>
+                        <rightOperand id="_6819018969059392888" name="errorMessage" expressionType="TYPE_INPUT" returnType="java.lang.String" interpreter="">
+                            <content>errorMessage</content>
+                        </rightOperand>
+                    </operation>
+                    <operation operatorType="ASSIGNMENT">
+                        <leftOperand name="gdriveCopiedFileId" type="DATA"/>
+                        <rightOperand id="_7856217537257914241" name="newFileId" expressionType="TYPE_INPUT" returnType="java.lang.String" interpreter="">
+                            <content>newFileId</content>
+                        </rightOperand>
+                    </operation>
+                    <operation operatorType="ASSIGNMENT">
+                        <leftOperand name="gdriveFileName" type="DATA"/>
+                        <rightOperand id="_7907037911159689600" name="fileName" expressionType="TYPE_INPUT" returnType="java.lang.String" interpreter="">
+                            <content>fileName</content>
+                        </rightOperand>
+                    </operation>
+                    <operation operatorType="ASSIGNMENT">
+                        <leftOperand name="gdriveWebViewLink" type="DATA"/>
+                        <rightOperand id="_6408353576821167580" name="webViewLink" expressionType="TYPE_INPUT" returnType="java.lang.String" interpreter="">
+                            <content>webViewLink</content>
+                        </rightOperand>
+                    </operation>
+                </outputs>
+            </connector>
+            <displayDescription id="_8542530533935900494" name="&lt;empty-name&gt;" expressionType="TYPE_CONSTANT" returnType="java.lang.String" interpreter="">
+                <content>Creates a copy of the uploaded file</content>
+            </displayDescription>
+            <dataDefinitions/>
+            <businessDataDefinitions/>
+            <operations/>
+            <boundaryEvents/>
+        </automaticTask>
+        <automaticTask id="_5465303329746096358" name="GDrive CreateArchiveFolder">
+            <incomingTransition>_6086602437574876802</incomingTransition>
+            <outgoingTransition>_8651637508681790754</outgoingTransition>
+            <connector id="_6494992802190954911" name="Test CreateArchiveFolder" connectorId="gdrive-create-folder" activationEvent="ON_ENTER" version="1.0.0" failAction="FAIL">
+                <inputs>
+                    <input name="serviceAccountJson">
+                        <expression id="_6696535323974318834" name="readServiceAccountJson" expressionType="TYPE_READ_ONLY_SCRIPT" returnType="java.lang.String" interpreter="GROOVY">
+                            <content>new File(serviceAccountJsonPath).text</content>
+                        </expression>
+                    </input>
+                    <input name="parentFolderId">
+                        <expression id="_7377193510194932781" name="gdriveFolderId" expressionType="TYPE_VARIABLE" returnType="java.lang.String" interpreter="">
+                            <content>gdriveFolderId</content>
+                        </expression>
+                    </input>
+                    <input name="description">
+                        <expression id="_6995357124906610994" name="Archive subfolder" expressionType="TYPE_READ_ONLY_SCRIPT" returnType="java.lang.String" interpreter="GROOVY">
+                            <content>'Archive subfolder for move tests'</content>
+                        </expression>
+                    </input>
+                    <input name="folderName">
+                        <expression id="_7510519667515632709" name="Archive" expressionType="TYPE_READ_ONLY_SCRIPT" returnType="java.lang.String" interpreter="GROOVY">
+                            <content>'Archive'</content>
+                        </expression>
+                    </input>
+                </inputs>
+                <outputs>
+                    <operation operatorType="ASSIGNMENT">
+                        <leftOperand name="gdriveSuccess" type="DATA"/>
+                        <rightOperand id="_7637927428182662760" name="success" expressionType="TYPE_INPUT" returnType="java.lang.Boolean" interpreter="">
+                            <content>success</content>
+                        </rightOperand>
+                    </operation>
+                    <operation operatorType="ASSIGNMENT">
+                        <leftOperand name="gdriveErrorMessage" type="DATA"/>
+                        <rightOperand id="_6832699330795113981" name="errorMessage" expressionType="TYPE_INPUT" returnType="java.lang.String" interpreter="">
+                            <content>errorMessage</content>
+                        </rightOperand>
+                    </operation>
+                    <operation operatorType="ASSIGNMENT">
+                        <leftOperand name="gdriveSubFolderId" type="DATA"/>
+                        <rightOperand id="_8799417927782516385" name="folderId" expressionType="TYPE_INPUT" returnType="java.lang.String" interpreter="">
+                            <content>folderId</content>
+                        </rightOperand>
+                    </operation>
+                </outputs>
+            </connector>
+            <displayDescription id="_6685487736354951198" name="&lt;empty-name&gt;" expressionType="TYPE_CONSTANT" returnType="java.lang.String" interpreter="">
+                <content>Creates an Archive subfolder inside the test folder</content>
+            </displayDescription>
+            <dataDefinitions/>
+            <businessDataDefinitions/>
+            <operations/>
+            <boundaryEvents/>
+        </automaticTask>
+        <automaticTask id="_6553795348546223560" name="GDrive Move">
+            <incomingTransition>_8651637508681790754</incomingTransition>
+            <outgoingTransition>_8427208096540515565</outgoingTransition>
+            <connector id="_8563170925671985737" name="Test Move" connectorId="gdrive-move" activationEvent="ON_ENTER" version="1.0.0" failAction="FAIL">
+                <inputs>
+                    <input name="serviceAccountJson">
+                        <expression id="_9141446848743501040" name="readServiceAccountJson" expressionType="TYPE_READ_ONLY_SCRIPT" returnType="java.lang.String" interpreter="GROOVY">
+                            <content>new File(serviceAccountJsonPath).text</content>
+                        </expression>
+                    </input>
+                    <input name="removeFromCurrentParent">
+                        <expression id="_7476836572817630300" name="true" expressionType="TYPE_CONSTANT" returnType="java.lang.Boolean" interpreter="">
+                            <content>true</content>
+                        </expression>
+                    </input>
+                    <input name="destinationFolderId">
+                        <expression id="_7024056154012864407" name="gdriveSubFolderId" expressionType="TYPE_VARIABLE" returnType="java.lang.String" interpreter="">
+                            <content>gdriveSubFolderId</content>
+                        </expression>
+                    </input>
+                    <input name="fileId">
+                        <expression id="_5921422062670191234" name="gdriveCopiedFileId" expressionType="TYPE_VARIABLE" returnType="java.lang.String" interpreter="">
+                            <content>gdriveCopiedFileId</content>
+                        </expression>
+                    </input>
+                </inputs>
+                <outputs>
+                    <operation operatorType="ASSIGNMENT">
+                        <leftOperand name="gdriveSuccess" type="DATA"/>
+                        <rightOperand id="_7484593404561964479" name="success" expressionType="TYPE_INPUT" returnType="java.lang.Boolean" interpreter="">
+                            <content>success</content>
+                        </rightOperand>
+                    </operation>
+                    <operation operatorType="ASSIGNMENT">
+                        <leftOperand name="gdriveErrorMessage" type="DATA"/>
+                        <rightOperand id="_8486828113355404201" name="errorMessage" expressionType="TYPE_INPUT" returnType="java.lang.String" interpreter="">
+                            <content>errorMessage</content>
+                        </rightOperand>
+                    </operation>
+                </outputs>
+            </connector>
+            <displayDescription id="_6807985556803341842" name="&lt;empty-name&gt;" expressionType="TYPE_CONSTANT" returnType="java.lang.String" interpreter="">
+                <content>Moves the copied file to root folder</content>
+            </displayDescription>
+            <dataDefinitions/>
+            <businessDataDefinitions/>
+            <operations/>
+            <boundaryEvents/>
+        </automaticTask>
+        <automaticTask id="_5284091138168525131" name="GDrive Download">
+            <incomingTransition>_9132133676453696168</incomingTransition>
+            <outgoingTransition>_7799666491812386543</outgoingTransition>
+            <connector id="_5392871185521544521" name="Test Download" connectorId="gdrive-download" activationEvent="ON_ENTER" version="1.0.0" failAction="FAIL">
+                <inputs>
+                    <input name="serviceAccountJson">
+                        <expression id="_5539445818560253832" name="readServiceAccountJson" expressionType="TYPE_READ_ONLY_SCRIPT" returnType="java.lang.String" interpreter="GROOVY">
+                            <content>new File(serviceAccountJsonPath).text</content>
+                        </expression>
+                    </input>
+                    <input name="acknowledgeAbuse">
+                        <expression id="_7335664306056458745" name="false" expressionType="TYPE_CONSTANT" returnType="java.lang.Boolean" interpreter="">
+                            <content>false</content>
+                        </expression>
+                    </input>
+                    <input name="fileId">
+                        <expression id="_4823618168706556922" name="gdriveFileId" expressionType="TYPE_VARIABLE" returnType="java.lang.String" interpreter="">
+                            <content>gdriveFileId</content>
+                        </expression>
+                    </input>
+                </inputs>
+                <outputs>
+                    <operation operatorType="ASSIGNMENT">
+                        <leftOperand name="gdriveSuccess" type="DATA"/>
+                        <rightOperand id="_8114926234507992461" name="success" expressionType="TYPE_INPUT" returnType="java.lang.Boolean" interpreter="">
+                            <content>success</content>
+                        </rightOperand>
+                    </operation>
+                    <operation operatorType="ASSIGNMENT">
+                        <leftOperand name="gdriveErrorMessage" type="DATA"/>
+                        <rightOperand id="_6291550477864130213" name="errorMessage" expressionType="TYPE_INPUT" returnType="java.lang.String" interpreter="">
+                            <content>errorMessage</content>
+                        </rightOperand>
+                    </operation>
+                    <operation operatorType="ASSIGNMENT">
+                        <leftOperand name="gdriveFileContent" type="DATA"/>
+                        <rightOperand id="_6050156743720222980" name="fileContent" expressionType="TYPE_INPUT" returnType="java.lang.String" interpreter="">
+                            <content>fileContent</content>
+                        </rightOperand>
+                    </operation>
+                    <operation operatorType="ASSIGNMENT">
+                        <leftOperand name="gdriveFileName" type="DATA"/>
+                        <rightOperand id="_8262334352068071075" name="fileName" expressionType="TYPE_INPUT" returnType="java.lang.String" interpreter="">
+                            <content>fileName</content>
+                        </rightOperand>
+                    </operation>
+                </outputs>
+            </connector>
+            <displayDescription id="_5264731222667789690" name="&lt;empty-name&gt;" expressionType="TYPE_CONSTANT" returnType="java.lang.String" interpreter="">
+                <content>Downloads the moved file content</content>
+            </displayDescription>
+            <dataDefinitions/>
+            <businessDataDefinitions/>
+            <operations/>
+            <boundaryEvents/>
+        </automaticTask>
+        <automaticTask id="_8755866831662741134" name="GDrive UploadConvert">
+            <incomingTransition>_8427208096540515565</incomingTransition>
+            <outgoingTransition>_5932357988914283828</outgoingTransition>
+            <connector id="_6987083152643096458" name="Test UploadConvert" connectorId="gdrive-upload" activationEvent="ON_ENTER" version="1.0.0" failAction="FAIL">
+                <inputs>
+                    <input name="fileName">
+                        <expression id="_7110523748298946473" name="ConvertedDoc.txt" expressionType="TYPE_READ_ONLY_SCRIPT" returnType="java.lang.String" interpreter="GROOVY">
+                            <content>'ConvertedDoc.txt'</content>
+                        </expression>
+                    </input>
+                    <input name="serviceAccountJson">
+                        <expression id="_7137632033575340767" name="readServiceAccountJson" expressionType="TYPE_READ_ONLY_SCRIPT" returnType="java.lang.String" interpreter="GROOVY">
+                            <content>new File(serviceAccountJsonPath).text</content>
+                        </expression>
+                    </input>
+                    <input name="convertToGoogleFormat">
+                        <expression id="_6269381897471154566" name="true" expressionType="TYPE_CONSTANT" returnType="java.lang.Boolean" interpreter="">
+                            <content>true</content>
+                        </expression>
+                    </input>
+                    <input name="parentFolderId">
+                        <expression id="_5802490592112392772" name="gdriveFolderId" expressionType="TYPE_VARIABLE" returnType="java.lang.String" interpreter="">
+                            <content>gdriveFolderId</content>
+                        </expression>
+                    </input>
+                    <input name="description">
+                        <expression id="_8142514482198652433" name="Upload with conversion" expressionType="TYPE_READ_ONLY_SCRIPT" returnType="java.lang.String" interpreter="GROOVY">
+                            <content>'Upload with Google Docs conversion'</content>
+                        </expression>
+                    </input>
+                    <input name="mimeType">
+                        <expression id="_5066009445711265395" name="text/plain" expressionType="TYPE_READ_ONLY_SCRIPT" returnType="java.lang.String" interpreter="GROOVY">
+                            <content>'text/plain'</content>
+                        </expression>
+                    </input>
+                    <input name="fileContent">
+                        <expression id="_8961566134207672182" name="Converted content" expressionType="TYPE_READ_ONLY_SCRIPT" returnType="java.lang.String" interpreter="GROOVY">
+                            <content>'Document for Google Docs conversion test'.bytes.encodeBase64().toString()</content>
+                        </expression>
+                    </input>
+                </inputs>
+                <outputs>
+                    <operation operatorType="ASSIGNMENT">
+                        <leftOperand name="gdriveSuccess" type="DATA"/>
+                        <rightOperand id="_6029594498596547163" name="success" expressionType="TYPE_INPUT" returnType="java.lang.Boolean" interpreter="">
+                            <content>success</content>
+                        </rightOperand>
+                    </operation>
+                    <operation operatorType="ASSIGNMENT">
+                        <leftOperand name="gdriveErrorMessage" type="DATA"/>
+                        <rightOperand id="_7824876916596657039" name="errorMessage" expressionType="TYPE_INPUT" returnType="java.lang.String" interpreter="">
+                            <content>errorMessage</content>
+                        </rightOperand>
+                    </operation>
+                    <operation operatorType="ASSIGNMENT">
+                        <leftOperand name="gdriveGoogleDocId" type="DATA"/>
+                        <rightOperand id="_8057783030216061286" name="fileId" expressionType="TYPE_INPUT" returnType="java.lang.String" interpreter="">
+                            <content>fileId</content>
+                        </rightOperand>
+                    </operation>
+                    <operation operatorType="ASSIGNMENT">
+                        <leftOperand name="gdriveFileName" type="DATA"/>
+                        <rightOperand id="_5646536474574159060" name="fileName" expressionType="TYPE_INPUT" returnType="java.lang.String" interpreter="">
+                            <content>fileName</content>
+                        </rightOperand>
+                    </operation>
+                    <operation operatorType="ASSIGNMENT">
+                        <leftOperand name="gdriveWebViewLink" type="DATA"/>
+                        <rightOperand id="_6181976299788917027" name="webViewLink" expressionType="TYPE_INPUT" returnType="java.lang.String" interpreter="">
+                            <content>webViewLink</content>
+                        </rightOperand>
+                    </operation>
+                </outputs>
+            </connector>
+            <displayDescription id="_4735781994948326207" name="&lt;empty-name&gt;" expressionType="TYPE_CONSTANT" returnType="java.lang.String" interpreter="">
+                <content>Uploads a text file and converts it to Google Docs format</content>
+            </displayDescription>
+            <dataDefinitions/>
+            <businessDataDefinitions/>
+            <operations/>
+            <boundaryEvents/>
+        </automaticTask>
+        <automaticTask id="_8286004295542012811" name="GDrive Export">
+            <incomingTransition>_5932357988914283828</incomingTransition>
+            <outgoingTransition>_8125132492151191773</outgoingTransition>
+            <connector id="_7106249468227578164" name="Test Export" connectorId="gdrive-export" activationEvent="ON_ENTER" version="1.0.0" failAction="FAIL">
+                <inputs>
+                    <input name="serviceAccountJson">
+                        <expression id="_9114400035244199854" name="readServiceAccountJson" expressionType="TYPE_READ_ONLY_SCRIPT" returnType="java.lang.String" interpreter="GROOVY">
+                            <content>new File(serviceAccountJsonPath).text</content>
+                        </expression>
+                    </input>
+                    <input name="exportMimeType">
+                        <expression id="_7570518094934158024" name="application/pdf" expressionType="TYPE_READ_ONLY_SCRIPT" returnType="java.lang.String" interpreter="GROOVY">
+                            <content>'application/pdf'</content>
+                        </expression>
+                    </input>
+                    <input name="fileId">
+                        <expression id="_6151930782686411120" name="gdriveGoogleDocId" expressionType="TYPE_VARIABLE" returnType="java.lang.String" interpreter="">
+                            <content>gdriveGoogleDocId</content>
+                        </expression>
+                    </input>
+                </inputs>
+                <outputs>
+                    <operation operatorType="ASSIGNMENT">
+                        <leftOperand name="gdriveSuccess" type="DATA"/>
+                        <rightOperand id="_7989635095775566306" name="success" expressionType="TYPE_INPUT" returnType="java.lang.Boolean" interpreter="">
+                            <content>success</content>
+                        </rightOperand>
+                    </operation>
+                    <operation operatorType="ASSIGNMENT">
+                        <leftOperand name="gdriveErrorMessage" type="DATA"/>
+                        <rightOperand id="_9149370604931032270" name="errorMessage" expressionType="TYPE_INPUT" returnType="java.lang.String" interpreter="">
+                            <content>errorMessage</content>
+                        </rightOperand>
+                    </operation>
+                    <operation operatorType="ASSIGNMENT">
+                        <leftOperand name="gdriveFileContent" type="DATA"/>
+                        <rightOperand id="_7820379374541191903" name="fileContent" expressionType="TYPE_INPUT" returnType="java.lang.String" interpreter="">
+                            <content>fileContent</content>
+                        </rightOperand>
+                    </operation>
+                    <operation operatorType="ASSIGNMENT">
+                        <leftOperand name="gdriveFileName" type="DATA"/>
+                        <rightOperand id="_6913045587074925761" name="fileName" expressionType="TYPE_INPUT" returnType="java.lang.String" interpreter="">
+                            <content>fileName</content>
+                        </rightOperand>
+                    </operation>
+                </outputs>
+            </connector>
+            <displayDescription id="_4995743788755817197" name="&lt;empty-name&gt;" expressionType="TYPE_CONSTANT" returnType="java.lang.String" interpreter="">
+                <content>Exports a Google Workspace file to PDF</content>
+            </displayDescription>
+            <dataDefinitions/>
+            <businessDataDefinitions/>
+            <operations/>
+            <boundaryEvents/>
+        </automaticTask>
+        <automaticTask id="_8387151448213561606" name="GDrive Delete">
+            <incomingTransition>_8125132492151191773</incomingTransition>
+            <outgoingTransition>_5702204010708215992</outgoingTransition>
+            <connector id="_8636799235591128229" name="Test Delete" connectorId="gdrive-delete" activationEvent="ON_ENTER" version="1.0.0" failAction="FAIL">
+                <inputs>
+                    <input name="serviceAccountJson">
+                        <expression id="_5750930391678516134" name="readServiceAccountJson" expressionType="TYPE_READ_ONLY_SCRIPT" returnType="java.lang.String" interpreter="GROOVY">
+                            <content>new File(serviceAccountJsonPath).text</content>
+                        </expression>
+                    </input>
+                    <input name="permanent">
+                        <expression id="_6535012820752489405" name="false" expressionType="TYPE_CONSTANT" returnType="java.lang.Boolean" interpreter="">
+                            <content>false</content>
+                        </expression>
+                    </input>
+                    <input name="fileId">
+                        <expression id="_8322722111406530064" name="gdriveFolderId" expressionType="TYPE_VARIABLE" returnType="java.lang.String" interpreter="">
+                            <content>gdriveFolderId</content>
+                        </expression>
+                    </input>
+                </inputs>
+                <outputs>
+                    <operation operatorType="ASSIGNMENT">
+                        <leftOperand name="gdriveSuccess" type="DATA"/>
+                        <rightOperand id="_8488079359115600178" name="success" expressionType="TYPE_INPUT" returnType="java.lang.Boolean" interpreter="">
+                            <content>success</content>
+                        </rightOperand>
+                    </operation>
+                    <operation operatorType="ASSIGNMENT">
+                        <leftOperand name="gdriveErrorMessage" type="DATA"/>
+                        <rightOperand id="_6350157017999960261" name="errorMessage" expressionType="TYPE_INPUT" returnType="java.lang.String" interpreter="">
+                            <content>errorMessage</content>
+                        </rightOperand>
+                    </operation>
+                </outputs>
+            </connector>
+            <displayDescription id="_6486212875177212321" name="&lt;empty-name&gt;" expressionType="TYPE_CONSTANT" returnType="java.lang.String" interpreter="">
+                <content>Deletes the test folder and its contents</content>
+            </displayDescription>
+            <dataDefinitions/>
+            <businessDataDefinitions/>
+            <operations/>
+            <boundaryEvents/>
+        </automaticTask>
+        <transitions>
+            <transition id="_4761916009033507356" name="7337706198949241852_-&gt;_7892551680209040510" source="_7337706198949241852" target="_7892551680209040510"/>
+            <transition id="_8125132492151191773" name="8286004295542012811_-&gt;_8387151448213561606" source="_8286004295542012811" target="_8387151448213561606"/>
+            <transition id="_5702204010708215992" name="8387151448213561606_-&gt;_8356635271363439361" source="_8387151448213561606" target="_8356635271363439361"/>
+            <transition id="_6086602437574876802" name="7952149317454545064_-&gt;_5465303329746096358" source="_7952149317454545064" target="_5465303329746096358"/>
+            <transition id="_8427208096540515565" name="6553795348546223560_-&gt;_8755866831662741134" source="_6553795348546223560" target="_8755866831662741134"/>
+            <transition id="_9132133676453696168" name="5521627051055184438_-&gt;_5284091138168525131" source="_5521627051055184438" target="_5284091138168525131"/>
+            <transition id="_5932357988914283828" name="8755866831662741134_-&gt;_8286004295542012811" source="_8755866831662741134" target="_8286004295542012811"/>
+            <transition id="_8651637508681790754" name="5465303329746096358_-&gt;_6553795348546223560" source="_5465303329746096358" target="_6553795348546223560"/>
+            <transition id="_6898395431269625031" name="4829806903035518617_-&gt;_5521627051055184438" source="_4829806903035518617" target="_5521627051055184438"/>
+            <transition id="_7799666491812386543" name="5284091138168525131_-&gt;_7952149317454545064" source="_5284091138168525131" target="_7952149317454545064"/>
+            <transition id="_5286615090906040571" name="7892551680209040510_-&gt;_4829806903035518617" source="_7892551680209040510" target="_4829806903035518617"/>
+        </transitions>
+        <startEvent id="_7337706198949241852" name="Start" interrupting="true">
+            <outgoingTransition>_4761916009033507356</outgoingTransition>
+        </startEvent>
+        <endEvent id="_8356635271363439361" name="End">
+            <incomingTransition>_5702204010708215992</incomingTransition>
+        </endEvent>
+        <dataDefinitions>
+            <dataDefinition id="_5274348481255537286" name="gdriveSuccess" transient="false" className="java.lang.Boolean"/>
+            <textDataDefinition longText="true" id="_7103728318347237566" name="gdriveErrorMessage" transient="false" className="java.lang.String"/>
+            <dataDefinition id="_8582767709569530260" name="gdriveFiles" transient="false" className="java.util.List"/>
+            <dataDefinition id="_7173637716980142942" name="gdriveTotalResults" transient="false" className="java.lang.Integer"/>
+            <textDataDefinition longText="true" id="_7287723973344978160" name="gdriveNextPageToken" transient="false" className="java.lang.String"/>
+            <textDataDefinition longText="true" id="_6218084497986743507" name="gdriveFileId" transient="false" className="java.lang.String"/>
+            <textDataDefinition longText="true" id="_4616147476273137812" name="gdriveFolderId" transient="false" className="java.lang.String"/>
+            <textDataDefinition longText="true" id="_6623314230607331577" name="gdriveCopiedFileId" transient="false" className="java.lang.String"/>
+            <textDataDefinition longText="true" id="_9044079750593022834" name="gdriveFileContent" transient="false" className="java.lang.String"/>
+            <textDataDefinition longText="true" id="_9038047169612109074" name="gdriveFileName" transient="false" className="java.lang.String"/>
+            <textDataDefinition longText="true" id="_5277278246799069280" name="gdriveWebViewLink" transient="false" className="java.lang.String"/>
+            <textDataDefinition longText="true" id="_5291407701914025376" name="gdriveSubFolderId" transient="false" className="java.lang.String"/>
+            <textDataDefinition longText="true" id="_4817361952129314352" name="gdriveGoogleDocId" transient="false" className="java.lang.String"/>
+            <textDataDefinition longText="true" id="_8773424217089339237" name="serviceAccountJsonPath" transient="false" className="java.lang.String">
+                <defaultValue id="_6760867173972095067" name="default-sa-path" expressionType="TYPE_CONSTANT" returnType="java.lang.String" interpreter="">
+                    <content>C:/BonitaStudioSubscription-2025.2-u3/bonitasoft-conectores-06171232f32e.json</content>
+                </defaultValue>
+            </textDataDefinition>
+        </dataDefinitions>
+        <businessDataDefinitions/>
+        <documentDefinitions/>
+        <documentListDefinitions/>
+        <connectors/>
+        <elementFinder/>
+    </flowElements>
+    <stringIndexes>
+        <stringIndex index="1"/>
+        <stringIndex index="2"/>
+        <stringIndex index="3"/>
+        <stringIndex index="4"/>
+        <stringIndex index="5"/>
+    </stringIndexes>
+    <contract>
+        <inputDefinitions/>
+        <constraints/>
+    </contract>
+    <context/>
+</tns:processDefinition>

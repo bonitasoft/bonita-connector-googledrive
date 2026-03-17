@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<definition:ConnectorDefinition xmlns:definition="http://www.bonitasoft.org/ns/connector/definition/6.1"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+
+    <id>gdrive-export</id>
+    <version>1.0.0</version>
+    <icon>gdrive.png</icon>
+
+    <category icon="gdrive.png" id="google-drive"/>
+
+    <!-- Input parameters -->
+    <input name="serviceAccountJson" type="java.lang.String" mandatory="true"/>
+    <input name="impersonateUser" type="java.lang.String" mandatory="false"/>
+    <input name="connectTimeout" type="java.lang.Integer" mandatory="false"/>
+    <input name="readTimeout" type="java.lang.Integer" mandatory="false"/>
+    <input name="fileId" type="java.lang.String" mandatory="true"/>
+    <input name="exportMimeType" type="java.lang.String" mandatory="true"/>
+
+    <!-- Output parameters -->
+    <output name="success" type="java.lang.Boolean"/>
+    <output name="errorMessage" type="java.lang.String"/>
+    <output name="fileContent" type="java.lang.String"/>
+    <output name="fileName" type="java.lang.String"/>
+    <output name="exportedMimeType" type="java.lang.String"/>
+    <output name="size" type="java.lang.Long"/>
+
+    <!-- UI Pages -->
+    <page id="connectionPage">
+        <widget id="serviceAccountJsonWidget" xsi:type="definition:Password" inputName="serviceAccountJson"/>
+        <widget id="impersonateUserWidget" xsi:type="definition:Text" inputName="impersonateUser"/>
+        <widget id="connectTimeoutWidget" xsi:type="definition:Text" inputName="connectTimeout"/>
+        <widget id="readTimeoutWidget" xsi:type="definition:Text" inputName="readTimeout"/>
+        <widget id="fileIdWidget" xsi:type="definition:Text" inputName="fileId"/>
+        <widget id="exportMimeTypeWidget" xsi:type="definition:Select" inputName="exportMimeType"/>
+    </page>
+</definition:ConnectorDefinition>

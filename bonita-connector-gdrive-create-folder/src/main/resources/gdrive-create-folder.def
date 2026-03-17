@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<definition:ConnectorDefinition xmlns:definition="http://www.bonitasoft.org/ns/connector/definition/6.1"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+
+    <id>gdrive-create-folder</id>
+    <version>1.0.0</version>
+    <icon>gdrive.png</icon>
+
+    <category icon="gdrive.png" id="google-drive"/>
+
+    <!-- Input parameters -->
+    <input name="serviceAccountJson" type="java.lang.String" mandatory="true"/>
+    <input name="impersonateUser" type="java.lang.String" mandatory="false"/>
+    <input name="connectTimeout" type="java.lang.Integer" mandatory="false"/>
+    <input name="readTimeout" type="java.lang.Integer" mandatory="false"/>
+    <input name="folderName" type="java.lang.String" mandatory="true"/>
+    <input name="parentFolderId" type="java.lang.String" mandatory="false"/>
+    <input name="description" type="java.lang.String" mandatory="false"/>
+    <input name="customProperties" type="java.util.Map" mandatory="false"/>
+
+    <!-- Output parameters -->
+    <output name="success" type="java.lang.Boolean"/>
+    <output name="errorMessage" type="java.lang.String"/>
+    <output name="folderId" type="java.lang.String"/>
+    <output name="folderName" type="java.lang.String"/>
+    <output name="webViewLink" type="java.lang.String"/>
+
+    <!-- UI Pages -->
+    <page id="connectionPage">
+        <widget xsi:type="definition:Password" id="serviceAccountJsonWidget" inputName="serviceAccountJson"/>
+        <widget xsi:type="definition:Text" id="impersonateUserWidget" inputName="impersonateUser"/>
+        <widget xsi:type="definition:Text" id="connectTimeoutWidget" inputName="connectTimeout"/>
+        <widget xsi:type="definition:Text" id="readTimeoutWidget" inputName="readTimeout"/>
+    </page>
+
+    <page id="folderPage">
+        <widget xsi:type="definition:Text" id="folderNameWidget" inputName="folderName"/>
+        <widget xsi:type="definition:Text" id="parentFolderIdWidget" inputName="parentFolderId"/>
+        <widget xsi:type="definition:TextArea" id="descriptionWidget" inputName="description"/>
+        <widget xsi:type="definition:Array" id="customPropertiesWidget" inputName="customProperties"/>
+    </page>
+</definition:ConnectorDefinition>

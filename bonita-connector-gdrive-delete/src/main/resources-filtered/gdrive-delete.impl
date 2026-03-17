@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<implementation:connectorImplementation xmlns:implementation="http://www.bonitasoft.org/ns/connector/implementation/6.0">
+  <implementationId>gdrive-delete-impl</implementationId>
+  <implementationVersion>${project.version}</implementationVersion>
+  <definitionId>gdrive-delete</definitionId>
+  <definitionVersion>1.0.0</definitionVersion>
+  <implementationClassname>com.bonitasoft.connectors.gdrive.delete.GDriveDeleteConnector</implementationClassname>
+  <hasSources>false</hasSources>
+  <description>Google Drive Delete connector implementation.</description>
+
+<!-- retrieved from the pom.xml at build time -->
+${connector-dependencies}
+
+</implementation:connectorImplementation>
