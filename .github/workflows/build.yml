@@ -1,0 +1,55 @@
+name: Build
+
+on:
+  push:
+    branches:
+      - main
+      - master
+      - develop
+      - release/*
+      - support/*
+    paths-ignore:
+      - '.claude/**'
+      - 'CLAUDE.md'
+      - 'README.md'
+      - 'README.adoc'
+      - 'CONTRIBUTING.md'
+      - 'LICENSE'
+      - '.github/**'
+      - '!.github/workflows/build.yml'
+
+  workflow_dispatch:
+
+concurrency:
+  group: ${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  build:
+    runs-on: ubuntu-24.04
+    steps:
+      - uses: actions/checkout@v6
+
+      - name: Setup Java
+        uses: actions/setup-java@v5
+        with:
+          distribution: temurin
+          java-version: 17
+          cache: maven
+
+      - name: Configure Maven Settings
+        uses: bonitasoft/maven-settings-action@v1
+        with:
+          keeper-secret-config: ${{ secrets.KSM_CONFIG }}
+
+      - name: Build and test
+        run: ./mvnw -B -ntp verify
+
+      - name: Publish Test Report
+        uses: mikepenz/action-junit-report@v6
+        if: always()
+        with:
+          report_paths: '**/target/*-reports/TEST-*.xml'
+
+      - name: Publish Snapshots to Maven Central
+        run: ./mvnw -B -ntp deploy -DskipTests

@@ -1,0 +1,13 @@
+{
+  "connector": "bonita-connector-gdrive",
+  "currentVersion": "1.0.0-beta.1",
+  "operations": {
+    "gdrive-create-folder": { "status": "untested", "issue": null, "version": null },
+    "gdrive-delete-file": { "status": "untested", "issue": null, "version": null },
+    "gdrive-download-file": { "status": "untested", "issue": null, "version": null },
+    "gdrive-get-file": { "status": "untested", "issue": null, "version": null },
+    "gdrive-list-files": { "status": "untested", "issue": null, "version": null },
+    "gdrive-move-file": { "status": "untested", "issue": null, "version": null },
+    "gdrive-upload-file": { "status": "untested", "issue": null, "version": null }
+  }
+}
