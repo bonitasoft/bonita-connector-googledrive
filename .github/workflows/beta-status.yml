@@ -280,7 +280,7 @@ jobs:
           REMAINING=$(jq -r '[.operations | to_entries[] | select(.value.status == "untested") | .key | sub("^[^-]+-"; "")] | join(", ")' beta-status.json)
           STATUS=$( [ "$ALL_VALIDATED" = "true" ] && echo "Released" || echo "Beta" )
 
-          BODY="## Beta Status Dashboard\n\n*Auto-updated by the beta-status GitHub Action workflow.*\n\n| Connector | Operations | Validated | Remaining | Status |\n| --- | --- | --- | --- | --- |\n| [${CONNECTOR}](https://github.com/bonitasoft/${CONNECTOR}) | ${TOTAL} | ${VALIDATED}/${TOTAL} | ${REMAINING:-â€”} | ${STATUS} |\n\n---\n\nLast updated: $(date -u '+%Y-%m-%d %H:%M UTC')"
+          BODY="## Beta Status Dashboard\n\n*Auto-updated by the beta-status GitHub Action workflow.*\n\n| Connector | Operations | Validated | Remaining | Status |\n| --- | --- | --- | --- | --- |\n| [${CONNECTOR}](https://github.com/bonitasoft/${CONNECTOR}) | ${TOTAL} | ${VALIDATED}/${TOTAL} | ${REMAINING:-—} | ${STATUS} |\n\n---\n\nLast updated: $(date -u '+%Y-%m-%d %H:%M UTC')"
 
           curl -s -X PUT \
             "https://${CONFLUENCE_CLOUD_ID}/wiki/api/v2/pages/${CONFLUENCE_PAGE_ID}" \
