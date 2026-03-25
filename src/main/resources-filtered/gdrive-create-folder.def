@@ -3,8 +3,8 @@
     xmlns:definition="http://www.bonitasoft.org/ns/connector/definition/6.1"
     xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
 
-    <id>${create-folder.def.id}</id>
-    <version>${create-folder.def.version}</version>
+    <id>${gdrive-create-folder.def.id}</id>
+    <version>${gdrive-create-folder.def.version}</version>
     <icon>drive_48dp.png</icon>
 
     <category icon="drive_48dp.png" id="Google Drive"/>

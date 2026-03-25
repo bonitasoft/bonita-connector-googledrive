@@ -3,8 +3,8 @@
     xmlns:definition="http://www.bonitasoft.org/ns/connector/definition/6.1"
     xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
 
-    <id>${download-file.def.id}</id>
-    <version>${download-file.def.version}</version>
+    <id>${gdrive-download-file.def.id}</id>
+    <version>${gdrive-download-file.def.version}</version>
     <icon>drive_48dp.png</icon>
 
     <category icon="drive_48dp.png" id="Google Drive"/>

@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <implementation:connectorImplementation xmlns:implementation="http://www.bonitasoft.org/ns/connector/implementation/6.0">
-  <implementationId>${create-folder.impl.id}</implementationId>
-  <implementationVersion>${create-folder.impl.version}</implementationVersion>
-  <definitionId>${create-folder.def.id}</definitionId>
-  <definitionVersion>${create-folder.def.version}</definitionVersion>
-  <implementationClassname>${create-folder.main-class}</implementationClassname>
+  <implementationId>${gdrive-create-folder.impl.id}</implementationId>
+  <implementationVersion>${gdrive-create-folder.impl.version}</implementationVersion>
+  <definitionId>${gdrive-create-folder.def.id}</definitionId>
+  <definitionVersion>${gdrive-create-folder.def.version}</definitionVersion>
+  <implementationClassname>${gdrive-create-folder.main-class}</implementationClassname>
   <hasSources>false</hasSources>
   <description>Google Drive Create Folder connector implementation</description>
 

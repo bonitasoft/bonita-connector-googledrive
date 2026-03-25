@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <definition:ConnectorDefinition xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:definition="http://www.bonitasoft.org/ns/connector/definition/6.1">
-  <id>${get-file.def.id}</id>
-  <version>${get-file.def.version}</version>
+  <id>${gdrive-get-file.def.id}</id>
+  <version>${gdrive-get-file.def.version}</version>
   <icon>drive_48dp.png</icon>
   <category icon="drive_48dp.png" id="Google Drive"/>
 

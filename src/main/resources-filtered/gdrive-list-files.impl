@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <implementation:connectorImplementation xmlns:implementation="http://www.bonitasoft.org/ns/connector/implementation/6.0">
-  <implementationId>${list-files.impl.id}</implementationId>
-  <implementationVersion>${list-files.impl.version}</implementationVersion>
-  <definitionId>${list-files.def.id}</definitionId>
-  <definitionVersion>${list-files.def.version}</definitionVersion>
-  <implementationClassname>${list-files.main-class}</implementationClassname>
+  <implementationId>${gdrive-list-files.impl.id}</implementationId>
+  <implementationVersion>${gdrive-list-files.impl.version}</implementationVersion>
+  <definitionId>${gdrive-list-files.def.id}</definitionId>
+  <definitionVersion>${gdrive-list-files.def.version}</definitionVersion>
+  <implementationClassname>${gdrive-list-files.main-class}</implementationClassname>
   <hasSources>false</hasSources>
   <description>Google Drive List Files connector implementation</description>
 
