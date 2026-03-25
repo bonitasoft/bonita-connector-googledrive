@@ -1,5 +1,0 @@
-name: Beta Status Tracker
-
-on:
-  issues:
-    
