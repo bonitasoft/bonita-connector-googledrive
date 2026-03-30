@@ -322,6 +322,7 @@ jobs:
           git checkout -b "$BRANCH_NAME"
 
           # Update POM version using Maven
+          chmod +x mvnw
           ./mvnw versions:set -DnewVersion="${RELEASE_VERSION}" -DgenerateBackupPoms=false -q
 
           # Update all *.def.version properties in pom.xml from beta to release
