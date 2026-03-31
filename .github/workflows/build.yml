@@ -55,4 +55,5 @@ jobs:
           report_paths: '**/target/*-reports/TEST-*.xml'
 
       - name: Publish Snapshots to Maven Central
+        if: contains(github.ref, 'develop') || contains(github.ref, 'support/')
         run: ./mvnw -B -ntp deploy -DskipTests
