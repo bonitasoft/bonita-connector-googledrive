@@ -1,17 +1,17 @@
 # Beta Status
 
 **Connector:** `bonita-connector-gdrive`
-**Current Version:** `1.0.0`
+**Current Version:** `1.0.1-beta.1`
 
 | Operation | Status | Feedback Issue | Validated Version |
 |---|---|---|---|
-| `gdrive-create-folder` | released | - | `1.0.0` |
-| `gdrive-delete-file` | released | - | `1.0.0` |
-| `gdrive-download-file` | released | - | `1.0.0` |
-| `gdrive-get-file` | released | - | `1.0.0` |
-| `gdrive-list-files` | released | - | `1.0.0` |
-| `gdrive-move-file` | released | - | `1.0.0` |
-| `gdrive-upload-file` | released | - | `1.0.0` |
+| `gdrive-create-folder` | untested | - | - |
+| `gdrive-delete-file` | untested | - | - |
+| `gdrive-download-file` | untested | - | - |
+| `gdrive-get-file` | untested | - | - |
+| `gdrive-list-files` | untested | - | - |
+| `gdrive-move-file` | untested | - | - |
+| `gdrive-upload-file` | untested | - | - |
 
 ---
-*Validated by Pablo Alonso de Linaje. Graduated from 1.0.0-beta.1 to 1.0.0.*
+*Reverted to beta. Connector not yet validated for GA.*
