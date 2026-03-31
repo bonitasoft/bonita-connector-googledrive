@@ -1,13 +1,13 @@
 {
   "connector": "bonita-connector-gdrive",
-  "currentVersion": "1.0.0",
+  "currentVersion": "1.0.1-beta.1",
   "operations": {
-    "gdrive-create-folder": { "status": "released", "issue": null, "version": "1.0.0" },
-    "gdrive-delete-file": { "status": "released", "issue": null, "version": "1.0.0" },
-    "gdrive-download-file": { "status": "released", "issue": null, "version": "1.0.0" },
-    "gdrive-get-file": { "status": "released", "issue": null, "version": "1.0.0" },
-    "gdrive-list-files": { "status": "released", "issue": null, "version": "1.0.0" },
-    "gdrive-move-file": { "status": "released", "issue": null, "version": "1.0.0" },
-    "gdrive-upload-file": { "status": "released", "issue": null, "version": "1.0.0" }
+    "gdrive-create-folder": { "status": "untested", "issue": null, "version": null },
+    "gdrive-delete-file": { "status": "untested", "issue": null, "version": null },
+    "gdrive-download-file": { "status": "untested", "issue": null, "version": null },
+    "gdrive-get-file": { "status": "untested", "issue": null, "version": null },
+    "gdrive-list-files": { "status": "untested", "issue": null, "version": null },
+    "gdrive-move-file": { "status": "untested", "issue": null, "version": null },
+    "gdrive-upload-file": { "status": "untested", "issue": null, "version": null }
   }
 }
