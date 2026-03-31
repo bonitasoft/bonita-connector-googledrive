@@ -7,7 +7,7 @@
 
 	<groupId>org.bonitasoft.connectors</groupId>
 	<artifactId>bonita-connector-gdrive</artifactId>
-	<version>1.0.0-beta.1</version>
+	<version>1.0.0</version>
 
 	<name>Bonita Google Drive Connector</name>
 	<description>Google Drive Connectors for Bonita</description>
@@ -39,49 +39,49 @@
 
 		<!-- Get File Connector -->
 		<gdrive-get-file.def.id>gdrive-get-file</gdrive-get-file.def.id>
-		<gdrive-get-file.def.version>1.0.0-beta.1</gdrive-get-file.def.version>
+		<gdrive-get-file.def.version>1.0.0</gdrive-get-file.def.version>
 		<gdrive-get-file.impl.id>${gdrive-get-file.def.id}-impl</gdrive-get-file.impl.id>
 		<gdrive-get-file.impl.version>${project.version}</gdrive-get-file.impl.version>
 		<gdrive-get-file.main-class>com.bonitasoft.connectors.gdrive.GetFileConnector</gdrive-get-file.main-class>
 
 		<!-- List Files Connector -->
 		<gdrive-list-files.def.id>gdrive-list-files</gdrive-list-files.def.id>
-		<gdrive-list-files.def.version>1.0.0-beta.1</gdrive-list-files.def.version>
+		<gdrive-list-files.def.version>1.0.0</gdrive-list-files.def.version>
 		<gdrive-list-files.impl.id>${gdrive-list-files.def.id}-impl</gdrive-list-files.impl.id>
 		<gdrive-list-files.impl.version>${project.version}</gdrive-list-files.impl.version>
 		<gdrive-list-files.main-class>com.bonitasoft.connectors.gdrive.ListFilesConnector</gdrive-list-files.main-class>
 
 		<!-- Upload File Connector -->
 		<gdrive-upload-file.def.id>gdrive-upload-file</gdrive-upload-file.def.id>
-		<gdrive-upload-file.def.version>1.0.0-beta.1</gdrive-upload-file.def.version>
+		<gdrive-upload-file.def.version>1.0.0</gdrive-upload-file.def.version>
 		<gdrive-upload-file.impl.id>${gdrive-upload-file.def.id}-impl</gdrive-upload-file.impl.id>
 		<gdrive-upload-file.impl.version>${project.version}</gdrive-upload-file.impl.version>
 		<gdrive-upload-file.main-class>com.bonitasoft.connectors.gdrive.UploadFileConnector</gdrive-upload-file.main-class>
 
 		<!-- Download File Connector -->
 		<gdrive-download-file.def.id>gdrive-download-file</gdrive-download-file.def.id>
-		<gdrive-download-file.def.version>1.0.0-beta.1</gdrive-download-file.def.version>
+		<gdrive-download-file.def.version>1.0.0</gdrive-download-file.def.version>
 		<gdrive-download-file.impl.id>${gdrive-download-file.def.id}-impl</gdrive-download-file.impl.id>
 		<gdrive-download-file.impl.version>${project.version}</gdrive-download-file.impl.version>
 		<gdrive-download-file.main-class>com.bonitasoft.connectors.gdrive.DownloadFileConnector</gdrive-download-file.main-class>
 
 		<!-- Create Folder Connector -->
 		<gdrive-create-folder.def.id>gdrive-create-folder</gdrive-create-folder.def.id>
-		<gdrive-create-folder.def.version>1.0.0-beta.1</gdrive-create-folder.def.version>
+		<gdrive-create-folder.def.version>1.0.0</gdrive-create-folder.def.version>
 		<gdrive-create-folder.impl.id>${gdrive-create-folder.def.id}-impl</gdrive-create-folder.impl.id>
 		<gdrive-create-folder.impl.version>${project.version}</gdrive-create-folder.impl.version>
 		<gdrive-create-folder.main-class>com.bonitasoft.connectors.gdrive.CreateFolderConnector</gdrive-create-folder.main-class>
 
 		<!-- Move File Connector -->
 		<gdrive-move-file.def.id>gdrive-move-file</gdrive-move-file.def.id>
-		<gdrive-move-file.def.version>1.0.0-beta.1</gdrive-move-file.def.version>
+		<gdrive-move-file.def.version>1.0.0</gdrive-move-file.def.version>
 		<gdrive-move-file.impl.id>${gdrive-move-file.def.id}-impl</gdrive-move-file.impl.id>
 		<gdrive-move-file.impl.version>${project.version}</gdrive-move-file.impl.version>
 		<gdrive-move-file.main-class>com.bonitasoft.connectors.gdrive.MoveFileConnector</gdrive-move-file.main-class>
 
 		<!-- Delete File Connector -->
 		<gdrive-delete-file.def.id>gdrive-delete-file</gdrive-delete-file.def.id>
-		<gdrive-delete-file.def.version>1.0.0-beta.1</gdrive-delete-file.def.version>
+		<gdrive-delete-file.def.version>1.0.0</gdrive-delete-file.def.version>
 		<gdrive-delete-file.impl.id>${gdrive-delete-file.def.id}-impl</gdrive-delete-file.impl.id>
 		<gdrive-delete-file.impl.version>${project.version}</gdrive-delete-file.impl.version>
 		<gdrive-delete-file.main-class>com.bonitasoft.connectors.gdrive.DeleteFileConnector</gdrive-delete-file.main-class>

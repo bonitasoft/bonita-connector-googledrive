@@ -36,5 +36,7 @@ jobs:
             {
               "artifactId": "bonita-connector-gdrive",
               "version": "${{ inputs.version }}",
-              "bonitaMinVersion": "10.2"
+              "bonitaMinVersion": "10.2",
+              "connectorName": "Google Drive",
+              "iconUrl": "https://raw.githubusercontent.com/bonitasoft/bonita-connector-googledrive/master/src/main/resources/drive_48dp.png"
             }
