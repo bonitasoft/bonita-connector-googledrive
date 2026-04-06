@@ -8,19 +8,19 @@
 
     <category icon="drive_48dp.png" id="Google Drive"/>
 
-    <!-- === Page 1 — Connection === -->
+    <!-- === Page 1 -- Connection === -->
     <input name="serviceAccountKeyJson" type="java.lang.String" mandatory="true"/>
     <input name="impersonatedUserEmail" type="java.lang.String" mandatory="false"/>
     <input name="applicationName" type="java.lang.String" mandatory="false" defaultValue="Bonita-GoogleDrive-Connector"/>
     <input name="connectTimeout" type="java.lang.Integer" mandatory="false" defaultValue="30000"/>
     <input name="readTimeout" type="java.lang.Integer" mandatory="false" defaultValue="60000"/>
 
-    <!-- === Page 2 — Search === -->
+    <!-- === Page 2 -- Search === -->
     <input name="parentFolderId" type="java.lang.String" mandatory="false"/>
     <input name="searchQuery" type="java.lang.String" mandatory="false"/>
     <input name="mimeTypeFilter" type="java.lang.String" mandatory="false"/>
 
-    <!-- === Page 3 — Configuration === -->
+    <!-- === Page 3 -- Configuration === -->
     <input name="maxResults" type="java.lang.Integer" mandatory="false" defaultValue="100"/>
     <input name="orderBy" type="java.lang.String" mandatory="false" defaultValue="modifiedTime desc"/>
     <input name="includeFiles" type="java.lang.Boolean" mandatory="false" defaultValue="true"/>

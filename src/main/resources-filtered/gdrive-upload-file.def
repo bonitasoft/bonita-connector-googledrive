@@ -8,23 +8,23 @@
 
     <category icon="drive_48dp.png" id="Google Drive"/>
 
-    <!-- === Page 1 — Connection === -->
+    <!-- === Page 1 -- Connection === -->
     <input name="serviceAccountKeyJson" type="java.lang.String" mandatory="true"/>
     <input name="impersonatedUserEmail" type="java.lang.String" mandatory="false"/>
     <input name="applicationName" type="java.lang.String" mandatory="false" defaultValue="Bonita-GoogleDrive-Connector"/>
     <input name="connectTimeout" type="java.lang.Integer" mandatory="false" defaultValue="30000"/>
     <input name="readTimeout" type="java.lang.Integer" mandatory="false" defaultValue="60000"/>
 
-    <!-- === Page 2 — Upload === -->
+    <!-- === Page 2 -- Upload === -->
     <input name="fileName" type="java.lang.String" mandatory="true"/>
     <input name="fileContentBase64" type="java.lang.String" mandatory="true"/>
     <input name="mimeType" type="java.lang.String" mandatory="true" defaultValue="application/octet-stream"/>
 
-    <!-- === Page 3 — Destination === -->
+    <!-- === Page 3 -- Destination === -->
     <input name="parentFolderId" type="java.lang.String" mandatory="false"/>
     <input name="description" type="java.lang.String" mandatory="false"/>
 
-    <!-- === Page 4 — Advanced === -->
+    <!-- === Page 4 -- Advanced === -->
     <input name="uploadStrategy" type="java.lang.String" mandatory="false" defaultValue="AUTO"/>
 
     <!-- === Outputs === -->

@@ -8,19 +8,19 @@
 
     <category icon="drive_48dp.png" id="Google Drive"/>
 
-    <!-- === Page 1 — Connection === -->
+    <!-- === Page 1 -- Connection === -->
     <input name="serviceAccountKeyJson" type="java.lang.String" mandatory="true"/>
     <input name="impersonatedUserEmail" type="java.lang.String" mandatory="false"/>
     <input name="applicationName" type="java.lang.String" mandatory="false" defaultValue="Bonita-GoogleDrive-Connector"/>
     <input name="connectTimeout" type="java.lang.Integer" mandatory="false" defaultValue="30000"/>
     <input name="readTimeout" type="java.lang.Integer" mandatory="false" defaultValue="60000"/>
 
-    <!-- === Page 2 — Move/Rename === -->
+    <!-- === Page 2 -- Move/Rename === -->
     <input name="fileId" type="java.lang.String" mandatory="true"/>
     <input name="newParentFolderId" type="java.lang.String" mandatory="false"/>
     <input name="newName" type="java.lang.String" mandatory="false"/>
 
-    <!-- === Page 4 — Advanced === -->
+    <!-- === Page 4 -- Advanced === -->
     <input name="removeFromCurrentParents" type="java.lang.Boolean" mandatory="false" defaultValue="true"/>
 
     <!-- === Outputs === -->
